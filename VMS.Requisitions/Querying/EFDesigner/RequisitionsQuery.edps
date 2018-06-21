@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityDeveloper Version="6.2.505.0">
+  <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" ConnectionStringInAppConfig="False" TargetFramework="NetCore" DetectManyToManyAssociations="False" DetectTPTInheritance="False" DetectFunctionBasedColumnDefault="True">
+    <Connection ConnectionString="Data Source=rdcvc2sql01\oltp;Initial Catalog=VMS1;Integrated Security=True;Persist Security Info=True" Provider="System.Data.SqlClient" />
+    <Generation>
+      <GeneratedFiles>
+        <File Name="IQueryingContext.cs" Project="VMS.Requisitions" ProjectFolder="Querying" OverwriteMode="None" />
+        <File Name="IQueryingContext.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying" />
+        <File Name="QueryingContext.cs" Project="VMS.Requisitions" ProjectFolder="Querying" />
+        <File Name="Requisition.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="Requisition.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionProject.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionProject.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionGeneralLedger.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionGeneralLedger.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionCostCenter.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionCostCenter.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="ClientTier.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="ClientTier.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="Location.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="Location.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="Organization.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="Organization.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="Candidate.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="Candidate.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionAttachment.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionAttachment.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="OrganizationDetail.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="OrganizationDetail.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionClass.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionClass.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionContact.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionContact.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="Approval.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="Approval.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="ApprovalProcess.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="ApprovalProcess.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="UserApprovalData.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="UserApprovalData.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionNextApprover.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionNextApprover.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="ReportsToContact.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="ReportsToContact.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="ActiveCandidatesCount.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="ActiveCandidatesCount.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="AttachmentsCount.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="AttachmentsCount.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="StatusDescription.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="StatusDescription.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionStatus.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionContactRole.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+      </GeneratedFiles>
+    </Generation>
+    <DatabaseFirstNamingRules>
+      <EntitySet PluralizationName="Pluralize" />
+      <Class UseSchemaAsPrefix="False" PluralizeCollectionNavigationPropertyName="True" AddConstraintColumnsToNavigationPropertyName="False" RemoveUnderscores="True" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="FirstLetterUppercase" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Singularize" />
+      <Property RemoveUnderscores="True" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="FirstLetterUppercase" AddPrefix="x_" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Unchanged" />
+    </DatabaseFirstNamingRules>
+    <ModelFirst StorageSynchronizationEnabled="False" TargetSchema="dbo" TargetProviderName="System.Data.SqlClient">
+      <TargetServer Server="SQL Server" ServerVersion="2014" />
+      <ModelFirstNamingRules>
+        <Table RemoveUnderscores="False" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="Unchanged" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Pluralize" />
+        <Column RemoveUnderscores="False" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="Unchanged" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Unchanged" />
+      </ModelFirstNamingRules>
+    </ModelFirst>
+    <Diagrams>
+      <Diagram Name="Diagram1" DefaultDiagram="True" />
+    </Diagrams>
+    <Templates>
+      <Template Name="Customized.EF Core" Enabled="True" File="Customized.EF Core.tmpl">
+        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.2.505.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <ValidationFramework>None</ValidationFramework>
+        </ed:Property>
+        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.2.505.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <ValidationErrorMessages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </ed:Property>
+        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.2.505.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <Project>VMS.Requisitions</Project>
+            <ProjectFolder>Querying\Entities</ProjectFolder>
+            <DestinationFolder />
+          </OutputInfo>
+        </ed:Property>
+        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.2.505.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <Project>VMS.Requisitions</Project>
+            <ProjectFolder>Querying</ProjectFolder>
+            <DestinationFolder />
+          </OutputInfo>
+        </ed:Property>
+        <ed:Property Name="FilePerClass" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="ModelNameAsFilesPrefix" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="HeaderTimestampVersionControlTag" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <string>-----------------------------------------------------------------------------</string>
+        </ed:Property>
+        <ed:Property Name="PropertyChangeNotifiers" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="PropertyChangePartialMethods" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="ImplementEquals" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="ImplementCloneable" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="ReadOnly" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="GeneratePartialClass" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="GenerateDataContracts" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="GenerateDummyComments" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="GenerateSerializableAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+      </Template>
+    </Templates>
+    <AttributeAssemblies />
+    <UpdateFromDatabaseExcludes>
+      <Exclude Name="Cand_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Prnt_Cand_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Usr_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Req_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Org_Rel_ID" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Sbmtr_Org_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Clnt_Org_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Fst_Nm" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="MI_Nm" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Lst_Nm" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Email_Tx" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="SSN_Tx" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Avl_Tx" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Prev_Engt_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Prev_Engt_Dc_Tx" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Emplr_Nm" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Alt_Vend_Nm" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Vend_Int_Cand_Nb_Val" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Dplyb_Rtg_Nb" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Cand_Ctzn_Sts_Cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Clnt_Cand_Sts_Cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Vend_Cand_Sts_Cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Dup_Sts_Cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Slctd_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Prv_Sbms_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Tp_Cont_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Tp_Cont_Perm_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Tp_Perm_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Vend_W2_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Ctgt_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Indp_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Indp_1099_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Indp_Corp_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Mnr_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Wkflw_Step_Nb" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Wkflw_Cmpl_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Intvw_Dt" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Intvw_By_Nm" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Crtd_Usr_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Crtd_Dt" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Updt_Usr_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Updt_Dt" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="SSN_Sh_Tx" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Prev_Engt_Empt_Tp_Cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Prev_Engt_Empt_Term_Tp_Cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Prev_Engt_End_Dt" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Cand_Ctzn_Sts_Tx" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Snstv_Data_Cnsnt_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Snstv_Data_Cnsnt_Dt" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Snstv_Data_Tx" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Cand_Rank_Nb" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Rehire_Comments" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Rehire_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Cand_Tax_Rate_Mult" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Over_Rt_Card_Fg" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Cand_Wrk_Sts_Cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Cand_Wrk_Eaa_Opt_Out" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="vend_chrg_pct" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="pymnt_basis_cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="rt_strct_id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Cand_Screened" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Screened_Date" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Prop_Id" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="Engt_Tp_Cd" Table="dbo.CAND" Type="Column" />
+      <Exclude Name="PK_CAND" Table="dbo.CAND" Type="Constraint" />
+      <Exclude Name="FK_CAND_PROP" Table="dbo.CAND" Type="Constraint" />
+      <Exclude Name="FK_CAND_ORG_REL" Table="dbo.CAND" Type="Constraint" />
+      <Exclude Name="FK_CAND_REQ" Table="dbo.CAND" Type="Constraint" />
+      <Exclude Name="FK_CAND_CAND" Table="dbo.CAND" Type="Constraint" />
+      <Exclude Name="Clnt_Dtl_Id" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Org_Id" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Auto_Tier_Chg_Cont_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Auto_Tier_Chg_Perm_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Enf_Cls_Tier_Cont_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Enf_Cls_Tier_Perm_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Pub_Req_Cont_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Pub_Req_Perm_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Ind_Req_Cont_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Ind_Req_Perm_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Enf_Req_Apvl_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Enf_Engt_Apvl_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Min_Chg_Usr_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dup_Ck_Mthd_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Updt_Usr_Id" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Updt_Dt" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Clnt_Rt_Cnfg_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Asgn_Cand_Vend_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Asgn_Cand_Vend_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Rasgn_Cand_Rgn_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Rasgn_Cand_Rgn_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Elec_Engt_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Filt_Vend_List_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Vend_View_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Expt_Rtg_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Engt_Eval_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Req_Ntce_Dflt_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Eval_Flwup_Ntce_Nb" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Vend_Exp_Acpt_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Ext_Cst_Ctr_Vldn_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Ext_Cst_Ctr_URL_Tx" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Pend_Ext_Cst_Ctr_Tm_Ent_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Enf_Bdgt_Cnst_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Week_End_Day" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Man_Bill_Rule_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Man_Bill_Rule_Dflt_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Prxy_Tm_Auth_Lvl" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Vndr_Prxy_Tm_Auth_Lvl" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Vndr_Prxy_Tm_Dflt_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Email_Cnfg_Actv_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_NotExceed_to_ReqCls_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_Max_Engt_Length" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_Max_Engt_Length_Drtn_Tp_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Cand_Not_For_Rehire_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Rejection_Comments_Allowed_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Req_Fill_Bill_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Hide_Vendor_Info_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Hide_Vendor_Info_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="User_Cost_Center_to_Req_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Req_Appr_Dist_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Engt_Prcs_User_Setting_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Enhncd_TS_Ntce_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Rate_Card_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Auto_Calc_Markup_Rate_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Engt_Tp_Cont_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Engt_Tp_Cont_Perm_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Engt_Tp_Perm_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Req_Projects" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Actv_Bdgt_Wrng_Ntce_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Not_Exceed_Bdgt_Prcnt" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Bill_Rule_In_Bdgt_Clcltr_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Tier_Days" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Tier_Start_Time" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Tier_End_Time" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="SSN_TimeEntry_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="SSN_Min_Len" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="SSN_Max_Len" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="SSN_Alphanum_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="SSN_Label_Tx" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Rt_Strct" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Pay_Rt_Req" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Mlstn_Cost_Center_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Mlstn_GL_Lg_Lst_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Mlstn_Proj_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Enf_Pmt_Schd_Bdgt_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="hide_approve_justification_msp_user" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Engt_Strt_Dt_Confirm_Ntc_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Engt_Strt_Dt_Confirm_3day_Ntc_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Rstr_Usr_Acs_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_PO_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Auto_Amend_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Vend_View_PO_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Dflt_NotExceed_to_ReqCls_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Allow_No_Bill_Rule_Engt" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Allow_No_Base_Rule_Engt" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Allow_Engt_Exceed_Hourly_or_Budget_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Adv_Interview_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Adv_Interview_Clnt_Cmnt_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Clnt_Amend_Admin_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Clnt_Amend_Tm_Apvr_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Clnt_Amend_MSP_User_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Clnt_Amend_Tm_Proxy_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Vend_Amend_Admin_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Vend_Amend_Cand_Contacts_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Vend_Amend_Tm_Entry_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Self_Bill_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Lmt_User_Assoc_Project_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_Proj_Det_User_Tp_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Lmt_User_Assoc_GL_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_GL_Det_User_Tp_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Lmt_User_Assoc_CC_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_CC_Det_User_Tp_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Salaried_Contractor_Constraints_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Allow_Create_New_Engt_Rec_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Req_CC_Lowest_Lvl_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Req_CC_Ref_Cd_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Vend_Loc_Bill_Rule_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Supp_Fee_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Link_Exp_Tm_Sht_Prd_fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_EFV_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="EFV_Url" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="EFV_Timeout" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Chron_Time_Entry_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Tm_Sht_Suspend_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Clnt_Amend_Approve_Usr_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Auto_Amend_Apvl_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Supplier_Tax_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Edit_NotExceed_to_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Exceed_Published_NotExceed_to_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Edit_Rate_Salary_Description_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Rate_Salary_Description_Format_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="ReqPendingApprovalAuthID" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Restrict_Cand_Not_For_Rehire_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="SSN_Encryption_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="SSN_Visible_Chars" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="SSN_Format_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Restr_Appr_Usr_CC_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Actv_Engt_Proj_Sel_Enf_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_Engt_Proj_Sel_Enf_On_Req_Cls_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_Proj_Engt_Id" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Use_Exp_Atch" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Expense_Item_Subm_Ctrl_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Activate_Req_Title_Ext_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Certs_Screening_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Certs_Screening_Date" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Require_Req_Start_End_Date_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Global_Requirements_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Require_Clnt_Cand_Id_On_Engt" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Supported_Email_Format" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Default_Email_Format" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Engt_Change_Reason_Format_As_List" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Default_Max_Candidate_Submittals" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="activate_projects_for_expense_line_items" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="LimitToTier1VendorsAuthorityID" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="ActivateCustomDisengageReasons" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Default_Max_Candidate_Submittals_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="AllowRestrictAdminPermissions" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Copy_Req_Alter_Req_Cls_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="View_Attach_Auth_Lvl" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="ActivateCopyingReqFg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="ActivateTechnologyFee" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Lmt_User_Assoc_Loc_Fg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Dflt_Loc_Det_User_Tp_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="DisengagePreviousEngtRecordFg" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Mass_Engt_Aprv_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="require_compliance_for_time_entry" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Mass_Req_Aprv_Auth_Cd" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="ViewDistributionTabAuthorityID" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Audit_Enabled" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Audit_Min_View_Authority_Level" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="Audit_Compliance_Contact_View" Table="dbo.CLNT_DTL" Type="Column" />
+      <Exclude Name="PK_CLNT_DTL" Table="dbo.CLNT_DTL" Type="Constraint" />
+      <Exclude Name="FK_CLNT_DTL_ORG" Table="dbo.CLNT_DTL" Type="Constraint" />
+      <Exclude Name="FK_CLNT_DTL_PROJ" Table="dbo.CLNT_DTL" Type="Constraint" />
+      <Exclude Name="Clnt_Tier_Id" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Org_Id" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Tier_Tp_Cd" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Seq_Nb" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Tier_Tx" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Sh_Tier_Tx" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Tier_Days_Nb" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Tier_Strt_Fg" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Updt_Usr_Id" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="Updt_Dt" Table="dbo.CLNT_TIER" Type="Column" />
+      <Exclude Name="PK_CLNT_TIER" Table="dbo.CLNT_TIER" Type="Constraint" />
+      <Exclude Name="FK_CLNT_TIER_ORG" Table="dbo.CLNT_TIER" Type="Constraint" />
+      <Exclude Name="FK_CLNT_TIER_XREF_TIER_TP" Table="dbo.CLNT_TIER" Type="Constraint" />
+      <Exclude Name="Location_Id" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Location_Grp_Id" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Location_Nm" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="LocationRefCd_Tx" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Location_Dc_Tx" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Adr1_Tx" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Adr2_Tx" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Cty_Nm" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Rgn_Nm" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Post_Cd_Tx" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Ctry_Nm" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Phn_Nb" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Actv_Fg" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Updt_Dt" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Updt_Usr_Id" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Create_Dt" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="Create_Usr_Id" Table="dbo.LOCATION" Type="Column" />
+      <Exclude Name="PK_LOCATION" Table="dbo.LOCATION" Type="Constraint" />
+      <Exclude Name="FK_LOCATION_LOCATION_GRP" Table="dbo.LOCATION" Type="Constraint" />
+      <Exclude Name="Org_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="s_Org_Tp_Cd" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Prnt_Org_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Brnd_Org_ID" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Prnt_Uid_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Org_Nm" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Org_Sh_Nm" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Url_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Adr_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="s_Fed_Empl_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Email_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Sts_Cd" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Thm_ID" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Bill_Rule_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Crtd_Usr_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Crtd_Dt" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Updt_Usr_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Updt_Dt" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Html_Hdr_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Html_Pfx_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Ntce_Pfx_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Ntce_Mail_Nm" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Ntce_Mail_Adr_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Ntce_Mail_Host_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Rpt_Mail_Nm" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Rpt_Mail_Adr_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Rpt_Mail_Host_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Rpt_Lbl_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Rpt_Sbj_Tx" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Rgn_Dc" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Location_Rgn_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Sec_Lvl_Cd" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Gl_Grp_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Use_Lgn_Agr_Fg" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Use_Lgn_Agr_PC_Fg" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Use_Lgn_Agr_IU_Fg" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="cand_screen_process_in_place" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Brnd_Org_Fg" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Hide_Timestamp_Fg" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Hide_Standard_Reports_Fg" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Activate_Cand_for_PBR_Fg" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Compliance_Region_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="s_Fed_Empl_Id_2" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="s_Fed_Empl_Id_3" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="s_Fed_Empl_Id_4" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Logo_Primary_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="Logo_Secondary_Id" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="ShowNonProdCode" Table="dbo.ORG" Type="Column" />
+      <Exclude Name="PK_ORG" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="FK_ORG_LOCATION_RGN" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="FK_ORG_COMPLIANCE_REGION" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="FK_ORG_GL_GRP" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="FK_ORG_ORG" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="Req_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Org_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Int_Nb_Val" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Acct_Info_Tx" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Dept_Nm" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Proj_Nm" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Title_Nm" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Dc" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Sh_Dc" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Char_Tx" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Wk_Loc_Nm" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Rt_Info_Tx" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Nb_Pstn_Nb" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Nb_Pstn_Fill_Nb" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Drtn_Nb" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Drtn_Tp_Cd" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Cont_Tier_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Auto_Tier_Chg_Cont_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Updt_Cont_Tier_Chg_Dt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Perm_Tier_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Auto_Tier_Chg_Perm_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Updt_Perm_Tier_Chg_Dt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Open_Pub_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Open_Int_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Cls_Dt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Strt_Dt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="End_Dt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Prty_Cd" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Sts_Cd" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Alt_Email_Tx" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Tp_Cont_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Tp_Cont_Perm_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Tp_Perm_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Cls_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Ctzn_Sts_Cd" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Inc_Ex_Tp_Cd" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Max_Rt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Est_Hrs_Per_Dy" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Wrk_Dys_Per_Wk" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Est_Bdgt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Buy_Side_PO_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Crtd_Usr_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Crtd_Dt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Updt_Usr_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Updt_Dt" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Wkflw_Step_Nb" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Wkflw_Cmpl_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Bill_From_Rt_Cs" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Not_Exceed_Rt_Cs" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Not_Exceed_Rt_Prd_Cd" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Not_Exceed_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Fill_Bill_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Location_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Req_Format_Tp_Cd" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Max_Pay_Rt_Cs" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Max_Pay_Rt_Prd_Tp_Cd" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Rt_Strct_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Bill_To_Rt_Cs" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Salaried_Contractor_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Tp_Proj_Fg" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="PBR_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Ext" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Is_Template" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Max_Submittals_By_Vendor" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Copied_Req_Id" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="Prop_Comment" Table="dbo.REQ" Type="Column" />
+      <Exclude Name="PK_REQ" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="FK_REQ_COPIED_REQ" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="FK_REQ_ORG" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="fk_REQ_Ref_Lookup_Time_Units" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="FK_REQ_PBR" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="FK_REQ_BUY_SIDE_PO" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="FK_REQ_LOCATION" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="Req_Id" Table="dbo.REQ_ATCH" Type="Column" />
+      <Exclude Name="Atch_Id" Table="dbo.REQ_ATCH" Type="Column" />
+      <Exclude Name="PK_REQ_ATCH" Table="dbo.REQ_ATCH" Type="Constraint" />
+      <Exclude Name="FK_REQ_ATCH_ATCH" Table="dbo.REQ_ATCH" Type="Constraint" />
+      <Exclude Name="FK_REQ_ATCH_REQ" Table="dbo.REQ_ATCH" Type="Constraint" />
+      <Exclude Name="Req_Id" Table="dbo.REQ_USR" Type="Column" />
+      <Exclude Name="Req_Role_Tp_Cd" Table="dbo.REQ_USR" Type="Column" />
+      <Exclude Name="Usr_Id" Table="dbo.REQ_USR" Type="Column" />
+      <Exclude Name="PK_REQ_USR" Table="dbo.REQ_USR" Type="Constraint" />
+      <Exclude Name="FK_REQ_USR_Usr_Id_References_UserData_UserId" Table="dbo.REQ_USR" Type="Constraint" />
+      <Exclude Name="FK_REQ_USR_REQ" Table="dbo.REQ_USR" Type="Constraint" />
+      <Exclude Name="RequisitionId" Table="dbo.vw_RequisitionsContext_RequisitionCostCenters" Type="Column" />
+      <Exclude Name="CostCenterId" Table="dbo.vw_RequisitionsContext_RequisitionCostCenters" Type="Column" />
+      <Exclude Name="CostCenterName" Table="dbo.vw_RequisitionsContext_RequisitionCostCenters" Type="Column" />
+      <Exclude Name="RequisitionId" Table="dbo.vw_RequisitionsContext_RequisitionGeneralLedgers" Type="Column" />
+      <Exclude Name="GeneralLedgerId" Table="dbo.vw_RequisitionsContext_RequisitionGeneralLedgers" Type="Column" />
+      <Exclude Name="GeneralLedgerName" Table="dbo.vw_RequisitionsContext_RequisitionGeneralLedgers" Type="Column" />
+      <Exclude Name="RequisitionId" Table="dbo.vw_RequisitionsContext_RequisitionProjects" Type="Column" />
+      <Exclude Name="ProjectId" Table="dbo.vw_RequisitionsContext_RequisitionProjects" Type="Column" />
+      <Exclude Name="ProjectName" Table="dbo.vw_RequisitionsContext_RequisitionProjects" Type="Column" />
+      <Exclude Name="FK_CAND_PROP" Table="dbo.CAND" Type="Constraint" />
+      <Exclude Name="FK_CAND_ORG_REL" Table="dbo.CAND" Type="Constraint" />
+      <Exclude Name="FK_CAND_CAND" Table="dbo.CAND" Type="Constraint" />
+      <Exclude Name="FK_CLNT_DTL_ORG" Table="dbo.CLNT_DTL" Type="Constraint" />
+      <Exclude Name="FK_CLNT_DTL_PROJ" Table="dbo.CLNT_DTL" Type="Constraint" />
+      <Exclude Name="FK_CLNT_TIER_ORG" Table="dbo.CLNT_TIER" Type="Constraint" />
+      <Exclude Name="FK_CLNT_TIER_XREF_TIER_TP" Table="dbo.CLNT_TIER" Type="Constraint" />
+      <Exclude Name="FK_LOCATION_LOCATION_GRP" Table="dbo.LOCATION" Type="Constraint" />
+      <Exclude Name="FK_ORG_LOCATION_RGN" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="FK_ORG_COMPLIANCE_REGION" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="FK_ORG_GL_GRP" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="FK_ORG_ORG" Table="dbo.ORG" Type="Constraint" />
+      <Exclude Name="FK_REQ_COPIED_REQ" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="fk_REQ_Ref_Lookup_Time_Units" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="FK_REQ_PBR" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="FK_REQ_BUY_SIDE_PO" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="" Table="dbo.REQ" Type="Constraint" />
+      <Exclude Name="FK_REQ_ATCH_ATCH" Table="dbo.REQ_ATCH" Type="Constraint" />
+      <Exclude Name="FK_REQ_USR_Usr_Id_References_UserData_UserId" Table="dbo.REQ_USR" Type="Constraint" />
+      <Exclude Name="PK_vw_RequisitionsContext_RequisitionCostCenters" Table="dbo.vw_RequisitionsContext_RequisitionCostCenters" Type="Constraint" />
+      <Exclude Name="PK_vw_RequisitionsContext_RequisitionGeneralLedgers" Table="dbo.vw_RequisitionsContext_RequisitionGeneralLedgers" Type="Constraint" />
+      <Exclude Name="PK_vw_RequisitionsContext_RequisitionProjects" Table="dbo.vw_RequisitionsContext_RequisitionProjects" Type="Constraint" />
+    </UpdateFromDatabaseExcludes>
+  </ModelSettings>
+</EntityDeveloper>

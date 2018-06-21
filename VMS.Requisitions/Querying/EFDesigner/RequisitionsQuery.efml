@@ -1,0 +1,1630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<efcore context-namespace="VMS.Requisitions.Querying" namespace="VMS.Requisitions.Querying.Entities" p1:name="QueryingContext" p1:Guid="e0c4ef51-8b12-4486-a5c0-fca114be7199" p1:ContextBase="IQueryingContext" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0">
+  <class name="$EnumTypes">
+    <EnumType Name="RequisitionStatus" class="RequisitionStatus" p1:Guid="1fe114a6-0c49-4039-99a0-1f03f1d1759d">
+      <Member Name="Draft" Value="1" p1:Guid="bddf3ae6-5057-41e2-bfd5-011bad6f52a7" />
+      <Member Name="PendingApproval" Value="2" p1:Guid="80765cfe-646d-48be-9089-e8abae4ec580" />
+      <Member Name="NotApproved" Value="3" p1:Guid="7dee36dc-683c-4863-b470-0b721be223ea" />
+      <Member Name="Open" Value="4" p1:Guid="fed57a36-c273-4520-a87c-2bf71454d1e9" />
+      <Member Name="InterviewsOccuring" Value="5" p1:Guid="a8b672bf-8220-4adf-a3a4-c8ceba32dd8a" />
+      <Member Name="Filled" Value="6" p1:Guid="ec77379c-374c-40de-a400-3940d1b9a555" />
+      <Member Name="ClosedCancelled" Value="8" p1:Guid="685920b7-37a5-415c-b27f-e7191fb16777" />
+      <Member Name="OnHold" Value="9" p1:Guid="cd4dcb20-623f-44f0-8459-9fe35a9ad169" />
+      <Member Name="PedningBuySideApproval" Value="10" p1:Guid="5743efef-0dfc-43fc-87f4-2546e143fadd" />
+      <Member Name="BuySideBudgetNotApproved" Value="11" p1:Guid="9ae5b194-f5fd-4f1f-9d5d-7cd91425f0d4" />
+    </EnumType>
+    <EnumType Name="RequisitionContactRole" class="RequisitionContactRole" p1:Guid="080310e3-4898-411c-b632-b869744c2708">
+      <Member Name="Owner" Value="1" p1:Guid="7d2c6ec4-b3ad-4f6d-9e45-e69edaa970e4" />
+      <Member Name="ReportsTo" Value="2" p1:Guid="21720b73-5054-4a99-957c-2b0dfafb93c3" />
+      <Member Name="MainContact" Value="3" p1:Guid="9f76a98d-ac4e-4000-921c-1b381202b355" />
+    </EnumType>
+  </class>
+  <class name="Requisition" entity-set="Requisitions" table="REQ" schema="dbo" p1:Guid="2ec851c5-87bb-4122-82e1-6d1343025200">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="a8e52085-f1f1-426e-976e-c1accd22d5ee" p1:DoNotGenerate="False">
+      <column name="Req_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="OrganizationId" type="Int32" p1:ValidateRequired="true" p1:Guid="ad80cbad-4e20-4a02-899c-b4378ed0c41e" p1:DoNotGenerate="False">
+      <column name="Org_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="InternalNumber" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a3d68544-5777-4c69-9ca7-522af02bc486" p1:DoNotGenerate="False">
+      <column name="Int_Nb_Val" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="AccountInfo" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="864c3b86-883d-4b4f-9cd7-854e87452edd" p1:DoNotGenerate="False">
+      <column name="Acct_Info_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="DepartmentName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a8eed393-e9ea-4f8c-a4ba-dbb78d17024c" p1:DoNotGenerate="False">
+      <column name="Dept_Nm" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="ProjectName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="2ed5dc2a-f6a9-4cb2-9c72-ca8cc0ad0132" p1:DoNotGenerate="False">
+      <column name="Proj_Nm" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Title" type="String" p1:ValidateRequired="true" p1:Guid="cda95897-2005-416b-8891-7ed15ec9c95e" p1:DoNotGenerate="False">
+      <column name="Title_Nm" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_ReqDc" type="Clob" p1:nullable="True" p1:ValidateMaxLength="2147483647" p1:ValidateRequired="false" p1:Guid="82cbea66-3b37-453d-93b6-bcc94fc7c60c">
+      <column name="Req_Dc" not-null="False" length="2147483647" sql-type="text" p1:unicode="False" />
+    </property>
+    <property name="x_ReqShDc" type="String" p1:ValidateRequired="true" p1:Guid="5ebbc672-24ff-4c0d-9367-fadb964660ef">
+      <column name="Req_Sh_Dc" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_CharTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0300634e-de7f-4a48-8264-3653c73afaeb">
+      <column name="Char_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="LocationName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="f674789b-8c18-4d5e-b52b-c152455e290b">
+      <column name="Wk_Loc_Nm" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RtInfoTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="89e18a4c-109c-4d69-b92a-dd9fbf2636e4">
+      <column name="Rt_Info_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="NumberOfOpenings" type="Int32" p1:ValidateRequired="true" p1:Guid="3e36d55f-c46f-4aa3-a0e0-3c21c176c101" p1:DoNotGenerate="False">
+      <column name="Nb_Pstn_Nb" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="NumberOfFilled" type="Int32" p1:ValidateRequired="true" p1:Guid="ab69f7fa-74bc-4165-853d-4d182053fc5f" p1:DoNotGenerate="False">
+      <column name="Nb_Pstn_Fill_Nb" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_DrtnNb" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d87c4567-9ff0-4f69-bf67-2d337332b1b1">
+      <column name="Drtn_Nb" not-null="False" precision="18" scale="0" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="x_DrtnTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7bd9b0b6-95f3-4389-afe1-555c19577859">
+      <column name="Drtn_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ContractTierId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="53bdc95e-e21e-4e80-aff8-f720d3f20a82" p1:DoNotGenerate="False">
+      <column name="Cont_Tier_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_AutoTierChgContFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="b5b130e4-5a31-40ab-8ca3-1572f0c7defc">
+      <column name="Auto_Tier_Chg_Cont_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtContTierChgDt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="bd1da73f-64e9-4bf7-9051-59f7ae346926">
+      <column name="Updt_Cont_Tier_Chg_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_PermTierId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c0a2d1ed-7370-46af-8c11-cf0e865040c5">
+      <column name="Perm_Tier_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_AutoTierChgPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="a9a8162e-6ece-4817-9b0c-d349f57d1009">
+      <column name="Auto_Tier_Chg_Perm_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtPermTierChgDt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="3a200559-868a-4194-a272-5001989be7bc">
+      <column name="Updt_Perm_Tier_Chg_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_OpenPubFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="62060e6a-cf3f-4766-b390-36cc6fe08f22">
+      <column name="Open_Pub_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_OpenIntFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="35d1f4ac-7b02-45ad-9dd9-2a7cd81a4ecc">
+      <column name="Open_Int_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="OpenUntil" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b7829f9c-a957-4bd1-a794-6a3f206e66e9" p1:DoNotGenerate="False">
+      <column name="Cls_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="StartDate" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="95edd4c6-db71-4daf-8dd1-f8ed1d1eda62" p1:DoNotGenerate="False">
+      <column name="Strt_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="EndDate" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="284672c2-b0db-4917-bc9d-fd80a16dee71" p1:DoNotGenerate="False">
+      <column name="End_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_ReqPrtyCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5e530d86-5440-4361-b638-6de710d044e0">
+      <column name="Req_Prty_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="RequisitionStatusId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e669ec9e-ecba-455a-8af1-af8c55c11887" p1:DoNotGenerate="False">
+      <column name="Req_Sts_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_AltEmailTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="81ed34b9-be26-4649-8642-bdfddca29891">
+      <column name="Alt_Email_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_TpContFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="2b1abe47-8d6d-47bc-aee7-985b1ddbd9e4">
+      <column name="Tp_Cont_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TpContPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="79cb6f5c-0256-4ea6-9a78-bd76e0770acd">
+      <column name="Tp_Cont_Perm_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TpPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="8e3342e6-4e29-477c-84ac-816ee8f4e15b">
+      <column name="Tp_Perm_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="RequisitionClassId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8713cd29-39b0-47c8-be78-42dfe400dc6d" p1:DoNotGenerate="False">
+      <column name="Req_Cls_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ReqCtznStsCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5cd7e559-9700-49ec-bcb6-7776f8899028">
+      <column name="Req_Ctzn_Sts_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ReqIncExTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8108f7d8-e16d-4fb6-aeac-50dfa21f532a">
+      <column name="Req_Inc_Ex_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_MaxRt" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ce7e8d1c-3c20-46f9-b82b-b7c6e7c09b71">
+      <column name="Max_Rt" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_EstHrsPerDy" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="94b559cd-76fd-4b98-8f1f-ea8d2630e398">
+      <column name="Est_Hrs_Per_Dy" not-null="False" length="20" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_WrkDysPerWk" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="765f999a-1e0e-4261-8cd6-e978b3acc92b">
+      <column name="Wrk_Dys_Per_Wk" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_EstBdgt" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="3ccf0d9f-9096-4abe-9c5f-7e9241b423dd">
+      <column name="Est_Bdgt" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_BuySidePOId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e0d36c28-ae6e-4cef-93d4-4d4eeba01799">
+      <column name="Buy_Side_PO_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CrtdUsrId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c265a1e1-a2aa-4e18-a31e-154ac26b6aed">
+      <column name="Crtd_Usr_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedDate" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="cca365c9-0d3c-455a-97d7-677062721009" p1:DoNotGenerate="False">
+      <column name="Crtd_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="73fc46c4-b72e-4f35-8a6b-64a3542f3df1">
+      <column name="Updt_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="dae42577-ed96-4f72-b393-7e2c019991b0">
+      <column name="Updt_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_WkflwStepNb" type="Byte" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="1f5cc133-3bfe-4ab2-8ea2-cb6e15a320dd">
+      <column name="Wkflw_Step_Nb" default="0" not-null="False" precision="3" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+    <property name="x_WkflwCmplFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="b93b4109-8852-40ce-a2f6-c7de33680048">
+      <column name="Wkflw_Cmpl_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_BillFromRtCs" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b202212f-2f14-48e1-b3c0-40d76f5367a1">
+      <column name="Bill_From_Rt_Cs" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_NotExceedRtCs" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b2582e47-aa36-40e9-81fc-bb03051fbec4">
+      <column name="Not_Exceed_Rt_Cs" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_NotExceedRtPrdCd" type="Int32" p1:ValidateRequired="true" p1:Guid="2f9180dd-f520-4960-b1b8-946c893242ba">
+      <column name="Not_Exceed_Rt_Prd_Cd" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_NotExceedFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="b910dce7-8187-4003-b2dc-7422ed125c5f">
+      <column name="Not_Exceed_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ReqFillBillFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="6a6868e6-2e9f-4489-87c5-c63321d80c20">
+      <column name="Req_Fill_Bill_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="LocationId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="63e5af33-bf69-4696-8427-8736f5c496d3" p1:DoNotGenerate="False">
+      <column name="Location_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ReqFormatTpCd" type="Int32" p1:ValidateRequired="true" p1:Guid="fd72f1f9-1456-424a-ade7-7acc3d4f8b1b">
+      <column name="Req_Format_Tp_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_MaxPayRtCs" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="26123507-b4d7-4b35-985b-cb3ca7bb5b2c">
+      <column name="Max_Pay_Rt_Cs" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_MaxPayRtPrdTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="22951516-ddaa-41a5-b855-14316034b7dd">
+      <column name="Max_Pay_Rt_Prd_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RtStrctId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7d5f2e14-1e0b-4efb-8c0a-cd7e2227cce5">
+      <column name="Rt_Strct_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_BillToRtCs" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="16b50706-6824-4fc9-a0ab-a0d05468511c">
+      <column name="Bill_To_Rt_Cs" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="IsSalariedContractor" type="Boolean" p1:ValidateRequired="true" p1:Guid="8d758f6b-a1ed-4b96-97d8-bfe91115615d" p1:DoNotGenerate="False">
+      <column name="Salaried_Contractor_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="IsSowRequisition" type="Boolean" p1:ValidateRequired="true" p1:Guid="b7e617cb-2cff-4940-b5ab-1de46b656092" p1:DoNotGenerate="False">
+      <column name="Tp_Proj_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_PBRId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="2d923b40-a6f6-4b87-9db7-8c2627b949a8">
+      <column name="PBR_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_Ext" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c608ff4d-067d-4193-935e-68dc1b8c14d5">
+      <column name="Ext" not-null="False" length="20" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="IsTemplate" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c175be6d-96cb-4bd9-a3d7-60162fc8d732" p1:DoNotGenerate="False">
+      <column name="Is_Template" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="MaximumSubmittalsByVendor" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="72a1f159-c076-486b-b547-cc42ff0ec110" p1:DoNotGenerate="False">
+      <column name="Max_Submittals_By_Vendor" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CopiedReqId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="56e3528c-821f-4d82-a378-a48d80750386">
+      <column name="Copied_Req_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_PropComment" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="4afba306-0284-46ae-97f1-d6eb83195afd">
+      <column name="Prop_Comment" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="RequisitionProject" entity-set="RequisitionProjects" table="vw_RequisitionsContext_RequisitionProjects" schema="dbo" p1:Guid="77d481c9-e048-44cb-b113-4a3c6702222b">
+    <composite-id>
+      <key-property name="RequisitionId" type="Int32" shadow="True" p1:ValidateRequired="true" p1:Guid="e1cf78eb-9a21-4206-aa31-75d515103117" p1:DoNotGenerate="False">
+        <column name="RequisitionId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+      <key-property name="Id" type="Int32" p1:ValidateRequired="true" p1:Guid="d259a972-f101-4be7-bd18-2ce49eb07e2a" p1:DoNotGenerate="False">
+        <column name="ProjectId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+    </composite-id>
+    <property name="Name" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="44126378-795b-442f-a14c-5e95c6e62831" p1:DoNotGenerate="False">
+      <column name="ProjectName" not-null="False" length="125" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="RequisitionGeneralLedger" entity-set="RequisitionGeneralLedgers" table="vw_RequisitionsContext_RequisitionGeneralLedgers" schema="dbo" p1:Guid="17032382-a162-402d-98d9-a1d7bf96b7d7">
+    <composite-id>
+      <key-property name="RequisitionId" type="Int32" shadow="True" p1:ValidateRequired="true" p1:Guid="5f6a404e-caf7-4b2a-82ee-65fc13b09a68" p1:DoNotGenerate="False">
+        <column name="RequisitionId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+      <key-property name="Id" type="Int32" p1:ValidateRequired="true" p1:Guid="e2a65206-f8b6-4f5e-bdbe-7c7a6dc927ed" p1:DoNotGenerate="False">
+        <column name="GeneralLedgerId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+    </composite-id>
+    <property name="Name" type="String" p1:ValidateRequired="true" p1:Guid="9a4d582c-87cf-44fb-b074-fd8f072bf890" p1:DoNotGenerate="False">
+      <column name="GeneralLedgerName" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="RequisitionCostCenter" entity-set="RequisitionCostCenters" table="vw_RequisitionsContext_RequisitionCostCenters" schema="dbo" p1:Guid="3517015c-a5f7-491d-8f0a-e7752072f0d1">
+    <composite-id>
+      <key-property name="RequisitionId" type="Int32" shadow="True" p1:ValidateRequired="true" p1:Guid="78dea0e5-37dc-41e9-b900-d366274407b8" p1:DoNotGenerate="False">
+        <column name="RequisitionId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+      <key-property name="Id" type="Int32" p1:ValidateRequired="true" p1:Guid="5edba800-a9c7-4995-a3c3-9d8dc644e872" p1:DoNotGenerate="False">
+        <column name="CostCenterId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+    </composite-id>
+    <property name="Name" type="String" p1:ValidateRequired="true" p1:Guid="9b97272d-98c2-4f37-ac8b-401635686543" p1:DoNotGenerate="False">
+      <column name="CostCenterName" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="ClientTier" entity-set="ClientTiers" table="CLNT_TIER" schema="dbo" p1:Guid="b373b76d-dc4b-4374-aef7-49e54d837960">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="df2ded12-8845-446f-b517-ed0a24b1bac7" p1:DoNotGenerate="False">
+      <column name="Clnt_Tier_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="x_OrgId" type="Int32" p1:ValidateRequired="true" p1:Guid="40d8f4cc-fa8a-46af-b45b-3aac96c03e18">
+      <column name="Org_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_TierTpCd" type="Int32" p1:ValidateRequired="true" p1:Guid="2271e326-91f8-4d52-99a3-40dfa05fd5ef">
+      <column name="Tier_Tp_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SeqNb" type="Int32" p1:ValidateRequired="true" p1:Guid="1897d764-43f9-48d6-b730-2709c464e19b">
+      <column name="Seq_Nb" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Name" type="String" p1:ValidateRequired="true" p1:Guid="0c8d02bd-6a3a-4d5c-9afe-5d87ad622064" p1:DoNotGenerate="False">
+      <column name="Tier_Tx" not-null="True" length="30" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_ShTierTx" type="String" p1:ValidateRequired="true" p1:Guid="42914521-b1c7-470a-91dc-f69e3fab8cac">
+      <column name="Sh_Tier_Tx" not-null="True" length="3" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_TierDaysNb" type="Int32" p1:ValidateRequired="true" p1:Guid="78197f2a-a4fb-401e-a97a-b21defe43389">
+      <column name="Tier_Days_Nb" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_TierStrtFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="c35998a9-9841-4ba9-8ee6-eb1aad8f7821">
+      <column name="Tier_Strt_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="582ba4ab-8d14-48f1-b406-60689322cdf4">
+      <column name="Updt_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="7541f070-9660-4372-83e8-236deee48c1d">
+      <column name="Updt_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Location" entity-set="Locations" table="LOCATION" schema="dbo" p1:Guid="ded27284-4948-4e1a-84e6-cfcd6d427ed7">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="9f066fd1-71d1-4091-a95c-c08a0943c1cf" p1:DoNotGenerate="False">
+      <column name="Location_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="x_LocationGrpId" type="Int32" p1:ValidateRequired="true" p1:Guid="fae40db6-c23a-482d-974c-74b092c043a2">
+      <column name="Location_Grp_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Name" type="String" p1:ValidateRequired="true" p1:Guid="12ffc628-a638-4dac-a4d3-14b7c3adb3a2" p1:DoNotGenerate="False">
+      <column name="Location_Nm" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_LocationRefCdTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="cb40516c-0d9d-4335-9716-b9b16e5073e2">
+      <column name="LocationRefCd_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_LocationDcTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="60e40370-4735-468c-a219-c9a22c53adb5">
+      <column name="Location_Dc_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_Adr1Tx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9eaa1e93-8530-4d64-93d5-0eaa4507bca9">
+      <column name="Adr1_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_Adr2Tx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="dd437cef-7ea7-4d37-9206-969a015b5723">
+      <column name="Adr2_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_CtyNm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b7dd7c30-9ea5-476f-9a92-6ad731d97dbe">
+      <column name="Cty_Nm" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RgnNm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6e144f20-ea8e-4527-a465-f20cdb163175">
+      <column name="Rgn_Nm" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_PostCdTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="56c47add-6312-4200-a194-6c42ff6e29f7">
+      <column name="Post_Cd_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_CtryNm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="28cdffca-e877-403b-ac54-06d3967b28f9">
+      <column name="Ctry_Nm" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_PhnNb" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a89a7def-70a9-44e4-b9d9-405163a811e0">
+      <column name="Phn_Nb" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_ActvFg" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d8959f7d-2476-418e-9d21-eb821832ff40">
+      <column name="Actv_Fg" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="90d5aac0-d894-4d69-9adb-9dda668eaf59">
+      <column name="Updt_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="2e0bd5fb-5637-48e4-a1fc-c4345f2da9b8">
+      <column name="Updt_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CreateDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="a2375d15-dee2-4909-8972-afb75716a591">
+      <column name="Create_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_CreateUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="c6f06072-db53-4591-bea4-41fe1bd886d3">
+      <column name="Create_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Organization" entity-set="Organizations" table="ORG" schema="dbo" p1:Guid="b41ea74e-14f1-42be-864a-a3c94a58e69b">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="b093584e-db1a-4ccf-ba6e-377cc6d6255f" p1:DoNotGenerate="False">
+      <column name="Org_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="OrganizationTypeId" type="Int32" p1:ValidateRequired="true" p1:Guid="eaccd40a-1571-47a2-9274-eed0e4e91fd4" p1:DoNotGenerate="False">
+      <column name="s_Org_Tp_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_PrntOrgId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="54a9ad95-35d5-49d8-8405-3b469465fd67">
+      <column name="Prnt_Org_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_BrndOrgID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="369efd83-8472-4d80-9207-8d41e1dfef7a">
+      <column name="Brnd_Org_ID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_PrntUidId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="dba4c2e6-fe0d-4bb5-80f4-d14abeebc5ff">
+      <column name="Prnt_Uid_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Name" type="String" p1:ValidateRequired="true" p1:Guid="60e5410f-8c56-4f33-ba5a-66a9b02a5312" p1:DoNotGenerate="False">
+      <column name="Org_Nm" not-null="True" length="120" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="ShortName" type="String" p1:ValidateRequired="true" p1:Guid="425ea063-3148-4d7c-b2cf-1e396607bdfc" p1:DoNotGenerate="False">
+      <column name="Org_Sh_Nm" not-null="True" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_UrlTx" type="String" p1:ValidateRequired="true" p1:Guid="77d8599e-d42d-4f2a-becb-f3735ce53e73">
+      <column name="Url_Tx" not-null="True" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_AdrId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="cf6cbb43-80c7-4ed8-96bf-079fb89da4ea">
+      <column name="Adr_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SFedEmplId" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="644137dc-9b40-4832-80d2-4686d635ab97">
+      <column name="s_Fed_Empl_Id" not-null="False" length="18" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_EmailTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0a4352ee-02f5-4532-a4a2-ee3db3bb972f">
+      <column name="Email_Tx" not-null="False" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_StsCd" type="Int32" p1:ValidateRequired="true" p1:Guid="9ddac47b-7f2b-4002-a3e2-699d6e953ffb">
+      <column name="Sts_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ThmID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a24a3120-ec8f-4f0b-89b8-31cb212717c5">
+      <column name="Thm_ID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_BillRuleId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="27d8028b-b22f-4dec-baac-3341f0238407">
+      <column name="Bill_Rule_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CrtdUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="af3308bd-f3a6-41c2-ae29-5c8af3d5aef0">
+      <column name="Crtd_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CrtdDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="a10ae9b4-5c09-470c-aa56-5c15d5e67290">
+      <column name="Crtd_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="b1dd7a7d-fcb6-4bb2-a551-c703213b92fd">
+      <column name="Updt_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="5c96aab5-66f0-4cf1-8220-0c52f51818ad">
+      <column name="Updt_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_HtmlHdrTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="35e6a980-c659-46e8-bea9-90f13f2f7390">
+      <column name="Html_Hdr_Tx" not-null="False" length="2000" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_HtmlPfxTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="17edafd5-2bc0-4e45-bb41-7c077961ba48">
+      <column name="Html_Pfx_Tx" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_NtcePfxTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c88668e6-ba83-4b42-9800-121fe23d65f1">
+      <column name="Ntce_Pfx_Tx" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_NtceMailNm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a8786cb4-adef-405c-ad0e-8ba3982cb7c9">
+      <column name="Ntce_Mail_Nm" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_NtceMailAdrTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6aee19b8-d1b4-4015-b723-d71b564070a9">
+      <column name="Ntce_Mail_Adr_Tx" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_NtceMailHostTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="2a992508-61f4-44ad-bb8d-597fc420ceb3">
+      <column name="Ntce_Mail_Host_Tx" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RptMailNm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9bde46e9-2c97-4e3d-989c-4389330d9ea7">
+      <column name="Rpt_Mail_Nm" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RptMailAdrTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="02b5d988-3d36-440d-bb59-2602b3e6c023">
+      <column name="Rpt_Mail_Adr_Tx" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RptMailHostTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a9b85530-b7f5-4021-85cc-8eec4a1b9a2d">
+      <column name="Rpt_Mail_Host_Tx" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RptLblTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="2cccfbcb-8fb3-46f3-85a7-552b32638a25">
+      <column name="Rpt_Lbl_Tx" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RptSbjTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="cd71b633-8913-4e97-b74e-1f30bda69a30">
+      <column name="Rpt_Sbj_Tx" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RgnDc" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a94ce9ce-e0a3-47ee-915b-b788b3b01c97">
+      <column name="Rgn_Dc" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_LocationRgnId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="606e2807-1e8f-46f5-88d5-6fbaa6034c76">
+      <column name="Location_Rgn_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SecLvlCd" type="Int32" p1:ValidateRequired="true" p1:Guid="292831df-f828-4fa0-b534-f75e10764710">
+      <column name="Sec_Lvl_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_GlGrpId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="501e3112-db3b-4836-aa57-f4c85c11d148">
+      <column name="Gl_Grp_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UseLgnAgrFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="9c8b2c8f-fdb2-4911-930e-9014741d7d63">
+      <column name="Use_Lgn_Agr_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseLgnAgrPCFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="06646679-eda9-4dc4-a9cf-f321f8efea07">
+      <column name="Use_Lgn_Agr_PC_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseLgnAgrIUFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="fdc390f4-252e-4e5b-9f90-4b8196d52523">
+      <column name="Use_Lgn_Agr_IU_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CandScreenProcessInPlace" type="Boolean" p1:ValidateRequired="true" p1:Guid="4612e46e-34ee-4fdd-aa9c-f1ec740bc453">
+      <column name="cand_screen_process_in_place" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_BrndOrgFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="17031fdc-a937-4000-979e-092364c530d4">
+      <column name="Brnd_Org_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_HideTimestampFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="9b2d1906-512e-44a0-ace6-9f31664f80d3">
+      <column name="Hide_Timestamp_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_HideStandardReportsFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="ce4e7941-e1bb-499e-b59d-b6c36db1e4ec">
+      <column name="Hide_Standard_Reports_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ActivateCandForPBRFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="7ec816c1-ac51-4ad6-86a3-749b075186ef">
+      <column name="Activate_Cand_for_PBR_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ComplianceRegionId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="1bdb760d-c475-4f11-b014-16c79105befc">
+      <column name="Compliance_Region_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SFedEmplId2" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="16d95824-d0b4-478f-aaec-4b653d0fc670">
+      <column name="s_Fed_Empl_Id_2" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_SFedEmplId3" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ef20702e-b64f-4ad3-85a4-fc701dae0702">
+      <column name="s_Fed_Empl_Id_3" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_SFedEmplId4" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="32b3bca1-ce62-48b8-b0a9-d0b32ad0de12">
+      <column name="s_Fed_Empl_Id_4" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_LogoPrimaryId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="62d20e82-c23b-457c-8ab3-a2867d215911">
+      <column name="Logo_Primary_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_LogoSecondaryId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ab4a06ef-a740-4550-9e37-ee66d4b2c2fd">
+      <column name="Logo_Secondary_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ShowNonProdCode" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d34b1fc3-a46d-48dd-abd3-50ce980d9003">
+      <column name="ShowNonProdCode" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Candidate" entity-set="Candidates" table="CAND" schema="dbo" p1:Guid="96b7a33b-0de4-4924-8de4-732c2ea65cb2">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="133d27df-2048-48ab-98ad-0c692a65e659" p1:DoNotGenerate="False">
+      <column name="Cand_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ParentCandidateId" type="Int32" p1:ValidateRequired="true" p1:Guid="63f2a548-7d9d-4942-8d2d-0179b7880383" p1:DoNotGenerate="False">
+      <column name="Prnt_Cand_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UsrId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="872099d8-db44-4975-9d6d-af24c81f0794">
+      <column name="Usr_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="RequisitionId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b71f1745-60d3-4034-8892-ce40096d2c31" p1:DoNotGenerate="False">
+      <column name="Req_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_OrgRelID" type="Int32" p1:ValidateRequired="true" p1:Guid="72576757-0864-4926-99fe-8af3ef7f1e6b">
+      <column name="Org_Rel_ID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SbmtrOrgId" type="Int32" p1:ValidateRequired="true" p1:Guid="6c998de2-ed39-4f2b-b0fb-73f0d07f11c2">
+      <column name="Sbmtr_Org_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ClntOrgId" type="Int32" p1:ValidateRequired="true" p1:Guid="ba2c33d6-5224-4c89-b1cb-33d63e891484">
+      <column name="Clnt_Org_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_FstNm" type="String" p1:ValidateRequired="true" p1:Guid="b71bf0ee-fff3-4908-a1b6-0e722804dc83">
+      <column name="Fst_Nm" not-null="True" length="25" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_MINm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="4f4750dd-09d1-4ba5-af53-3d890943ad81">
+      <column name="MI_Nm" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_LstNm" type="String" p1:ValidateRequired="true" p1:Guid="dc20a6f4-76cc-44af-9ea3-a0f091c6334c">
+      <column name="Lst_Nm" not-null="True" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_EmailTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="1247b5a0-55b1-441d-a1ce-fe0f30b0ed82">
+      <column name="Email_Tx" not-null="False" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_SSNTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="04287446-b2bd-4eb6-9fe0-43a8ff50654e">
+      <column name="SSN_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_AvlTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="f67dbe05-e59f-4735-adc1-1a82ed746c97">
+      <column name="Avl_Tx" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_PrevEngtFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="8b2f1086-75e8-480e-b491-18b6316c9ad6">
+      <column name="Prev_Engt_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_PrevEngtDcTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="bfb4a5a6-3fdc-401c-a76a-4ad7a17ab036">
+      <column name="Prev_Engt_Dc_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_EmplrNm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="331ffe7e-8884-4002-921b-47182f802397">
+      <column name="Emplr_Nm" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_AltVendNm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="76a5443b-37bb-4a10-ba7a-7e0d7c851ade">
+      <column name="Alt_Vend_Nm" not-null="False" length="25" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_VendIntCandNbVal" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7389689e-3216-49be-88e7-5b45c7ba4d60">
+      <column name="Vend_Int_Cand_Nb_Val" not-null="False" length="20" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_DplybRtgNb" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b7f4566f-ba29-44e8-ae21-190372965e65">
+      <column name="Dplyb_Rtg_Nb" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CandCtznStsCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="843cd133-1e7a-44e5-bea5-b60bf526bbe6">
+      <column name="Cand_Ctzn_Sts_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ClientCandidateStatusId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7e1ac7e1-aca7-4da6-bda1-da054491f2d2" p1:DoNotGenerate="False">
+      <column name="Clnt_Cand_Sts_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_VendCandStsCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0740c946-9be3-4acd-b255-887f1e8e1eca">
+      <column name="Vend_Cand_Sts_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_DupStsCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d7005407-4867-4530-a975-31bb3ee1cd1f">
+      <column name="Dup_Sts_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SlctdFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="1abeac8f-098e-4a93-a6ab-3be13d8295df">
+      <column name="Slctd_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_PrvSbmsFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="43e5061a-0f0a-4138-a476-767fbb9470f0">
+      <column name="Prv_Sbms_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TpContFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="8af6288a-2f61-409a-a042-16b358b91caf">
+      <column name="Tp_Cont_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TpContPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="5ad8c298-ab10-43cc-a22e-5dce5a35d082">
+      <column name="Tp_Cont_Perm_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TpPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4ac2e0e6-f26d-4f0b-9d51-c6ae5fb30c72">
+      <column name="Tp_Perm_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_VendW2Fg" type="Boolean" p1:ValidateRequired="true" p1:Guid="02aef129-d64c-498a-8aa1-be1bb7abda20">
+      <column name="Vend_W2_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CtgtFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="8489d90a-1c97-4bb2-9ca5-6742ddb66369">
+      <column name="Ctgt_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_IndpFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="ef44366b-62b1-45dd-bebe-80e855cb8770">
+      <column name="Indp_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_Indp1099Fg" type="Boolean" p1:ValidateRequired="true" p1:Guid="113eadf9-a45d-47dd-add5-5f561037d7fc">
+      <column name="Indp_1099_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_IndpCorpFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="bab5614a-374f-4029-a818-4bdee3eff248">
+      <column name="Indp_Corp_Fg" default="-1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_MnrFg" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="93b6fbaf-b946-4fd0-a504-90e106b37c01">
+      <column name="Mnr_Fg" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_WkflwStepNb" type="Byte" p1:ValidateRequired="true" p1:Guid="a6d0289e-93de-4dab-9e2b-b9ee5f6e764e">
+      <column name="Wkflw_Step_Nb" default="0" not-null="True" precision="3" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+    <property name="x_WkflwCmplFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="e4f28988-995d-46a2-a6d2-ebf9f5f81a6c">
+      <column name="Wkflw_Cmpl_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_IntvwDt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c2f2f907-1782-4bb9-b874-2d55f99e16f4">
+      <column name="Intvw_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_IntvwByNm" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="2b7cdcba-5698-46b4-9f6c-e4c104c4c66a">
+      <column name="Intvw_By_Nm" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_CrtdUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="e0229cce-e182-4121-86bc-6ca5f44fcea3">
+      <column name="Crtd_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CrtdDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="1658cd06-bc37-40ce-97ee-4bc1ba765cb0">
+      <column name="Crtd_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="c8bb3044-e1db-40e1-b600-4b9a10a5dab9">
+      <column name="Updt_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="03f88621-e0d6-4ea3-a6d6-ad8eeaf69594">
+      <column name="Updt_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_SSNShTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7d364b30-0d62-477e-8622-57d96cc7a7e6">
+      <column name="SSN_Sh_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_PrevEngtEmptTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a2709e81-9a02-48d7-9994-c4d718e0cefe">
+      <column name="Prev_Engt_Empt_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_PrevEngtEmptTermTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="cab9f62a-4b75-4ef4-94b5-bfb5bd753c2b">
+      <column name="Prev_Engt_Empt_Term_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_PrevEngtEndDt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="17483901-7cd8-459a-ae4b-981107de4869">
+      <column name="Prev_Engt_End_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_CandCtznStsTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="bdac899a-6254-4881-b09b-eee16a439314">
+      <column name="Cand_Ctzn_Sts_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_SnstvDataCnsntFg" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8c9c0dc0-b6f7-4905-a5d7-e14990338f1e">
+      <column name="Snstv_Data_Cnsnt_Fg" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_SnstvDataCnsntDt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="88e03601-5426-4587-9fa3-94576ad501e5">
+      <column name="Snstv_Data_Cnsnt_Dt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_SnstvDataTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ab69a0d7-2d7e-4769-8975-7b6d96390a6f">
+      <column name="Snstv_Data_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_CandRankNb" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a648cbcc-7862-48c3-b465-da43c5ccd017">
+      <column name="Cand_Rank_Nb" not-null="False" precision="8" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="x_RehireComments" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="47eb4bc1-4cd5-463e-8d63-41a95d8deb65">
+      <column name="Rehire_Comments" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_RehireFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4ea57555-6ad0-49e5-aef9-be6e522fca1b">
+      <column name="Rehire_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CandTaxRateMult" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="adbdf3ae-dcb8-4bf7-bf1d-96806efa4629">
+      <column name="Cand_Tax_Rate_Mult" not-null="False" precision="7" scale="6" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="x_OverRtCardFg" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ee833669-9dfd-430c-842c-684fd59e02f9">
+      <column name="Over_Rt_Card_Fg" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CandWrkStsCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d3b93120-482d-4834-8a79-130bbb034c9c">
+      <column name="Cand_Wrk_Sts_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CandWrkEaaOptOut" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="49454c3f-1e0a-4017-8296-957c49a217f0">
+      <column name="Cand_Wrk_Eaa_Opt_Out" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_VendChrgPct" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="728a3fed-8047-48c2-b7ef-9948c2319ee1">
+      <column name="vend_chrg_pct" not-null="False" precision="7" scale="4" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="x_PymntBasisCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="80d11db5-e532-4214-bde7-2915ba09773e">
+      <column name="pymnt_basis_cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RtStrctId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="3ff2a1a2-70bb-4884-8fa9-30449b0c0253">
+      <column name="rt_strct_id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CandScreened" type="Boolean" p1:ValidateRequired="true" p1:Guid="03a3161b-67e0-4b29-916c-f223e2eb494f">
+      <column name="Cand_Screened" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ScreenedDate" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="cb6d3f1a-7cb8-4384-9eb7-14287faa902a">
+      <column name="Screened_Date" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_PropId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7cec1a1c-d8c0-441b-a3ca-c4323778045c">
+      <column name="Prop_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_EngtTpCd" type="Int32" p1:ValidateRequired="true" p1:Guid="417e269b-c403-4e30-a6d2-b7b47da27bc6">
+      <column name="Engt_Tp_Cd" default="0" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="RequisitionAttachment" entity-set="RequisitionAttachments" table="REQ_ATCH" schema="dbo" p1:Guid="b5ca4d03-afb8-47ec-b532-a071f5e474d8">
+    <composite-id>
+      <key-property name="RequisitionId" type="Int32" p1:ValidateRequired="true" p1:Guid="87a49f2c-9d1e-41fa-b658-907b7452ade6" p1:DoNotGenerate="False">
+        <column name="Req_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+      <key-property name="AttachmentId" type="Int32" p1:ValidateRequired="true" p1:Guid="b878ad40-576d-4a85-baf5-7cbf5765efdd" p1:DoNotGenerate="False">
+        <column name="Atch_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+    </composite-id>
+  </class>
+  <class name="OrganizationDetail" entity-set="OrganizationDetails" table="CLNT_DTL" schema="dbo" p1:Guid="77bb791c-97cb-44ca-b7b8-201dfbb18132">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="7e0b032c-556a-4462-adce-4344e8513fe9" p1:DoNotGenerate="False">
+      <column name="Clnt_Dtl_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="OrganizationId" type="Int32" p1:ValidateRequired="true" p1:Guid="11750cef-e9df-4139-9dbe-ee4c07d1da91" p1:DoNotGenerate="False">
+      <column name="Org_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_AutoTierChgContFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="054b7be0-ea09-4570-ad08-7ca403122e39">
+      <column name="Auto_Tier_Chg_Cont_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AutoTierChgPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="488fcd6f-1dd2-44e0-816b-37c94d34afa2">
+      <column name="Auto_Tier_Chg_Perm_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EnfClsTierContFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="a372af6a-4b0b-4072-91fb-8f725b1934fb">
+      <column name="Enf_Cls_Tier_Cont_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EnfClsTierPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="28501e75-8cb8-47f6-9dcc-68b4f9033218">
+      <column name="Enf_Cls_Tier_Perm_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_PubReqContFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="413766b3-e1c3-4bb5-a3ff-0287d8f5abea">
+      <column name="Pub_Req_Cont_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_PubReqPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="c4777539-44b0-476c-b45f-3351e0f8eec5">
+      <column name="Pub_Req_Perm_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_IndReqContFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="71191fad-9be5-44e0-80ac-2e35233866b8">
+      <column name="Ind_Req_Cont_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_IndReqPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="91aab69a-e75a-4d95-806a-b2ba7217360f">
+      <column name="Ind_Req_Perm_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EnfReqApvlFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="ea18be4a-cc00-479f-82b3-ef4f12c45ca2">
+      <column name="Enf_Req_Apvl_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EnfEngtApvlFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="5c881a41-a66e-4dd9-85cf-b7dd5a819be3">
+      <column name="Enf_Engt_Apvl_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_MinChgUsrAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="94f8ea79-b446-4593-a136-22f2bf3b77f6">
+      <column name="Min_Chg_Usr_Auth_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_DupCkMthdCd" type="Int32" p1:ValidateRequired="true" p1:Guid="c69bef40-33dc-47ba-bb1f-d149b453d4f5">
+      <column name="Dup_Ck_Mthd_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="120f38b3-a031-4d1b-b8f5-7e8ea5d9732e">
+      <column name="Updt_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="2f01620f-cb64-40fa-a543-dfb8cb3dcfc7">
+      <column name="Updt_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_ClntRtCnfgFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="74d4328f-a24a-4bd4-a33a-1607fa129215">
+      <column name="Clnt_Rt_Cnfg_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AsgnCandVendFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="ea09823f-7d61-47d1-9d73-5726d1c65b14">
+      <column name="Asgn_Cand_Vend_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AsgnCandVendAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="f989ab1a-7476-43c3-a40f-1f729d37c2b8">
+      <column name="Asgn_Cand_Vend_Auth_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RasgnCandRgnFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="03910683-5b49-4067-9031-9e1626fc893d">
+      <column name="Rasgn_Cand_Rgn_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_RasgnCandRgnAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="3e153659-ff06-444b-bf62-ae8cf21c1a38">
+      <column name="Rasgn_Cand_Rgn_Auth_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ElecEngtFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d9eab32f-f43a-4327-b443-19b581f0a71d">
+      <column name="Elec_Engt_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_FiltVendListFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="09178525-2f69-425d-b604-7b170d8d5a27">
+      <column name="Filt_Vend_List_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_VendViewFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="543ba292-2a21-4333-9823-f9dc527524ae">
+      <column name="Vend_View_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ExptRtgFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="67837839-946e-4fe4-b088-473f0e5fb26d">
+      <column name="Expt_Rtg_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EngtEvalFg" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c3fd9bb0-02f8-48f7-a94a-83d50db4996d">
+      <column name="Engt_Eval_Fg" default="0" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ReqNtceDfltFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="1287d560-df9e-4f8d-97eb-322ebc87dfb1">
+      <column name="Req_Ntce_Dflt_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EvalFlwupNtceNb" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8ea25ac6-3444-41db-aa5d-352636745fe0">
+      <column name="Eval_Flwup_Ntce_Nb" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_VendExpAcptFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="00339080-865b-494d-9177-3e70e0e89113">
+      <column name="Vend_Exp_Acpt_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ExtCstCtrVldnFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="7ac7ca61-607b-45f5-a9d7-51277e187612">
+      <column name="Ext_Cst_Ctr_Vldn_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ExtCstCtrURLTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9f0a4759-63bc-4422-b309-5c4d16f89f6f">
+      <column name="Ext_Cst_Ctr_URL_Tx" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_PendExtCstCtrTmEntFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="391e322b-481f-49e1-82ec-e293dd250dff">
+      <column name="Pend_Ext_Cst_Ctr_Tm_Ent_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EnfBdgtCnstFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="f73b0157-3506-49ba-b30b-5a9cedaeff5a">
+      <column name="Enf_Bdgt_Cnst_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_WeekEndDay" type="Int32" p1:ValidateRequired="true" p1:Guid="302b102d-e1fa-4d23-bd5e-06ac4e295f1b">
+      <column name="Week_End_Day" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ManBillRuleFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="acb182d5-c5e4-4d6a-a5ea-59d0d70e3053">
+      <column name="Man_Bill_Rule_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ManBillRuleDfltFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="507fa5e2-cd10-492d-91ff-ce2a1af2a9ce">
+      <column name="Man_Bill_Rule_Dflt_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_PrxyTmAuthLvl" type="Int32" p1:ValidateRequired="true" p1:Guid="d8cabcad-8174-4e59-a9e9-2b3cc6841d89">
+      <column name="Prxy_Tm_Auth_Lvl" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_VndrPrxyTmAuthLvl" type="Int32" p1:ValidateRequired="true" p1:Guid="0d3bde15-1d51-4a92-9166-b3ca380456d4">
+      <column name="Vndr_Prxy_Tm_Auth_Lvl" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_VndrPrxyTmDfltFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="7a9a3467-d906-45b0-b96c-01f93e936dda">
+      <column name="Vndr_Prxy_Tm_Dflt_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EmailCnfgActvFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="b90979a3-bf32-4b59-8069-62fbc88880c4">
+      <column name="Email_Cnfg_Actv_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DfltNotExceedToReqClsFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d308d900-1082-4fd6-b343-6595814a7123">
+      <column name="Dflt_NotExceed_to_ReqCls_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DfltMaxEngtLength" type="Int32" p1:ValidateRequired="true" p1:Guid="0289361f-b58b-4485-bb30-5b08147f3ec5">
+      <column name="Dflt_Max_Engt_Length" default="0" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_DfltMaxEngtLengthDrtnTpCd" type="Int32" p1:ValidateRequired="true" p1:Guid="e8d3b3f1-3a3f-45b1-98b3-6d8b99f44db0">
+      <column name="Dflt_Max_Engt_Length_Drtn_Tp_Cd" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CandNotForRehireFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="3370c488-17f8-44e8-808b-b53b74c36665">
+      <column name="Cand_Not_For_Rehire_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_RejectionCommentsAllowedFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="f52c1ff8-c9a3-4538-8db0-d737b0774c43">
+      <column name="Rejection_Comments_Allowed_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ReqFillBillFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="0ef9dd82-ffb3-42ee-a105-a4baf0e00efa">
+      <column name="Req_Fill_Bill_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_HideVendorInfoFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="5cac59fe-72ce-4807-852b-dea21b915b00">
+      <column name="Hide_Vendor_Info_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_HideVendorInfoAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="d7ad38bd-2932-4cfb-8601-2f442b48d32d">
+      <column name="Hide_Vendor_Info_Auth_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UserCostCenterToReqCd" type="Int32" p1:ValidateRequired="true" p1:Guid="a73fe27c-94cb-4754-a1a8-4b92d0f8bbdf">
+      <column name="User_Cost_Center_to_Req_Cd" default="0" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="IsApprovalRequiredBeforeRequisitionDistribution" type="Boolean" p1:ValidateRequired="true" p1:Guid="3560a5a8-16aa-40d4-8129-98a0dde20599" p1:DoNotGenerate="False">
+      <column name="Req_Appr_Dist_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EngtPrcsUserSettingCd" type="Int32" p1:ValidateRequired="true" p1:Guid="f15c3845-fb44-4a07-a857-0c182ec046e3">
+      <column name="Engt_Prcs_User_Setting_Cd" default="0" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UseEnhncdTSNtceFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="1937c2d4-2222-44c0-a13b-aa1cffbea022">
+      <column name="Use_Enhncd_TS_Ntce_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseRateCardFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4c1f6777-bc50-48ca-b13a-6fbbeb5cc4db">
+      <column name="Use_Rate_Card_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AutoCalcMarkupRateFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="443e6522-09c8-4723-b6f5-4d16321120a3">
+      <column name="Auto_Calc_Markup_Rate_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EngtTpContFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="281d0816-056d-42cf-a595-f431e18d0e47">
+      <column name="Engt_Tp_Cont_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EngtTpContPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="bfd8af1c-5c96-4e01-903d-4bf4ef25f4a1">
+      <column name="Engt_Tp_Cont_Perm_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EngtTpPermFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="0b026c62-eae7-4c4d-abfa-1c6c50209cdf">
+      <column name="Engt_Tp_Perm_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ReqProjects" type="Boolean" p1:ValidateRequired="true" p1:Guid="41421b29-6d9b-4f3e-9cca-89cbd08a17a1">
+      <column name="Req_Projects" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ActvBdgtWrngNtceFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4d488be4-de0a-4d50-94f2-7c81df5dd15f">
+      <column name="Actv_Bdgt_Wrng_Ntce_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_NotExceedBdgtPrcnt" type="Int16" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="acaa7965-c643-42fd-9d29-4413b90b9656">
+      <column name="Not_Exceed_Bdgt_Prcnt" not-null="False" precision="5" scale="0" sql-type="smallint" p1:unicode="False" />
+    </property>
+    <property name="x_UseBillRuleInBdgtClcltrFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="becb3558-beac-4d89-9359-fe45d7ff70bb">
+      <column name="Use_Bill_Rule_In_Bdgt_Clcltr_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TierDays" type="String" p1:ValidateRequired="true" p1:Guid="6895aba2-dd3e-4d60-ae89-960e61b22701">
+      <column name="Tier_Days" default="'1111111'" not-null="True" length="7" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_TierStartTime" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8d05f6c6-d46d-4ba4-b7f1-27a12f776270">
+      <column name="Tier_Start_Time" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_TierEndTime" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d41fae99-49e3-4db0-bd61-b1c1fee686f1">
+      <column name="Tier_End_Time" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_SSNTimeEntryFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="fd0d277a-5fd1-4041-a2f1-298396b543d4">
+      <column name="SSN_TimeEntry_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_SSNMinLen" type="Int32" p1:ValidateRequired="true" p1:Guid="d59a488b-7436-43a6-995a-fb02eae43a08">
+      <column name="SSN_Min_Len" default="0" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SSNMaxLen" type="Int32" p1:ValidateRequired="true" p1:Guid="8c39686f-94fa-46db-a59d-1b2d9df2b26c">
+      <column name="SSN_Max_Len" default="25" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SSNAlphanumFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="b65c9439-fc49-46b6-bbd0-48aa0fcea344">
+      <column name="SSN_Alphanum_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_SSNLabelTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b9514dcc-c3fb-4445-b976-930c31d8f50a">
+      <column name="SSN_Label_Tx" not-null="False" length="75" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_UseRtStrct" type="Boolean" p1:ValidateRequired="true" p1:Guid="acbfe5aa-9a97-4017-876c-209156442c1b">
+      <column name="Use_Rt_Strct" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UsePayRtReq" type="Boolean" p1:ValidateRequired="true" p1:Guid="cbef9bf8-9fdb-4bbb-9d76-8d406243424e">
+      <column name="Use_Pay_Rt_Req" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_MlstnCostCenterFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="447a8895-dfb5-4e97-a842-4d63f7f7b849">
+      <column name="Mlstn_Cost_Center_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_MlstnGLLgLstFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="453fecb3-a664-4fc1-bfd6-bb0eb625c94d">
+      <column name="Mlstn_GL_Lg_Lst_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_MlstnProjFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d59c899d-1690-4dd2-a76c-4ceffb63bf70">
+      <column name="Mlstn_Proj_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EnfPmtSchdBdgtFg" type="Byte" p1:ValidateRequired="true" p1:Guid="97bc8979-c7a0-4680-992e-2ec9ae8f8e47">
+      <column name="Enf_Pmt_Schd_Bdgt_Fg" default="0" not-null="True" precision="3" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+    <property name="x_HideApproveJustificationMspUser" type="Boolean" p1:ValidateRequired="true" p1:Guid="5d10c9ef-17f7-4cc8-876f-f9f46b19cd27">
+      <column name="hide_approve_justification_msp_user" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EngtStrtDtConfirmNtcFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="c601d78e-5481-4af9-84be-f0b5d5d186bd">
+      <column name="Engt_Strt_Dt_Confirm_Ntc_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EngtStrtDtConfirm3dayNtcFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="43e62f54-564d-46ea-8d48-9c407fd4b5b5">
+      <column name="Engt_Strt_Dt_Confirm_3day_Ntc_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_RstrUsrAcsFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="e762b898-8e89-4a47-b3ca-b693258b7bfb">
+      <column name="Rstr_Usr_Acs_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UsePOFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="1a427d5f-6ef1-4652-b34f-72fdb95e6398">
+      <column name="Use_PO_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AutoAmendFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="79d00c59-c115-4319-a895-0a1db09fd29a">
+      <column name="Auto_Amend_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_VendViewPOFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="19b9ab9a-4138-4064-8e5a-8b7df19341fe">
+      <column name="Vend_View_PO_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseDfltNotExceedToReqClsFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="b6e964e9-2546-4f5b-bb1d-6de9ead701fc">
+      <column name="Use_Dflt_NotExceed_to_ReqCls_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AllowNoBillRuleEngt" type="Boolean" p1:ValidateRequired="true" p1:Guid="f7ba34db-bf86-41bf-b97d-dce597e33c1f">
+      <column name="Allow_No_Bill_Rule_Engt" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AllowNoBaseRuleEngt" type="Boolean" p1:ValidateRequired="true" p1:Guid="d4a37e74-54dc-4539-ad01-f9bd025f1e87">
+      <column name="Allow_No_Base_Rule_Engt" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AllowEngtExceedHourlyOrBudgetFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="bd71b3f4-594d-4a8c-bb0d-029ee1f771b1">
+      <column name="Allow_Engt_Exceed_Hourly_or_Budget_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AdvInterviewFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="ea0779fe-2aa4-4cbc-8360-77d853b9a88e">
+      <column name="Adv_Interview_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AdvInterviewClntCmntFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d8b1cfaa-ceb0-4bbb-a9f7-2aa9abbfdfa2">
+      <column name="Adv_Interview_Clnt_Cmnt_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ClntAmendAdminFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="99446105-7946-4619-8ac5-462edc3acd81">
+      <column name="Clnt_Amend_Admin_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ClntAmendTmApvrFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="9acdad98-03bd-4740-812c-cb10c0eccd9e">
+      <column name="Clnt_Amend_Tm_Apvr_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ClntAmendMSPUserFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="a57f8024-81ca-4825-b213-da5884d16e7b">
+      <column name="Clnt_Amend_MSP_User_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ClntAmendTmProxyFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d7c69b43-fb10-4490-ac3b-39cdbce8c544">
+      <column name="Clnt_Amend_Tm_Proxy_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_VendAmendAdminFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="37d3533e-4351-4b94-a1ed-b495e6b79ed4">
+      <column name="Vend_Amend_Admin_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_VendAmendCandContactsFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4c8c643d-b703-4bf1-92fe-5f087b35aae5">
+      <column name="Vend_Amend_Cand_Contacts_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_VendAmendTmEntryFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="610bb02d-e966-470d-8b5e-d37928e02d44">
+      <column name="Vend_Amend_Tm_Entry_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_SelfBillFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="b4f118a3-712c-40ec-8bd8-6a1ea9a109cb">
+      <column name="Self_Bill_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_LmtUserAssocProjectFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="f657c7be-6b68-4356-b747-6e43e6a2c0bd">
+      <column name="Lmt_User_Assoc_Project_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DfltProjDetUserTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6aea0164-2955-4fe0-99e1-d3fef446e67e">
+      <column name="Dflt_Proj_Det_User_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_LmtUserAssocGLFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="ec942201-a2d4-4a89-84b6-a6b8d3ffba8f">
+      <column name="Lmt_User_Assoc_GL_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DfltGLDetUserTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="53baaf9a-5ff9-46c0-aba4-45a38b8c51d3">
+      <column name="Dflt_GL_Det_User_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_LmtUserAssocCCFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="e5bb44c8-edea-4afc-bb23-1a627717c1e5">
+      <column name="Lmt_User_Assoc_CC_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DfltCCDetUserTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0d43c428-f5f9-4986-ad3c-80d022e6cf1b">
+      <column name="Dflt_CC_Det_User_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UseSalariedContractorConstraintsFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="98c513e3-66b0-4385-92f5-ca9f6da3e324">
+      <column name="Use_Salaried_Contractor_Constraints_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AllowCreateNewEngtRecFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="1185eff5-4ca9-4222-89e3-40483b07992d">
+      <column name="Allow_Create_New_Engt_Rec_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ReqCCLowestLvlFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4d0a5fcf-d966-4f1a-849e-79b5a610acb8">
+      <column name="Req_CC_Lowest_Lvl_Fg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ReqCCRefCdFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="52b48897-bf07-4cf7-9bb7-3cf835f925cc">
+      <column name="Req_CC_Ref_Cd_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseVendLocBillRuleFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="8e6fc5bc-cb80-48ee-9a98-4dc884748282">
+      <column name="Use_Vend_Loc_Bill_Rule_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseSuppFeeFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="bd9929e2-27a4-4432-9f44-03483767a141">
+      <column name="Use_Supp_Fee_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_LinkExpTmShtPrdFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="3c785717-c4bf-4eeb-89dc-555aeeed994d">
+      <column name="Link_Exp_Tm_Sht_Prd_fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseEFVFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4ab8d015-9c05-4f28-9d0e-eefba81f6ae0">
+      <column name="Use_EFV_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EFVUrl" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="cb4aad7a-52e4-4611-9263-88a9f8a6cd61">
+      <column name="EFV_Url" not-null="False" length="500" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_EFVTimeout" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e5ce73f5-d8de-465c-95b6-d6526c047000">
+      <column name="EFV_Timeout" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ChronTimeEntryFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="47ca83bc-843c-40d0-a88f-318c5a88911f">
+      <column name="Chron_Time_Entry_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TmShtSuspendFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d2824c2e-fe9c-4ea1-b702-d077f7927996">
+      <column name="Tm_Sht_Suspend_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ClntAmendApproveUsrFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="70c21dd1-094e-41d1-a405-0e0dba6e3e61">
+      <column name="Clnt_Amend_Approve_Usr_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AutoAmendApvlFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d1dd55e7-9544-489b-847f-a14a91bc9204">
+      <column name="Auto_Amend_Apvl_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_SupplierTaxFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="0e2090c1-2c8f-4e8a-85d6-65c57aaa8f65">
+      <column name="Supplier_Tax_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EditNotExceedToAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="94e0f3d0-f5d2-463a-8092-f7cf70021369">
+      <column name="Edit_NotExceed_to_Auth_Cd" default="4" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ExceedPublishedNotExceedToAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="98dd0b60-4f88-4617-8a01-6b66ad1c8cbb">
+      <column name="Exceed_Published_NotExceed_to_Auth_Cd" default="4" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_EditRateSalaryDescriptionAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="4788efe0-7fc1-4713-8e27-ef2fa415545e">
+      <column name="Edit_Rate_Salary_Description_Auth_Cd" default="4" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RateSalaryDescriptionFormatCd" type="Int32" p1:ValidateRequired="true" p1:Guid="198a8eca-797a-4ded-a04a-2baccf173ed5">
+      <column name="Rate_Salary_Description_Format_Cd" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ReqPendingApprovalAuthID" type="Int32" p1:ValidateRequired="true" p1:Guid="6ed4148e-1bed-4555-b7d6-49a3a4c77780">
+      <column name="ReqPendingApprovalAuthID" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RestrictCandNotForRehireFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="df37884d-167a-4450-ad91-c32f0ceabd03">
+      <column name="Restrict_Cand_Not_For_Rehire_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_SSNEncryptionFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d9ac3cba-e10c-4afa-94bf-d9303260bbc4">
+      <column name="SSN_Encryption_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_SSNVisibleChars" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="f78d53c8-2605-451e-a78e-d791da64222c">
+      <column name="SSN_Visible_Chars" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_SSNFormatCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d2e25950-25ee-48e7-a7bc-0566518ed9af">
+      <column name="SSN_Format_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RestrApprUsrCCFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="34c4ba3c-8cda-41ec-acdb-ea47f4159d24">
+      <column name="Restr_Appr_Usr_CC_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ActvEngtProjSelEnfFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="ee951539-5295-40b7-8aaa-5265081d6035">
+      <column name="Actv_Engt_Proj_Sel_Enf_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DfltEngtProjSelEnfOnReqClsCd" type="Int32" p1:ValidateRequired="true" p1:Guid="ce2d5a3d-bab1-4bba-96e6-2b19e5dcc5aa">
+      <column name="Dflt_Engt_Proj_Sel_Enf_On_Req_Cls_Cd" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_DfltProjEngtId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="aaeb40c1-76c2-475c-93d3-d68aba06a369">
+      <column name="Dflt_Proj_Engt_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UseExpAtch" type="Boolean" p1:ValidateRequired="true" p1:Guid="87a5059f-6c83-4ce8-8c2c-8f5ee1a59a89">
+      <column name="Use_Exp_Atch" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ExpenseItemSubmCtrlFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="6619e6f5-f90a-4043-85ad-03e62baf8e31">
+      <column name="Expense_Item_Subm_Ctrl_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ActivateReqTitleExtFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="351d6cc7-7ca1-4cea-b440-f7936db3f505">
+      <column name="Activate_Req_Title_Ext_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CertsScreeningFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="5f1a75de-978a-4d8b-9f57-e083ba43d0f0">
+      <column name="Certs_Screening_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CertsScreeningDate" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0bdaeb45-0460-441a-a5be-45f02ee08f03">
+      <column name="Certs_Screening_Date" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_RequireReqStartEndDateFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4f717ad5-a03f-4649-9158-12ff4ef0db2d">
+      <column name="Require_Req_Start_End_Date_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_GlobalRequirementsFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="ceb36013-0dce-4e0d-b1a5-f161a2c61fcd">
+      <column name="Global_Requirements_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_RequireClntCandIdOnEngt" type="Boolean" p1:ValidateRequired="true" p1:Guid="5e056c6b-d879-461f-b51a-a8cf40c579ac">
+      <column name="Require_Clnt_Cand_Id_On_Engt" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_SupportedEmailFormat" type="Byte" p1:ValidateRequired="true" p1:Guid="4fe4fee7-a6cf-4416-aeaa-ba4899d2b481">
+      <column name="Supported_Email_Format" default="1" not-null="True" precision="3" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+    <property name="x_DefaultEmailFormat" type="Byte" p1:ValidateRequired="true" p1:Guid="19b67a25-4472-4e9e-98a8-0fc749e51240">
+      <column name="Default_Email_Format" default="2" not-null="True" precision="3" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+    <property name="x_EngtChangeReasonFormatAsList" type="Boolean" p1:ValidateRequired="true" p1:Guid="904113dd-caa5-4a58-8b05-ee07a020bef6">
+      <column name="Engt_Change_Reason_Format_As_List" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DefaultMaxCandidateSubmittals" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="def69bbb-6700-4849-afca-0bc0c4bad1aa">
+      <column name="Default_Max_Candidate_Submittals" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ActivateProjectsForExpenseLineItems" type="Boolean" p1:ValidateRequired="true" p1:Guid="acd2329f-c3d7-4cd1-967c-5a6673772a19">
+      <column name="activate_projects_for_expense_line_items" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_LimitToTier1VendorsAuthorityID" type="Int32" p1:ValidateRequired="true" p1:Guid="08481b5c-954b-4d94-a22a-6329ecf307fe">
+      <column name="LimitToTier1VendorsAuthorityID" default="4" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ActivateCustomDisengageReasons" type="Boolean" p1:ValidateRequired="true" p1:Guid="64ad6e8c-8bfe-4622-bb42-c6c1476f9818">
+      <column name="ActivateCustomDisengageReasons" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DefaultMaxCandidateSubmittalsAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="3af781a5-6d1c-426f-824d-9c46a63782e1">
+      <column name="Default_Max_Candidate_Submittals_Auth_Cd" default="4" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_AllowRestrictAdminPermissions" type="Boolean" p1:ValidateRequired="true" p1:Guid="cf6d8fe4-24fd-4c7d-8ced-eba64a32ad02">
+      <column name="AllowRestrictAdminPermissions" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CopyReqAlterReqClsFg" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8875cb89-9536-473c-bda1-35fa41870ed9">
+      <column name="Copy_Req_Alter_Req_Cls_Fg" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ViewAttachAuthLvl" type="Int32" p1:ValidateRequired="true" p1:Guid="c96fc76c-3584-4645-958f-4a915d01e697">
+      <column name="View_Attach_Auth_Lvl" default="5" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ActivateCopyingReqFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="7911f32f-e35c-4224-b3ff-c31c9f40b559">
+      <column name="ActivateCopyingReqFg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ActivateTechnologyFee" type="Boolean" p1:ValidateRequired="true" p1:Guid="0d2b4048-3468-4590-8001-7b26d4cbca70">
+      <column name="ActivateTechnologyFee" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_LmtUserAssocLocFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="7f2a1759-f495-4848-89fe-f21267d08745">
+      <column name="Lmt_User_Assoc_Loc_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_DfltLocDetUserTpCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="544e9267-bc7d-4be6-b0a5-fe44f0e893db">
+      <column name="Dflt_Loc_Det_User_Tp_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_DisengagePreviousEngtRecordFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="d8bd5fed-82f4-48e9-a7f9-ccda6a859bbb">
+      <column name="DisengagePreviousEngtRecordFg" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_MassEngtAprvAuthCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e5747304-250a-499a-b961-9510298c5085">
+      <column name="Mass_Engt_Aprv_Auth_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RequireComplianceForTimeEntry" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="944f0d32-fedb-4474-933f-86a9793b8073">
+      <column name="require_compliance_for_time_entry" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_MassReqAprvAuthCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7e55ab53-48bf-414f-9e1c-7042e61834a6">
+      <column name="Mass_Req_Aprv_Auth_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ViewDistributionTabAuthorityID" type="Int32" p1:ValidateRequired="true" p1:Guid="181b7303-6e0e-47b9-9310-5f5912b7cad0">
+      <column name="ViewDistributionTabAuthorityID" default="5" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_AuditEnabled" type="Boolean" p1:ValidateRequired="true" p1:Guid="d2d4a4a1-80e3-4aca-82c7-c04311b158b5">
+      <column name="Audit_Enabled" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_AuditMinViewAuthorityLevel" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7f8bc9fa-ba55-4871-a68f-3261b4176fe7">
+      <column name="Audit_Min_View_Authority_Level" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_AuditComplianceContactView" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8b294421-7265-43a8-9fb2-eadf7cc33919">
+      <column name="Audit_Compliance_Contact_View" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="RequisitionClass" entity-set="RequisitionClasses" table="REQ_CLS" schema="dbo" p1:Guid="e9837fda-027d-4592-a64d-c3f7f1c63377">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="2d57c138-02ea-4609-bec7-6391d9abc428" p1:DoNotGenerate="False">
+      <column name="Req_Cls_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="x_OrgId" type="Int32" p1:ValidateRequired="true" p1:Guid="f5f7c027-3448-4c2f-a447-ad0c9009acc1">
+      <column name="Org_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ReqId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c5b777e7-77da-4cb4-abc8-c7024e8e154b">
+      <column name="Req_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_PrntReqClsId" type="Int32" p1:ValidateRequired="true" p1:Guid="30eb2c6a-3171-45ff-a283-bd0b65217f84">
+      <column name="Prnt_Req_Cls_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RootReqClsID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9d209711-257d-4813-b729-bcf65403e573">
+      <column name="Root_Req_Cls_ID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_NodeLft" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="120b2eba-66d2-4482-9b38-8de80daaeacf">
+      <column name="Node_Lft" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_NodeRt" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="98197c40-f48a-4cc3-89b4-2d8f4b04379a">
+      <column name="Node_Rt" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Description" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="3e22ff21-f48b-4787-9ef1-471b7a62f490" p1:DoNotGenerate="False">
+      <column name="Req_Cls_Dc" not-null="False" length="30" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_ReqClsShDc" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="75c2068c-aa4e-4d8d-bd62-778949a454e0">
+      <column name="Req_Cls_Sh_Dc" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_DcTx" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="310a835f-fded-4118-91b3-d0c13538d598">
+      <column name="Dc_Tx" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="x_UpdtUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="c6a5b872-c70f-4d77-a0a9-e396ea4ce8dc">
+      <column name="Updt_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="2ba64a05-debb-476e-b592-cb1e193b9717">
+      <column name="Updt_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_HrlyRtLowCs" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5fd23f15-53bf-49fd-ae42-8d0d8b60199f">
+      <column name="Hrly_Rt_Low_Cs" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_HrlyRtHighCs" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="45804732-8c50-4987-b524-a2b1511e80f6">
+      <column name="Hrly_Rt_High_Cs" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_SlryLowCs" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="923230c5-50ee-4c88-b762-8d5f5dd8abab">
+      <column name="Slry_Low_Cs" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_SlryHighCs" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ad0db397-5208-4567-a09e-f0a26c176718">
+      <column name="Slry_High_Cs" not-null="False" precision="19" scale="4" sql-type="money" p1:unicode="False" />
+    </property>
+    <property name="x_SpclOptCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ace5f6a6-918e-449d-acd1-07b00f06cd50">
+      <column name="Spcl_Opt_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ReqFormatTpCd" type="Int32" p1:ValidateRequired="true" p1:Guid="f8d30d3f-f60f-46aa-b7d0-48e29ddd3554">
+      <column name="Req_Format_Tp_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_MaxDur" type="Int32" p1:ValidateRequired="true" p1:Guid="df8b99cd-529a-4ea3-9d91-7d0dd89e0f85">
+      <column name="Max_Dur" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_MaxDurPrdTpCd" type="Int32" p1:ValidateRequired="true" p1:Guid="0d9dbbb8-240c-4b1c-8a58-686960170abc">
+      <column name="Max_Dur_Prd_Tp_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ReqSetWkflwFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="c885c9d5-4170-447a-a081-4e01373b58af">
+      <column name="Req_Set_Wkflw_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_StgChgAuthCd" type="Int32" p1:ValidateRequired="true" p1:Guid="6e6a96b3-1b49-44dd-9a70-0b74cf416a12">
+      <column name="Stg_Chg_Auth_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_RtStrctId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="94aaf23b-b808-4561-ab0c-3376ce08670f">
+      <column name="rt_strct_id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UsePayRtReq" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="466befa8-469d-4f3c-a530-4bfcb8920f22">
+      <column name="use_pay_rt_req" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TmShtFreqCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="776be4e2-2e65-4ff7-b0ed-9681dd4f81f9">
+      <column name="tm_sht_freq_cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ActvFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="5f2c11a1-8fe3-4f24-b03e-125e5bc9fab1">
+      <column name="Actv_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CrtFg" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="dd395286-1471-4a7d-96a2-c2bfda4f4a28">
+      <column name="Crt_Fg" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_QstnFg" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="03f8c560-b841-4963-a6f5-056a800f0858">
+      <column name="Qstn_Fg" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CntFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="4c70441b-267d-456a-9692-a03de9509b1f">
+      <column name="Cnt_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_ApvFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="550a6d27-c37e-4cce-b731-f556d2cd5f13">
+      <column name="Apv_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseSalariedContractorFieldFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="38c924d6-8dab-4235-b1f9-131a5cfe37fd">
+      <column name="Use_Salaried_Contractor_Field_Fg" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_EngtProjSelCd" type="Int32" p1:ValidateRequired="true" p1:Guid="77daf9f2-5667-4340-ad29-795ebf1a8207">
+      <column name="Engt_Proj_Sel_Cd" default="1" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_TmShtTypeCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6afed9a2-b4d2-4ea7-bb97-6accc083dd74">
+      <column name="tm_sht_type_cd" default="1" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_MaxCandidateSubmittals" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c31f8d11-1730-417f-a569-7ad3a241e5f4">
+      <column name="Max_Candidate_Submittals" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UseRequisitionApprovals" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c7956619-dcc0-498e-b4ce-db0d66f4086c">
+      <column name="Use_Requisition_Approvals" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseNewEngagementApprovals" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b1007e4e-42e4-426a-a099-9c7e09ae1894">
+      <column name="Use_New_Engagement_Approvals" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseTimesheets" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="860c1444-7e54-44e3-85d7-9141c7b875d6">
+      <column name="Use_Timesheets" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseExpenses" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6ad40a80-6a0e-493d-8a03-2fc63d1d9794">
+      <column name="Use_Expenses" not-null="False" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_UseTimesheetsAuthCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="faa95d6e-fd69-4371-8719-7e454783b9df">
+      <column name="Use_Timesheets_Auth_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UseExpensesAuthCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="680edbb8-cc3d-4a53-89d7-14f250c48020">
+      <column name="Use_Expenses_Auth_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ReqTypeSupport" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="dbff2efa-dbd3-4d3b-8aed-da1259413cb1">
+      <column name="Req_Type_Support" default="1" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ViewDistributionAuthCd" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="1fb741cc-ba74-46cc-ba58-4e48c67fd130">
+      <column name="View_Distribution_Auth_Cd" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="RequisitionContact" entity-set="RequisitionContacts" table="vw_RequisitionsContext_RequisitionContacts" schema="dbo" p1:Guid="13fa6711-120c-4533-850f-54da7e16ec87">
+    <composite-id>
+      <key-property name="RequisitionId" type="Int32" p1:ValidateRequired="true" p1:Guid="22002316-9d48-4832-8191-e2bdd2cfe4c8" p1:DoNotGenerate="False">
+        <column name="RequisitionId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+      <key-property name="ContactRoleId" type="VMS.Requisitions.Querying.Entities.RequisitionContactRole" p1:ValidateRequired="true" p1:Guid="9f1a5f13-660a-4e63-ade2-598e085b89ca" p1:DoNotGenerate="False">
+        <column name="ContactRoleId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+      </key-property>
+    </composite-id>
+    <property name="UserId" type="Int32" p1:ValidateRequired="true" p1:Guid="47c2f73d-ec8b-43ec-812a-043380442e59" p1:DoNotGenerate="False">
+      <column name="UserId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="FirstName" type="String" p1:ValidateRequired="true" p1:Guid="ad4376ad-9754-4662-ba74-5ebb0b45589f" p1:DoNotGenerate="False">
+      <column name="FirstName" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="MiddleInitial" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="effb3b8f-2485-4063-ab4a-a3c0aa7c6f05" p1:DoNotGenerate="False">
+      <column name="MiddleInitial" not-null="False" length="2" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="LastName" type="String" p1:ValidateRequired="true" p1:Guid="b6275eab-9764-4053-a148-7b9f9d6253f2" p1:DoNotGenerate="False">
+      <column name="LastName" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="EmailAddress" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="793af71a-229e-41bb-87f7-ed7f2c584fd0" p1:DoNotGenerate="False">
+      <column name="EmailAddress" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="Approval" entity-set="Approvals" table="APVL" schema="dbo" p1:Guid="900346c2-06de-4e97-b1f1-97fa213e805e">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="7765009d-f6fa-4485-a58b-384290e45796" p1:DoNotGenerate="False">
+      <column name="Apvl_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ApprovalProcessId" type="Int32" p1:ValidateRequired="true" p1:Guid="a3d54e26-d22a-452d-8aaa-f90396a7f798" p1:DoNotGenerate="False">
+      <column name="Apvl_Process_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UserId" type="Int32" p1:ValidateRequired="true" p1:Guid="1edf5c50-5210-4ea3-89bb-e10cf06daa21" p1:DoNotGenerate="False">
+      <column name="Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ApvlLvLId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a6aec2d3-3c8d-47b3-a0e6-ceaac3054941">
+      <column name="Apvl_LvL_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ApprovalStatusId" type="Int32" p1:ValidateRequired="true" p1:Guid="4176585c-ae6e-4fa9-ac69-2fa44cfe4392" p1:DoNotGenerate="False">
+      <column name="Apvl_Sts_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CrtdUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="e10c3b58-de2c-449a-960d-9ef6bf525899">
+      <column name="Crtd_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CrtdDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="d17dc7de-8d11-4615-b36b-f6e8e1bc6ea1">
+      <column name="Crtd_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtUsrId" type="Int32" p1:ValidateRequired="true" p1:Guid="99447d9f-76fc-478b-8f8f-52182c2e200a">
+      <column name="Updt_Usr_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdtDt" type="DateTime" p1:ValidateRequired="true" p1:Guid="e36cd686-a4b5-4589-b529-4e3f84480bf0">
+      <column name="Updt_Dt" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="ApprovalProcess" entity-set="ApprovalProcesses" table="APVL_PROCESS" schema="dbo" p1:Guid="36cc7bae-99b1-4c73-baf8-449a91d68188">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="3e1a9004-a6c6-4db6-91e5-5cb0ddcc96d8" p1:DoNotGenerate="False">
+      <column name="Apvl_Process_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ApvlDtlId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="33428288-0f53-47b4-af53-dff5fdd48426">
+      <column name="Apvl_Dtl_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="EntityId" type="Int32" p1:ValidateRequired="true" p1:Guid="aac4e532-1dfa-49bd-9379-e426b94f3d24" p1:DoNotGenerate="False">
+      <column name="Entity_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="EntityTpCd" type="Int32" p1:ValidateRequired="true" p1:Guid="d574b0f8-6a00-42fb-911e-a046278777c1" p1:DoNotGenerate="False">
+      <column name="Entity_Tp_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="UserApprovalData" entity-set="UserApprovalData" table="User_Approval_Data" schema="dbo" p1:Guid="13610761-94da-4359-a319-b6a671494316">
+    <id name="Id" type="Int32" p1:ValidateRequired="true" p1:Guid="88383df1-1355-419e-bde0-5597e27c178b" p1:DoNotGenerate="False">
+      <column name="User_ID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="x_ApprovalLevelID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="70b41b4d-3e20-4fed-b9eb-d3d1e460d640">
+      <column name="Approval_Level_ID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AlternateApproverId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="94586a55-7fa0-4847-8817-3c3fca65a4ff" p1:DoNotGenerate="False">
+      <column name="Alternate_Approver_ID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_AlternateApprovalEmailFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="e4bf412a-f88d-4491-93a7-646e39885e1d">
+      <column name="Alternate_Approval_Email_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_TimesheetAlternateApprovalEmailFg" type="Boolean" p1:ValidateRequired="true" p1:Guid="a4cbf51c-4af3-4c97-a145-c5baf5b7d730">
+      <column name="Timesheet_Alternate_Approval_Email_Fg" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="x_CreatedBy" type="Int32" p1:ValidateRequired="true" p1:Guid="bbafd91f-3bd7-4b12-baa2-9f96043099d7">
+      <column name="Created_By" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_UpdatedBy" type="Int32" p1:ValidateRequired="true" p1:Guid="7b2671d4-1241-47b7-a16b-57dfdad2a917">
+      <column name="Updated_By" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_CreatedDate" type="DateTime" p1:ValidateRequired="true" p1:Guid="6bfb6c0d-f592-497f-878b-50d75c638935">
+      <column name="Created_Date" default="getutcdate()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_UpdatedDate" type="DateTime" p1:ValidateRequired="true" p1:Guid="aac41e72-040a-4099-bac4-fc39e1f14425">
+      <column name="Updated_Date" default="getutcdate()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="x_TimesheetAlternateApproverID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="381b7736-d564-4d08-82c9-272d6c8e8102">
+      <column name="Timesheet_Alternate_Approver_ID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="OrganizationId" type="Int32" p1:ValidateRequired="true" p1:Guid="b1bb156c-99fc-4186-987d-17d3facddd04" p1:DoNotGenerate="False">
+      <column name="Org_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ApproverUserId1" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="4abcd700-98a1-4566-ade4-f5ed8cb2b4a6">
+      <column name="Approver_User_Id1" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ApproverUserId2" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="2bdb2cd9-58e9-497e-83fb-73671ce70f1c">
+      <column name="Approver_User_Id2" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ApproverUserId3" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8c50cfc8-3ebf-49c9-8d26-b99b09cda92e">
+      <column name="Approver_User_Id3" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="x_ApproverUserId4" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b6451c87-4ace-41fc-8a15-5692035f65d2">
+      <column name="Approver_User_Id4" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="RequisitionNextApprover" entity-set="RequisitionNextApprovers" table="vw_RequisitionsContext_RequisitionNextApprovers" schema="dbo" p1:Guid="d556835b-1150-4bf4-81b5-888153484fcb">
+    <id name="RequisitionId" type="Int32" p1:ValidateRequired="true" p1:Guid="89110489-22ba-4570-ba0e-88e479ba3cd3" p1:DoNotGenerate="False">
+      <column name="RequisitionId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ApproverUserId" type="Int32" p1:ValidateRequired="true" p1:Guid="fdfd2883-da72-4cbe-b441-6b770d602cc3" p1:DoNotGenerate="False">
+      <column name="ApproverUserId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AlternateApproverUserId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6d1a4d7e-5acb-4843-a06c-43de9fbf3fea" p1:DoNotGenerate="False">
+      <column name="AlternateApproverId" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="ReportsToContact" entity-set="ReportsToContacts" table="vw_RequisitionsContext_ReportsToContact" schema="dbo" p1:Guid="f3a2c4f3-e72a-4b05-b4a9-1b4d6b91e511">
+    <id name="RequisitionId" type="Int32" shadow="True" p1:ValidateRequired="true" p1:Guid="fd536c05-bbfb-4fe2-bf1a-9ffae1ec465b" p1:DoNotGenerate="False">
+      <column name="RequisitionId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="UserId" type="Int32" p1:ValidateRequired="true" p1:Guid="f74703b5-aa2e-4934-81fc-172be5ccb6ff" p1:DoNotGenerate="False">
+      <column name="UserId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="FirstName" type="String" p1:ValidateRequired="true" p1:Guid="360af1df-3cbb-4592-b558-abd73d7cfc1f" p1:DoNotGenerate="False">
+      <column name="FirstName" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="MiddleInitial" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ad8e4096-7cd3-4d09-a0e6-114b52c05db5" p1:DoNotGenerate="False">
+      <column name="MiddleInitial" not-null="False" length="2" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="LastName" type="String" p1:ValidateRequired="true" p1:Guid="4db7e3d1-7308-4680-8894-ff1d0aa34ecd" p1:DoNotGenerate="False">
+      <column name="LastName" not-null="True" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="EmailAddress" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c7751a11-882f-458c-8aca-537533b14418" p1:DoNotGenerate="False">
+      <column name="EmailAddress" not-null="False" length="254" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="ActiveCandidatesCount" entity-set="ActiveCandidatesCounts" table="vw_RequisitionsContext_ActiveCandidatesCount" schema="dbo" p1:Guid="fa986a28-f319-4723-9d07-ccc0010a32a4">
+    <id name="RequisitionId" type="Int32" shadow="True" p1:ValidateRequired="true" p1:Guid="53a42938-6868-4fdf-9365-dd2f04983134" p1:DoNotGenerate="False">
+      <column name="RequisitionId" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Count" type="Int32" p1:ValidateRequired="true" p1:Guid="cbcf4535-22e3-4829-9955-94952f750db7" p1:DoNotGenerate="False">
+      <column name="`Count`" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="AttachmentsCount" entity-set="AttachmentsCounts" table="vw_RequisitionsContext_AttachmentsCount" schema="dbo" p1:Guid="b2f16da8-9fc0-44dc-8347-d5e4459e0693">
+    <id name="RequisitionId" type="Int32" shadow="True" p1:ValidateRequired="true" p1:Guid="4ea845ee-15f1-4a99-b9e1-8a9b2571fc75" p1:DoNotGenerate="False">
+      <column name="RequisitionId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Count" type="Int32" p1:ValidateRequired="true" p1:Guid="e36cd26d-e0e4-41ab-899b-ac2acb18c062" p1:DoNotGenerate="False">
+      <column name="`Count`" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="StatusDescription" entity-set="StatusDescriptions" table="vw_RequisitionsContext_StatusDescription" schema="dbo" p1:Guid="30070b67-0970-4443-bdd9-5ffad98df1f8">
+    <id name="RequisitionStatusId" type="Int32" p1:ValidateRequired="true" p1:Guid="86aa3ed8-ec1b-466c-9900-6a80bb5e33b2" p1:DoNotGenerate="False">
+      <column name="RequisitionStatusId" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Description1" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6cc7e92f-7d67-4e49-819c-943d5482bea8" p1:DoNotGenerate="False">
+      <column name="Description1" not-null="False" length="200" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Description2" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="fd8c8c2b-3484-4781-a1f4-64122753713e" p1:DoNotGenerate="False">
+      <column name="Description2" not-null="False" length="200" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Description3" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0fb0fa6c-1225-4d8a-b9e1-46eb4089ab4c" p1:DoNotGenerate="False">
+      <column name="Description3" not-null="False" length="200" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Description4" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a75acbe5-5b46-49e5-8cf9-a69722d697c1" p1:DoNotGenerate="False">
+      <column name="Description4" not-null="False" length="200" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Description5" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="58409e96-952e-409e-8611-62165ad02268" p1:DoNotGenerate="False">
+      <column name="Description5" not-null="False" length="200" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Description6" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="7be3d1f0-0d64-49c7-ad79-fde041e608dc" p1:DoNotGenerate="False">
+      <column name="Description6" not-null="False" length="200" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Description7" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="86de1215-6535-40e9-b256-92cce601ba8f" p1:DoNotGenerate="False">
+      <column name="Description7" not-null="False" length="200" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Description8" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8b1a0d4e-e529-474b-aa84-5718b11d8a15" p1:DoNotGenerate="False">
+      <column name="Description8" not-null="False" length="200" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+  </class>
+  <associations>
+    <association name="Requisition_RequisitionProject" cardinality="OneToMany" p1:Guid="2cd1ce43-7629-4865-86ab-b19f243576e3">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionProject" relation-class="Requisition" generate="False" constrained="True" p1:Guid="82947ccd-bb42-4da2-b7e7-49eda328427f">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="Projects" class="Requisition" relation-class="RequisitionProject" p1:Guid="a18b04d2-7886-4671-a5ee-7bc669c10cf9">
+        <property name="RequisitionId" />
+      </end2>
+    </association>
+    <association name="Requisition_RequisitionGeneralLedger" cardinality="OneToMany" p1:Guid="c3f21937-9626-4ad5-b1b0-e1bb9a54753e">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionGeneralLedger" relation-class="Requisition" generate="False" constrained="True" p1:Guid="55d4d8c1-4868-4fe5-8d47-982b3dec58a2">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="GeneralLedgers" class="Requisition" relation-class="RequisitionGeneralLedger" p1:Guid="1ce6fc67-44b4-4a22-8268-4b320cbac91a">
+        <property name="RequisitionId" />
+      </end2>
+    </association>
+    <association name="Requisition_RequisitionCostCenter" cardinality="OneToMany" p1:Guid="f84b950d-dad0-4ebb-8cc9-1539b6c57aed">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionCostCenter" relation-class="Requisition" generate="False" constrained="True" p1:Guid="ece5cd0a-9f6c-4759-9424-09b4d88ec146">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="CostCenters" class="Requisition" relation-class="RequisitionCostCenter" p1:Guid="0d4b92ec-e709-413f-8d2c-a70d9da2efd1">
+        <property name="RequisitionId" />
+      </end2>
+    </association>
+    <association name="ClientTier_Requisition" cardinality="OneToMany" p1:Guid="1701a889-bfb2-4989-add6-7bd08d96bf0a">
+      <end1 multiplicity="ZeroOrOne" name="ContractTier" class="Requisition" relation-class="ClientTier" constrained="False" p1:Guid="d1d2b37c-8797-41d8-8bed-a7dd87415f09">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="Requisitions" class="ClientTier" relation-class="Requisition" generate="False" p1:Guid="d150d74d-018c-4884-bd7d-918393a78983">
+        <property name="ContractTierId" />
+      </end2>
+    </association>
+    <association name="LOCATION_Requisition" cardinality="OneToMany" p1:Guid="bfd2d7f9-5778-47b0-98ed-4ca476ce1eb3">
+      <end1 multiplicity="ZeroOrOne" name="Location" class="Requisition" relation-class="Location" constrained="True" p1:Guid="33ed7aea-47a1-4c50-a233-f48ba18b233c">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="Requisitions" class="Location" relation-class="Requisition" generate="False" p1:Guid="cbf2e32e-dd3e-414d-81bc-2cd286c43658">
+        <property name="LocationId" />
+      </end2>
+    </association>
+    <association name="ORG_Requisition" cardinality="OneToMany" p1:Guid="ce91130f-d90b-45ab-b55a-72acfba51570">
+      <end1 multiplicity="One" name="Organization" class="Requisition" relation-class="Organization" constrained="True" p1:Guid="7a68705a-fd49-45c0-a881-42dd90078e72">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="Requisitions" class="Organization" relation-class="Requisition" generate="False" p1:Guid="657d249d-0dc1-44a2-a739-97c165f45964">
+        <property name="OrganizationId" />
+      </end2>
+    </association>
+    <association name="Requisition_CAND" cardinality="OneToMany" on-delete="Cascade" p1:Guid="ee3aa135-25dd-4fb7-b0c0-9108f993f24b">
+      <end1 multiplicity="ZeroOrOne" name="Requisition" class="Candidate" relation-class="Requisition" generate="False" constrained="True" p1:Guid="be63c553-91c6-4618-8419-67f346cbbd25">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="Candidates" class="Requisition" relation-class="Candidate" p1:Guid="a68e9a6c-80c7-42b9-b9e0-62122dfa4a47">
+        <property name="RequisitionId" />
+      </end2>
+    </association>
+    <association name="OrganizationDetal_Requisition" cardinality="OneToMany" p1:Guid="366c95ad-1236-4d4d-9fe1-7db5b0d5ca74">
+      <end1 multiplicity="One" name="OrganizationDetail" class="Requisition" relation-class="OrganizationDetail" constrained="True" p1:Guid="9bb50036-0f7d-4524-bfaf-8fa175975226">
+        <property name="OrganizationId" />
+      </end1>
+      <end2 multiplicity="Many" name="Requisitions" class="OrganizationDetail" relation-class="Requisition" generate="False" p1:Guid="b63b4b3e-2789-431a-8f44-2b1a342e3658">
+        <property name="OrganizationId" />
+      </end2>
+    </association>
+    <association name="RequisitionClass_Requisition" cardinality="OneToMany" p1:Guid="72d3ed4e-c8a3-4759-adab-cbfd2217a5b1">
+      <end1 multiplicity="ZeroOrOne" name="RequisitionClass" class="Requisition" relation-class="RequisitionClass" constrained="True" p1:Guid="4cd47a8d-1fd2-46a7-94ec-ccb482cfdc27">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="Requisitions" class="RequisitionClass" relation-class="Requisition" generate="False" p1:Guid="656cf2df-dcbd-482e-9583-f861885c9cbd">
+        <property name="RequisitionClassId" />
+      </end2>
+    </association>
+    <association name="Requisition_RequisitionContact" cardinality="OneToMany" p1:Guid="cc1c239e-da34-4cdc-a26c-8a63dfd70790">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionContact" relation-class="Requisition" generate="False" constrained="True" p1:Guid="46dea91f-c307-425a-ad0a-8129e1294595">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="RequisitionContacts" class="Requisition" relation-class="RequisitionContact" p1:Guid="b36b8bbf-6cf6-4888-aa81-ee40f6af3b3a">
+        <property name="RequisitionId" />
+      </end2>
+    </association>
+    <association name="APVLPROCESS_APVL" cardinality="OneToMany" p1:Guid="49d99b9e-e414-4fcb-93ae-b5bff17772d2">
+      <end1 multiplicity="One" name="APVLPROCESS" class="Approval" relation-class="ApprovalProcess" generate="False" constrained="True" p1:Guid="603da142-b683-426c-9a81-6208fc20250f">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="Many" name="Approvals" class="ApprovalProcess" relation-class="Approval" p1:Guid="13f61047-4d28-4fd9-84fb-319da5fd68d9">
+        <property name="ApprovalProcessId" />
+      </end2>
+    </association>
+    <association name="UserApprovalData_Approval" cardinality="OneToOne" p1:Guid="c9752543-51a5-4f2d-b9f7-f66928c12c61">
+      <end1 multiplicity="One" name="UserApprovalData" class="Approval" relation-class="UserApprovalData" constrained="True" p1:Guid="f65dfe3c-8499-4411-8482-ccb8ff1ee494">
+        <property name="Id" />
+      </end1>
+      <end2 multiplicity="One" name="Approval" class="UserApprovalData" relation-class="Approval" generate="False" constrained="False" p1:Guid="2a9ce496-eb7e-494c-b250-a6ebf88ff1e9">
+        <property name="UserId" />
+      </end2>
+    </association>
+    <association name="ReportsToContact_Requisition" cardinality="OneToOne" p1:Guid="ae0dbd35-9a1b-42be-97d9-b2e42f5ffc5e">
+      <end1 multiplicity="One" name="ReportsToContact" class="Requisition" relation-class="ReportsToContact" constrained="False" p1:Guid="dee7a830-93a4-4ca2-90b5-d824d51641f4">
+        <property name="RequisitionId" />
+      </end1>
+      <end2 multiplicity="One" name="Requisition" class="ReportsToContact" relation-class="Requisition" generate="False" constrained="False" p1:Guid="ac69ad91-2717-420c-b98c-b919cddb084f">
+        <property name="Id" />
+      </end2>
+    </association>
+    <association name="ActiveCadidate_Requisition" cardinality="OneToOne" p1:Guid="fe05c4d8-b208-4f27-b989-9e093f3e2cdf">
+      <end1 multiplicity="One" name="ActiveCandidates" class="Requisition" relation-class="ActiveCandidatesCount" constrained="True" p1:Guid="6eb848bf-471a-4889-88b5-87857aebeddf">
+        <property name="RequisitionId" />
+      </end1>
+      <end2 multiplicity="One" name="Requisition" class="ActiveCandidatesCount" relation-class="Requisition" generate="False" constrained="False" p1:Guid="bc02f076-83e8-41ab-a540-165a0c46ee22">
+        <property name="Id" />
+      </end2>
+    </association>
+    <association name="AttachmentsCount_Requisition" cardinality="OneToOne" p1:Guid="7511bae9-bff8-442f-acd7-8a286d92d8bf">
+      <end1 multiplicity="One" name="Attachments" class="Requisition" relation-class="AttachmentsCount" constrained="True" p1:Guid="d57a176c-97c8-4052-a52e-47db26e0d709">
+        <property name="RequisitionId" />
+      </end1>
+      <end2 multiplicity="One" name="Requisition" class="AttachmentsCount" relation-class="Requisition" generate="False" constrained="False" p1:Guid="87e3ec5a-354a-4c37-afc3-e91118dc5dfa">
+        <property name="Id" />
+      </end2>
+    </association>
+    <association name="StatusDescription_Requisition" cardinality="OneToOne" p1:Guid="2ac61d35-4308-44da-9c03-c8befac5595f">
+      <end1 multiplicity="ZeroOrOne" name="StatusDescription" class="Requisition" relation-class="StatusDescription" constrained="True" p1:Guid="9cb0f8a9-d318-4825-8b98-a29407ecfae7">
+        <property name="RequisitionStatusId" />
+      </end1>
+      <end2 multiplicity="One" name="Requisition" class="StatusDescription" relation-class="Requisition" generate="False" constrained="False" p1:Guid="c348337c-b183-4511-97be-3fb558d5923c">
+        <property name="RequisitionStatusId" />
+      </end2>
+    </association>
+  </associations>
+</efcore>
