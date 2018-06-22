@@ -177,17 +177,7 @@ namespace VMS.Requisitions.Models
 
         // **** **** cntRate **** ****
 
-        /// <summary>
-        /// Gets or sets the hourly low rate.  Hourly low bill rate $98.32 USD - From ReqClass
-        /// </summary>
-        public IMoney HourlyLowRate { get; set; }
-
-
-        /// <summary>
-        /// Gets or sets the hourly high rate. Hourly high bill rate $98.32 USD - From ReqClass
-        /// </summary>
-        public IMoney HourlyHighRate { get; set; }
-
+       
         /// <summary>
         /// Gets or sets the bill range from rate. Bill Range
         /// </summary>
@@ -219,16 +209,6 @@ namespace VMS.Requisitions.Models
         /// </summary>
         public int DaysPerWeek { get; set; }
 
-
-        /// <summary>
-        /// Gets or sets the salary range low.  $76,000 USD Per Year
-        /// </summary>
-        public IMoney SalaryRangeLow { get; set; }
-
-        /// <summary>
-        /// Gets or sets the salary range high.
-        /// </summary>
-        public IMoney SalaryRangeHigh { get; set; }
 
         //public string NotToExceedRate { get; set; }
 

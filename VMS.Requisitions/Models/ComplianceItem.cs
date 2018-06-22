@@ -9,6 +9,11 @@ namespace VMS.Requisitions.Models
     public class ComplianceItem : IComplianceItem
     {
         /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         public string Name { get; set; }
@@ -21,7 +26,6 @@ namespace VMS.Requisitions.Models
         /// <summary>
         /// Gets or sets the due. Optional/Before Engagement...
         /// </summary>
-        public string Due { get; set; }
-
+        public ComplianceDue Due { get; set; }
     }
 }

@@ -9,6 +9,11 @@ namespace VMS.Requisitions.Models
     public class BudgetLine : IBudgetLine
     {
         /// <summary>
+        /// Gets or sets the billing rule.
+        /// </summary>
+        public IBillingRule BillingRule { get; set; }
+
+        /// <summary>
         /// Gets or sets the sequence number.
         /// </summary>
         public short SequenceNumber { get; set; }

@@ -165,16 +165,6 @@ namespace VMS.Requisitions.Contracts
         IRateStructure RateStructure { get; set; }
 
         /// <summary>
-        /// Gets or sets the hourly low rate.
-        /// </summary>
-        IMoney HourlyLowRate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the hourly high rate.
-        /// </summary>
-        IMoney HourlyHighRate { get; set; }
-
-        /// <summary>
         /// Gets or sets the bill range from rate.
         /// </summary>
         IMoney BillRangeFromRate { get; set; }
@@ -203,16 +193,6 @@ namespace VMS.Requisitions.Contracts
         /// Gets or sets the days per week.
         /// </summary>
         int DaysPerWeek { get; set; }
-
-        /// <summary>
-        /// Gets or sets the salary range low.
-        /// </summary>
-        IMoney SalaryRangeLow { get; set; }
-
-        /// <summary>
-        /// Gets or sets the salary range high.
-        /// </summary>
-        IMoney SalaryRangeHigh { get; set; }
 
         /// <summary>
         /// Gets or sets the rate info text.

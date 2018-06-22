@@ -7,6 +7,11 @@ namespace VMS.Requisitions.Contracts
     public interface IBudgetLine
     {
         /// <summary>
+        /// Gets or sets the billing rule.
+        /// </summary>
+        IBillingRule BillingRule { get; set; }
+
+        /// <summary>
         /// Gets or sets the sequence number.
         /// </summary>
         short SequenceNumber { get; set; }
