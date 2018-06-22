@@ -215,26 +215,6 @@ Response Example:
               "due": 3
             }
           ]
-        },
-        {
-          "name": "Test Plans/ Test Cases / Test Execution / Defect Reporting",
-          "sequenceNumber": 2,
-          "skillType": 1,
-          "duration": {
-            "value": 5,
-            "durationType": 4
-          },
-          "expertiseRating": null
-        },
-        {
-          "name": "Working experience in Agile methodology",
-          "sequenceNumber": 3,
-          "skillType": 1,
-          "duration": {
-            "value": 3,
-            "durationType": 4
-          },
-          "expertiseRating": null
         }
       ]
     }
