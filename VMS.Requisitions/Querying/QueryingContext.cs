@@ -75,6 +75,12 @@ namespace VMS.Requisitions.Querying
             set;
         }
 
+        public virtual DbSet<BillingRuleDetail> BillingRuleDetails
+        {
+            get;
+            set;
+        }
+
         public virtual DbSet<Candidate> Candidates
         {
             get;
@@ -82,6 +88,48 @@ namespace VMS.Requisitions.Querying
         }
 
         public virtual DbSet<ClientTier> ClientTiers
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<CompliainceGroup> CompliainceGroups
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<ComplianceItem> ComplianceItems
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<CustomField> CustomFields
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<CustomFieldListItem> CustomFieldListItems
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<CustomValue> CustomValues
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<ExpertiseRating> ExpertiseRatings
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<LocalizationOrganization> LocalizationOrganizations
         {
             get;
             set;
@@ -105,6 +153,18 @@ namespace VMS.Requisitions.Querying
             set;
         }
 
+        public virtual DbSet<OrganizationMessage> OrganizationMessages
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<RateStructure> RateStructures
+        {
+            get;
+            set;
+        }
+
         public virtual DbSet<ReportsToContact> ReportsToContacts
         {
             get;
@@ -123,7 +183,19 @@ namespace VMS.Requisitions.Querying
             set;
         }
 
+        public virtual DbSet<RequisitionBudgetDetail> RequisitionBudgetDetails
+        {
+            get;
+            set;
+        }
+
         public virtual DbSet<RequisitionClass> RequisitionClasses
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<RequisitionComplianceInfo> RequisitionComplianceInfos
         {
             get;
             set;
@@ -136,6 +208,12 @@ namespace VMS.Requisitions.Querying
         }
 
         public virtual DbSet<RequisitionCostCenter> RequisitionCostCenters
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<RequisitionFinancialDetail> RequisitionFinancialDetails
         {
             get;
             set;
@@ -154,6 +232,18 @@ namespace VMS.Requisitions.Querying
         }
 
         public virtual DbSet<RequisitionProject> RequisitionProjects
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<RequisitionQuestion> RequisitionQuestions
+        {
+            get;
+            set;
+        }
+
+        public virtual DbSet<RequisitionSkill> RequisitionSkills
         {
             get;
             set;
@@ -233,6 +323,51 @@ namespace VMS.Requisitions.Querying
             this.StatusDescriptionMapping(modelBuilder);
             this.CustomizeStatusDescriptionMapping(modelBuilder);
 
+            this.LocalizationOrganizationMapping(modelBuilder);
+            this.CustomizeLocalizationOrganizationMapping(modelBuilder);
+
+            this.CustomFieldMapping(modelBuilder);
+            this.CustomizeCustomFieldMapping(modelBuilder);
+
+            this.CustomValueMapping(modelBuilder);
+            this.CustomizeCustomValueMapping(modelBuilder);
+
+            this.CustomFieldListItemMapping(modelBuilder);
+            this.CustomizeCustomFieldListItemMapping(modelBuilder);
+
+            this.RequisitionFinancialDetailMapping(modelBuilder);
+            this.CustomizeRequisitionFinancialDetailMapping(modelBuilder);
+
+            this.RateStructureMapping(modelBuilder);
+            this.CustomizeRateStructureMapping(modelBuilder);
+
+            this.CompliainceGroupMapping(modelBuilder);
+            this.CustomizeCompliainceGroupMapping(modelBuilder);
+
+            this.ComplianceItemMapping(modelBuilder);
+            this.CustomizeComplianceItemMapping(modelBuilder);
+
+            this.RequisitionComplianceInfoMapping(modelBuilder);
+            this.CustomizeRequisitionComplianceInfoMapping(modelBuilder);
+
+            this.RequisitionQuestionMapping(modelBuilder);
+            this.CustomizeRequisitionQuestionMapping(modelBuilder);
+
+            this.RequisitionSkillMapping(modelBuilder);
+            this.CustomizeRequisitionSkillMapping(modelBuilder);
+
+            this.ExpertiseRatingMapping(modelBuilder);
+            this.CustomizeExpertiseRatingMapping(modelBuilder);
+
+            this.RequisitionBudgetDetailMapping(modelBuilder);
+            this.CustomizeRequisitionBudgetDetailMapping(modelBuilder);
+
+            this.BillingRuleDetailMapping(modelBuilder);
+            this.CustomizeBillingRuleDetailMapping(modelBuilder);
+
+            this.OrganizationMessageMapping(modelBuilder);
+            this.CustomizeOrganizationMessageMapping(modelBuilder);
+
             RelationshipsMapping(modelBuilder);
             CustomizeMapping(ref modelBuilder);
         }
@@ -249,16 +384,36 @@ namespace VMS.Requisitions.Querying
             modelBuilder.Entity<Requisition>().Property<string>(x => x.DepartmentName).HasColumnName(@"Dept_Nm").HasColumnType(@"nvarchar(254)").ValueGeneratedNever().HasMaxLength(254);
             modelBuilder.Entity<Requisition>().Property<string>(x => x.ProjectName).HasColumnName(@"Proj_Nm").HasColumnType(@"nvarchar(254)").ValueGeneratedNever().HasMaxLength(254);
             modelBuilder.Entity<Requisition>().Property<string>(x => x.Title).HasColumnName(@"Title_Nm").HasColumnType(@"nvarchar(254)").IsRequired().ValueGeneratedNever().HasMaxLength(254);
+            modelBuilder.Entity<Requisition>().Property<string>(x => x.Description).HasColumnName(@"Req_Dc").HasColumnType(@"text").ValueGeneratedNever().HasMaxLength(2147483647);
+            modelBuilder.Entity<Requisition>().Property<string>(x => x.ShortDescription).HasColumnName(@"Req_Sh_Dc").HasColumnType(@"nvarchar(254)").IsRequired().ValueGeneratedNever().HasMaxLength(254);
+            modelBuilder.Entity<Requisition>().Property<string>(x => x.Characteristics).HasColumnName(@"Char_Tx").HasColumnType(@"nvarchar(254)").ValueGeneratedNever().HasMaxLength(254);
+            modelBuilder.Entity<Requisition>().Property<string>(x => x.RateInformationText).HasColumnName(@"Rt_Info_Tx").HasColumnType(@"nvarchar(254)").ValueGeneratedNever().HasMaxLength(254);
             modelBuilder.Entity<Requisition>().Property<int>(x => x.NumberOfOpenings).HasColumnName(@"Nb_Pstn_Nb").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
             modelBuilder.Entity<Requisition>().Property<int>(x => x.NumberOfFilled).HasColumnName(@"Nb_Pstn_Fill_Nb").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<decimal>>(x => x.DurationValue).HasColumnName(@"Drtn_Nb").HasColumnType(@"decimal").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.DurationTypeId).HasColumnName(@"Drtn_Tp_Cd").HasColumnType(@"int").ValueGeneratedNever();
             modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.ContractTierId).HasColumnName(@"Cont_Tier_Id").HasColumnType(@"int").ValueGeneratedNever();
             modelBuilder.Entity<Requisition>().Property<System.Nullable<System.DateTime>>(x => x.OpenUntil).HasColumnName(@"Cls_Dt").HasColumnType(@"datetime").ValueGeneratedNever();
             modelBuilder.Entity<Requisition>().Property<System.Nullable<System.DateTime>>(x => x.StartDate).HasColumnName(@"Strt_Dt").HasColumnType(@"datetime").ValueGeneratedNever();
             modelBuilder.Entity<Requisition>().Property<System.Nullable<System.DateTime>>(x => x.EndDate).HasColumnName(@"End_Dt").HasColumnType(@"datetime").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.RequisitionPriorityId).HasColumnName(@"Req_Prty_Cd").HasColumnType(@"int").ValueGeneratedNever();
             modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.RequisitionStatusId).HasColumnName(@"Req_Sts_Cd").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<string>(x => x.AlternateEmail).HasColumnName(@"Alt_Email_Tx").HasColumnType(@"nvarchar(254)").ValueGeneratedNever().HasMaxLength(254);
             modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.RequisitionClassId).HasColumnName(@"Req_Cls_Id").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.RequisitionCitizenStatusId).HasColumnName(@"Req_Ctzn_Sts_Cd").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<decimal>>(x => x.MaxRate).HasColumnName(@"Max_Rt").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<string>(x => x.HoursPerDay).HasColumnName(@"Est_Hrs_Per_Dy").HasColumnType(@"nvarchar(20)").ValueGeneratedNever().HasMaxLength(20);
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.DaysPerWeek).HasColumnName(@"Wrk_Dys_Per_Wk").HasColumnType(@"int").ValueGeneratedNever();
             modelBuilder.Entity<Requisition>().Property<System.Nullable<System.DateTime>>(x => x.CreatedDate).HasColumnName(@"Crtd_Dt").HasColumnType(@"datetime").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<decimal>>(x => x.BillFromRate).HasColumnName(@"Bill_From_Rt_Cs").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<decimal>>(x => x.NotToExceedRate).HasColumnName(@"Not_Exceed_Rt_Cs").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<int>(x => x.NotToExceedRatePeriodId).HasColumnName(@"Not_Exceed_Rt_Prd_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"1");
+            modelBuilder.Entity<Requisition>().Property<bool>(x => x.UseNotToExceed).HasColumnName(@"Not_Exceed_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"0");
             modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.LocationId).HasColumnName(@"Location_Id").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<int>(x => x.FormatTypeId).HasColumnName(@"Req_Format_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<decimal>>(x => x.MaxPayRate).HasColumnName(@"Max_Pay_Rt_Cs").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<int>>(x => x.MaxPayRatePeriodTypeId).HasColumnName(@"Max_Pay_Rt_Prd_Tp_Cd").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<Requisition>().Property<System.Nullable<decimal>>(x => x.BillToRate).HasColumnName(@"Bill_To_Rt_Cs").HasColumnType(@"money").ValueGeneratedNever();
             modelBuilder.Entity<Requisition>().Property<bool>(x => x.IsSalariedContractor).HasColumnName(@"Salaried_Contractor_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"0");
             modelBuilder.Entity<Requisition>().Property<bool>(x => x.IsSowRequisition).HasColumnName(@"Tp_Proj_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"0");
             modelBuilder.Entity<Requisition>().Property<System.Nullable<bool>>(x => x.IsTemplate).HasColumnName(@"Is_Template").HasColumnType(@"bit").ValueGeneratedNever();
@@ -352,6 +507,7 @@ namespace VMS.Requisitions.Querying
             modelBuilder.Entity<Organization>().Property<int>(x => x.OrganizationTypeId).HasColumnName(@"s_Org_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
             modelBuilder.Entity<Organization>().Property<string>(x => x.Name).HasColumnName(@"Org_Nm").HasColumnType(@"nvarchar(120)").IsRequired().ValueGeneratedNever().HasMaxLength(120);
             modelBuilder.Entity<Organization>().Property<string>(x => x.ShortName).HasColumnName(@"Org_Sh_Nm").HasColumnType(@"nvarchar(50)").IsRequired().ValueGeneratedNever().HasMaxLength(50);
+            modelBuilder.Entity<Organization>().Property<string>(x => x.RegionDescription).HasColumnName(@"Rgn_Dc").HasColumnType(@"nvarchar(255)").ValueGeneratedNever().HasMaxLength(255);
             modelBuilder.Entity<Organization>().HasKey(@"Id");
         }
 	
@@ -396,7 +552,13 @@ namespace VMS.Requisitions.Querying
             modelBuilder.Entity<OrganizationDetail>().ToTable(@"CLNT_DTL", @"dbo");
             modelBuilder.Entity<OrganizationDetail>().Property<int>(x => x.Id).HasColumnName(@"Clnt_Dtl_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<OrganizationDetail>().Property<int>(x => x.OrganizationId).HasColumnName(@"Org_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<OrganizationDetail>().Property<bool>(x => x.EnforceBudgetConstraint).HasColumnName(@"Enf_Bdgt_Cnst_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever();
             modelBuilder.Entity<OrganizationDetail>().Property<bool>(x => x.IsApprovalRequiredBeforeRequisitionDistribution).HasColumnName(@"Req_Appr_Dist_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"1");
+            modelBuilder.Entity<OrganizationDetail>().Property<bool>(x => x.IsEngagementTypeContractSupported).HasColumnName(@"Engt_Tp_Cont_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"1");
+            modelBuilder.Entity<OrganizationDetail>().Property<bool>(x => x.IsEngagementTypeContractToPermanentSupported).HasColumnName(@"Engt_Tp_Cont_Perm_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"1");
+            modelBuilder.Entity<OrganizationDetail>().Property<bool>(x => x.UsePayRateOnRequisition).HasColumnName(@"Use_Pay_Rt_Req").HasColumnType(@"bit").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"0");
+            modelBuilder.Entity<OrganizationDetail>().Property<bool>(x => x.UseDefaultNotToExceedRate).HasColumnName(@"Use_Dflt_NotExceed_to_ReqCls_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"0");
+            modelBuilder.Entity<OrganizationDetail>().Property<int>(x => x.RateSalaryDescriptionFormatId).HasColumnName(@"Rate_Salary_Description_Format_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"1");
             modelBuilder.Entity<OrganizationDetail>().HasKey(@"Id");
         }
 	
@@ -411,6 +573,12 @@ namespace VMS.Requisitions.Querying
             modelBuilder.Entity<RequisitionClass>().ToTable(@"REQ_CLS", @"dbo");
             modelBuilder.Entity<RequisitionClass>().Property<int>(x => x.Id).HasColumnName(@"Req_Cls_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<RequisitionClass>().Property<string>(x => x.Description).HasColumnName(@"Req_Cls_Dc").HasColumnType(@"nvarchar(30)").ValueGeneratedNever().HasMaxLength(30);
+            modelBuilder.Entity<RequisitionClass>().Property<System.Nullable<decimal>>(x => x.HourlyLowRateValue).HasColumnName(@"Hrly_Rt_Low_Cs").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionClass>().Property<System.Nullable<decimal>>(x => x.HourlyHighRateValue).HasColumnName(@"Hrly_Rt_High_Cs").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionClass>().Property<System.Nullable<decimal>>(x => x.SalaryLowValue).HasColumnName(@"Slry_Low_Cs").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionClass>().Property<int>(x => x.MaximumDurationValue).HasColumnName(@"Max_Dur").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionClass>().Property<int>(x => x.MaximumDurationTypeId).HasColumnName(@"Max_Dur_Prd_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionClass>().Property<System.Nullable<bool>>(x => x.UsePayRateOnRequisition).HasColumnName(@"use_pay_rt_req").HasColumnType(@"bit").ValueGeneratedNever();
             modelBuilder.Entity<RequisitionClass>().HasKey(@"Id");
         }
 	
@@ -564,6 +732,246 @@ namespace VMS.Requisitions.Querying
         partial void CustomizeStatusDescriptionMapping(ModelBuilder modelBuilder);
 
         #endregion
+    
+        #region LocalizationOrganization Mapping
+
+        private void LocalizationOrganizationMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LocalizationOrganization>().ToTable(@"LOCAL_ORG", @"dbo");
+            modelBuilder.Entity<LocalizationOrganization>().Property<int>(x => x.Id).HasColumnName(@"local_org_id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<LocalizationOrganization>().Property<int>(x => x.OrganizationId).HasColumnName(@"org_id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<LocalizationOrganization>().Property<int>(x => x.CurrrencySymbolId).HasColumnName(@"currency_sym_cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<LocalizationOrganization>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeLocalizationOrganizationMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region CustomField Mapping
+
+        private void CustomFieldMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CustomField>().ToTable(@"CUSTOM_FLD", @"dbo");
+            modelBuilder.Entity<CustomField>().Property<int>(x => x.Id).HasColumnName(@"Custom_Fld_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<CustomField>().Property<int>(x => x.OrganizationId).HasColumnName(@"Org_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<CustomField>().Property<int>(x => x.EnitityTypeId).HasColumnName(@"Entity_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<CustomField>().Property<string>(x => x.Label).HasColumnName(@"Label").HasColumnType(@"nvarchar(254)").IsRequired().ValueGeneratedNever().HasMaxLength(254);
+            modelBuilder.Entity<CustomField>().Property<bool>(x => x.IsActive).HasColumnName(@"Actv_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedOnAdd().HasDefaultValueSql(@"1");
+            modelBuilder.Entity<CustomField>().Property<int>(x => x.SequenceNumber).HasColumnName(@"Seq_Num").HasColumnType(@"int").IsRequired().ValueGeneratedNever().HasDefaultValueSql(@"0");
+            modelBuilder.Entity<CustomField>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeCustomFieldMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region CustomValue Mapping
+
+        private void CustomValueMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CustomValue>().ToTable(@"CUSTOM_VAL", @"dbo");
+            modelBuilder.Entity<CustomValue>().Property<int>(x => x.Id).HasColumnName(@"Custom_Val_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<CustomValue>().Property<int>(x => x.CustomFieldId).HasColumnName(@"Custom_Fld_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<CustomValue>().Property<int>(x => x.EntityId).HasColumnName(@"Entity_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<CustomValue>().Property<string>(x => x.ValueText).HasColumnName(@"Val_Tx").HasColumnType(@"nvarchar(254)").ValueGeneratedNever().HasMaxLength(254);
+            modelBuilder.Entity<CustomValue>().Property<System.Nullable<int>>(x => x.ListItemId).HasColumnName(@"List_Item_Id").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<CustomValue>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeCustomValueMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region CustomFieldListItem Mapping
+
+        private void CustomFieldListItemMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CustomFieldListItem>().ToTable(@"LIST_ITEM", @"dbo");
+            modelBuilder.Entity<CustomFieldListItem>().Property<int>(x => x.Id).HasColumnName(@"List_Item_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<CustomFieldListItem>().Property<string>(x => x.ListItemText).HasColumnName(@"List_Item_Tx").HasColumnType(@"nvarchar(254)").IsRequired().ValueGeneratedNever().HasMaxLength(254);
+            modelBuilder.Entity<CustomFieldListItem>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeCustomFieldListItemMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region RequisitionFinancialDetail Mapping
+
+        private void RequisitionFinancialDetailMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RequisitionFinancialDetail>().ToTable(@"Req_Financial_Detail", @"dbo");
+            modelBuilder.Entity<RequisitionFinancialDetail>().Property<int>(x => x.Id).HasColumnName(@"Req_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionFinancialDetail>().Property<System.Nullable<decimal>>(x => x.EstimatedExpenses).HasColumnName(@"Estimated_Expenses").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionFinancialDetail>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeRequisitionFinancialDetailMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region RateStructure Mapping
+
+        private void RateStructureMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RateStructure>().ToTable(@"RT_STRCT", @"dbo");
+            modelBuilder.Entity<RateStructure>().Property<int>(x => x.Id).HasColumnName(@"Rt_Strct_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<RateStructure>().Property<string>(x => x.Name).HasColumnName(@"lbl_nm").HasColumnType(@"nvarchar(150)").ValueGeneratedNever().HasMaxLength(150);
+            modelBuilder.Entity<RateStructure>().Property<string>(x => x.Code).HasColumnName(@"strct_cd").HasColumnType(@"nvarchar(10)").ValueGeneratedNever().HasMaxLength(10);
+            modelBuilder.Entity<RateStructure>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeRateStructureMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region CompliainceGroup Mapping
+
+        private void CompliainceGroupMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CompliainceGroup>().ToTable(@"COMPLIANCE_GROUP", @"dbo");
+            modelBuilder.Entity<CompliainceGroup>().Property<int>(x => x.Id).HasColumnName(@"Compliance_Group_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<CompliainceGroup>().Property<string>(x => x.Name).HasColumnName(@"Compliance_Group_Name").HasColumnType(@"nvarchar(256)").IsRequired().ValueGeneratedNever().HasMaxLength(256);
+            modelBuilder.Entity<CompliainceGroup>().Property<bool>(x => x.IsGlobal).HasColumnName(@"Global_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedOnAdd().HasDefaultValueSql(@"0");
+            modelBuilder.Entity<CompliainceGroup>().Property<bool>(x => x.IsActive).HasColumnName(@"Active_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedOnAdd().HasDefaultValueSql(@"1");
+            modelBuilder.Entity<CompliainceGroup>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeCompliainceGroupMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region ComplianceItem Mapping
+
+        private void ComplianceItemMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ComplianceItem>().ToTable(@"COMPLIANCE_ITEM", @"dbo");
+            modelBuilder.Entity<ComplianceItem>().Property<int>(x => x.Id).HasColumnName(@"Compliance_Item_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<ComplianceItem>().Property<string>(x => x.Name).HasColumnName(@"Compliance_Item_Name").HasColumnType(@"nvarchar(256)").IsRequired().ValueGeneratedNever().HasMaxLength(256);
+            modelBuilder.Entity<ComplianceItem>().Property<bool>(x => x.IsClientOwned).HasColumnName(@"Client_Only_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedOnAdd().HasDefaultValueSql(@"0");
+            modelBuilder.Entity<ComplianceItem>().Property<int>(x => x.DueId).HasColumnName(@"Compliance_Due_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<ComplianceItem>().Property<bool>(x => x.IsActive).HasColumnName(@"Active_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedOnAdd().HasDefaultValueSql(@"1");
+            modelBuilder.Entity<ComplianceItem>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeComplianceItemMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region RequisitionComplianceInfo Mapping
+
+        private void RequisitionComplianceInfoMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RequisitionComplianceInfo>().ToTable(@"REQ_COMP_INFO", @"dbo");
+            modelBuilder.Entity<RequisitionComplianceInfo>().HasKey(@"x_ReqCompInfoId");
+        }
+	
+        partial void CustomizeRequisitionComplianceInfoMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region RequisitionQuestion Mapping
+
+        private void RequisitionQuestionMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RequisitionQuestion>().ToTable(@"REQ_QSTN", @"dbo");
+            modelBuilder.Entity<RequisitionQuestion>().Property<int>(x => x.Id).HasColumnName(@"Req_Qstn_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<RequisitionQuestion>().Property<int>(x => x.RequisitionId).HasColumnName(@"Req_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionQuestion>().Property<int>(x => x.SequenceNumber).HasColumnName(@"Seq_Nb").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionQuestion>().Property<string>(x => x.DescriptionText).HasColumnName(@"Dc_Tx").HasColumnType(@"nvarchar(512)").IsRequired().ValueGeneratedNever().HasMaxLength(512);
+            modelBuilder.Entity<RequisitionQuestion>().Property<bool>(x => x.IsActive).HasColumnName(@"Actv_Fg").HasColumnType(@"bit").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionQuestion>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeRequisitionQuestionMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region RequisitionSkill Mapping
+
+        private void RequisitionSkillMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RequisitionSkill>().ToTable(@"REQ_SKLST", @"dbo");
+            modelBuilder.Entity<RequisitionSkill>().Property<int>(x => x.Id).HasColumnName(@"Req_Sklst_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<RequisitionSkill>().Property<int>(x => x.SkillsetTypeId).HasColumnName(@"Sklst_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionSkill>().Property<int>(x => x.SequenceNumber).HasColumnName(@"Seq_Nb").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionSkill>().Property<string>(x => x.Name).HasColumnName(@"Dc_Tx").HasColumnType(@"nvarchar(150)").IsRequired().ValueGeneratedNever().HasMaxLength(150);
+            modelBuilder.Entity<RequisitionSkill>().Property<int>(x => x.SkillTypeId).HasColumnName(@"Skl_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionSkill>().Property<System.Nullable<decimal>>(x => x.DurationValue).HasColumnName(@"Drtn_Nb").HasColumnType(@"decimal").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionSkill>().Property<System.Nullable<int>>(x => x.DurationTypeId).HasColumnName(@"Drtn_Tp_Cd").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionSkill>().Property<System.Nullable<int>>(x => x.ExpertiseRatingId).HasColumnName(@"Expt_Rtg_Id").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionSkill>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeRequisitionSkillMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region ExpertiseRating Mapping
+
+        private void ExpertiseRatingMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ExpertiseRating>().ToTable(@"EXPT_RTG", @"dbo");
+            modelBuilder.Entity<ExpertiseRating>().Property<int>(x => x.Id).HasColumnName(@"Expt_Rtg_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<ExpertiseRating>().Property<string>(x => x.Description).HasColumnName(@"Expt_Rtg_Dc").HasColumnType(@"nvarchar(100)").IsRequired().ValueGeneratedNever().HasMaxLength(100);
+            modelBuilder.Entity<ExpertiseRating>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeExpertiseRatingMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region RequisitionBudgetDetail Mapping
+
+        private void RequisitionBudgetDetailMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RequisitionBudgetDetail>().ToTable(@"Req_Budget_Detail", @"dbo");
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<int>(x => x.Id).HasColumnName(@"Budget_Detail_ID").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<int>(x => x.RequisitionId).HasColumnName(@"Req_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<System.Nullable<int>>(x => x.BillingRuleDetailId).HasColumnName(@"Bill_Rule_Dtl_ID").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<System.Nullable<decimal>>(x => x.Rate).HasColumnName(@"Rate").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<System.Nullable<decimal>>(x => x.WorkHoursPerWeek).HasColumnName(@"Work_Hours_Per_Week").HasColumnType(@"decimal").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<System.Nullable<decimal>>(x => x.Duration).HasColumnName(@"Duration").HasColumnType(@"decimal").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<System.Nullable<decimal>>(x => x.EstimatedBudget).HasColumnName(@"Estimated_Budget").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<short>(x => x.SequenceNumber).HasColumnName(@"Sequence_Number").HasColumnType(@"smallint").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<System.Nullable<decimal>>(x => x.ManagementFee).HasColumnName(@"Management_Fee").HasColumnType(@"money").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().Property<System.Nullable<int>>(x => x.RateTypeId).HasColumnName(@"Rate_Type_CD").HasColumnType(@"int").ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionBudgetDetail>().HasKey(@"Id", @"RequisitionId");
+        }
+	
+        partial void CustomizeRequisitionBudgetDetailMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region BillingRuleDetail Mapping
+
+        private void BillingRuleDetailMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BillingRuleDetail>().ToTable(@"BILL_RULE_DTL", @"dbo");
+            modelBuilder.Entity<BillingRuleDetail>().Property<int>(x => x.Id).HasColumnName(@"bill_rule_dtl_id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<BillingRuleDetail>().Property<string>(x => x.Name).HasColumnName(@"lbl_nm").HasColumnType(@"nvarchar(150)").ValueGeneratedNever().HasMaxLength(150);
+            modelBuilder.Entity<BillingRuleDetail>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeBillingRuleDetailMapping(ModelBuilder modelBuilder);
+
+        #endregion
+    
+        #region OrganizationMessage Mapping
+
+        private void OrganizationMessageMapping(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrganizationMessage>().ToTable(@"ORG_MSG", @"dbo");
+            modelBuilder.Entity<OrganizationMessage>().Property<int>(x => x.OrganizationId).HasColumnName(@"Org_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<OrganizationMessage>().Property<int>(x => x.OrganizationMessageTypeId).HasColumnName(@"Org_Msg_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<OrganizationMessage>().Property<string>(x => x.Text).HasColumnName(@"Msg_Tx").HasColumnType(@"nvarchar(800)").ValueGeneratedNever().HasMaxLength(800);
+            modelBuilder.Entity<OrganizationMessage>().HasKey(@"Id");
+        }
+	
+        partial void CustomizeOrganizationMessageMapping(ModelBuilder modelBuilder);
+
+        #endregion
 
         private void RelationshipsMapping(ModelBuilder modelBuilder)
         {
@@ -584,6 +992,11 @@ namespace VMS.Requisitions.Querying
             modelBuilder.Entity<Requisition>().HasOne(x => x.ActiveCandidates).WithOne().IsRequired(true).HasForeignKey(typeof(Requisition), @"Id");
             modelBuilder.Entity<Requisition>().HasOne(x => x.Attachments).WithOne().IsRequired(true).HasForeignKey(typeof(Requisition), @"Id");
             modelBuilder.Entity<Requisition>().HasOne(x => x.StatusDescription).WithOne().HasForeignKey(typeof(Requisition), @"RequisitionStatusId");
+            modelBuilder.Entity<Requisition>().HasOne(x => x.ReqFinancialDetail).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(typeof(RequisitionFinancialDetail), @"Id");
+            modelBuilder.Entity<Requisition>().HasMany(x => x.RequisitionComplianceInfos).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(@"x_ReqId");
+            modelBuilder.Entity<Requisition>().HasMany(x => x.REQQSTNs).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(@"RequisitionId");
+            modelBuilder.Entity<Requisition>().HasMany(x => x.REQSKLSTs).WithOne(op => op.Requisition).OnDelete(DeleteBehavior.Cascade).IsRequired(true).HasForeignKey(@"x_ReqId");
+            modelBuilder.Entity<Requisition>().HasMany(x => x.ReqBudgetDetails).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(@"RequisitionId");
 
         #endregion
 
@@ -614,6 +1027,9 @@ namespace VMS.Requisitions.Querying
 
         #region Organization Navigation properties
 
+            modelBuilder.Entity<Organization>().HasMany(x => x.LOCALORGs).WithOne(op => op.Organization).OnDelete(DeleteBehavior.Cascade).IsRequired(true).HasForeignKey(@"OrganizationId");
+            modelBuilder.Entity<Organization>().HasMany(x => x.CUSTOMFLDs).WithOne(op => op.Organization).IsRequired(true).HasForeignKey(@"OrganizationId");
+            modelBuilder.Entity<Organization>().HasMany(x => x.ORGMSGs).WithOne(op => op.Organization).OnDelete(DeleteBehavior.Cascade).IsRequired(true).HasForeignKey(@"OrganizationId");
 
         #endregion
 
@@ -671,6 +1087,98 @@ namespace VMS.Requisitions.Querying
 
         #region StatusDescription Navigation properties
 
+
+        #endregion
+
+        #region LocalizationOrganization Navigation properties
+
+            modelBuilder.Entity<LocalizationOrganization>().HasOne(x => x.Organization).WithMany(op => op.LOCALORGs).OnDelete(DeleteBehavior.Cascade).IsRequired(true).HasForeignKey(@"OrganizationId");
+
+        #endregion
+
+        #region CustomField Navigation properties
+
+            modelBuilder.Entity<CustomField>().HasMany(x => x.CustomFields_x_LinkedFldId).WithOne(op => op.CustomField_x_LinkedFldId).HasForeignKey(@"x_LinkedFldId");
+            modelBuilder.Entity<CustomField>().HasOne(x => x.CustomField_x_LinkedFldId).WithMany(op => op.CustomFields_x_LinkedFldId).HasForeignKey(@"x_LinkedFldId");
+            modelBuilder.Entity<CustomField>().HasOne(x => x.Organization).WithMany(op => op.CUSTOMFLDs).IsRequired(true).HasForeignKey(@"OrganizationId");
+            modelBuilder.Entity<CustomField>().HasMany(x => x.CustomValues).WithOne(op => op.CustomField).IsRequired(true).HasForeignKey(@"CustomFieldId");
+
+        #endregion
+
+        #region CustomValue Navigation properties
+
+            modelBuilder.Entity<CustomValue>().HasOne(x => x.CustomField).WithMany(op => op.CustomValues).IsRequired(true).HasForeignKey(@"CustomFieldId");
+            modelBuilder.Entity<CustomValue>().HasOne(x => x.CustomFieldListItem).WithMany(op => op.CustomValues).HasForeignKey(@"ListItemId");
+
+        #endregion
+
+        #region CustomFieldListItem Navigation properties
+
+            modelBuilder.Entity<CustomFieldListItem>().HasMany(x => x.CustomValues).WithOne(op => op.CustomFieldListItem).HasForeignKey(@"ListItemId");
+
+        #endregion
+
+        #region RequisitionFinancialDetail Navigation properties
+
+            modelBuilder.Entity<RequisitionFinancialDetail>().HasOne(x => x.Requisition).WithOne(op => op.ReqFinancialDetail).IsRequired(true).HasForeignKey(typeof(RequisitionFinancialDetail), @"Id");
+
+        #endregion
+
+        #region CompliainceGroup Navigation properties
+
+            modelBuilder.Entity<CompliainceGroup>().HasMany(x => x.RequisitonComplianceInfos).WithOne(op => op.ComplianceGroup).IsRequired(true).HasForeignKey(@"x_ComplianceGroupId");
+
+        #endregion
+
+        #region ComplianceItem Navigation properties
+
+            modelBuilder.Entity<ComplianceItem>().HasMany(x => x.RequisitionComplianceInfos).WithOne(op => op.ComplianceItem).IsRequired(true).HasForeignKey(@"x_ComplianceItemId");
+
+        #endregion
+
+        #region RequisitionComplianceInfo Navigation properties
+
+            modelBuilder.Entity<RequisitionComplianceInfo>().HasOne(x => x.Requisition).WithMany(op => op.RequisitionComplianceInfos).IsRequired(true).HasForeignKey(@"x_ReqId");
+            modelBuilder.Entity<RequisitionComplianceInfo>().HasOne(x => x.ComplianceGroup).WithMany(op => op.RequisitonComplianceInfos).IsRequired(true).HasForeignKey(@"x_ComplianceGroupId");
+            modelBuilder.Entity<RequisitionComplianceInfo>().HasOne(x => x.ComplianceItem).WithMany(op => op.RequisitionComplianceInfos).IsRequired(true).HasForeignKey(@"x_ComplianceItemId");
+
+        #endregion
+
+        #region RequisitionQuestion Navigation properties
+
+            modelBuilder.Entity<RequisitionQuestion>().HasOne(x => x.Requisition).WithMany(op => op.REQQSTNs).IsRequired(true).HasForeignKey(@"RequisitionId");
+
+        #endregion
+
+        #region RequisitionSkill Navigation properties
+
+            modelBuilder.Entity<RequisitionSkill>().HasOne(x => x.Requisition).WithMany(op => op.REQSKLSTs).OnDelete(DeleteBehavior.Cascade).IsRequired(true).HasForeignKey(@"x_ReqId");
+            modelBuilder.Entity<RequisitionSkill>().HasOne(x => x.ExpertiseRating).WithMany(op => op.RequisitionSkills).HasForeignKey(@"ExpertiseRatingId");
+
+        #endregion
+
+        #region ExpertiseRating Navigation properties
+
+            modelBuilder.Entity<ExpertiseRating>().HasMany(x => x.RequisitionSkills).WithOne(op => op.ExpertiseRating).HasForeignKey(@"ExpertiseRatingId");
+
+        #endregion
+
+        #region RequisitionBudgetDetail Navigation properties
+
+            modelBuilder.Entity<RequisitionBudgetDetail>().HasOne(x => x.Requisition).WithMany(op => op.ReqBudgetDetails).IsRequired(true).HasForeignKey(@"RequisitionId");
+            modelBuilder.Entity<RequisitionBudgetDetail>().HasOne(x => x.BILLRULEDTL).WithMany(op => op.RequisitionBudgetDetails).HasForeignKey(@"BillingRuleDetailId");
+
+        #endregion
+
+        #region BillingRuleDetail Navigation properties
+
+            modelBuilder.Entity<BillingRuleDetail>().HasMany(x => x.RequisitionBudgetDetails).WithOne(op => op.BILLRULEDTL).HasForeignKey(@"BillingRuleDetailId");
+
+        #endregion
+
+        #region OrganizationMessage Navigation properties
+
+            modelBuilder.Entity<OrganizationMessage>().HasOne(x => x.Organization).WithMany(op => op.ORGMSGs).OnDelete(DeleteBehavior.Cascade).IsRequired(true).HasForeignKey(@"OrganizationId");
 
         #endregion
         }

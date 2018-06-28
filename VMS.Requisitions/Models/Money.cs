@@ -16,6 +16,7 @@ namespace VMS.Requisitions.Models
         /// <summary>
         /// Gets or sets the currency.
         /// </summary>
+        /// Data Mapping: LocalizationOrganization.CurrencySymbolId
         public Currency Currency { get; set; }
     }
 }

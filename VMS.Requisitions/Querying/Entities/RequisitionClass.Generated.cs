@@ -31,7 +31,43 @@ namespace VMS.Requisitions.Querying.Entities
             set;
         }
 
+        public virtual System.Nullable<decimal> HourlyHighRateValue
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<decimal> HourlyLowRateValue
+        {
+            get;
+            set;
+        }
+
         public virtual int Id
+        {
+            get;
+            set;
+        }
+
+        public virtual int MaximumDurationTypeId
+        {
+            get;
+            set;
+        }
+
+        public virtual int MaximumDurationValue
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<decimal> SalaryLowValue
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<bool> UsePayRateOnRequisition
         {
             get;
             set;

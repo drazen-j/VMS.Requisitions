@@ -45,6 +45,11 @@ namespace VMS.Requisitions.Querying
         DbSet<AttachmentsCount> AttachmentsCounts {get; set;}
 
         /// <summary>
+        /// Gets or sets the BillingRuleDetails.
+        /// </summary>
+        DbSet<BillingRuleDetail> BillingRuleDetails {get; set;}
+
+        /// <summary>
         /// Gets or sets the Candidates.
         /// </summary>
         DbSet<Candidate> Candidates {get; set;}
@@ -53,6 +58,41 @@ namespace VMS.Requisitions.Querying
         /// Gets or sets the ClientTiers.
         /// </summary>
         DbSet<ClientTier> ClientTiers {get; set;}
+
+        /// <summary>
+        /// Gets or sets the CompliainceGroups.
+        /// </summary>
+        DbSet<CompliainceGroup> CompliainceGroups {get; set;}
+
+        /// <summary>
+        /// Gets or sets the ComplianceItems.
+        /// </summary>
+        DbSet<ComplianceItem> ComplianceItems {get; set;}
+
+        /// <summary>
+        /// Gets or sets the CustomFields.
+        /// </summary>
+        DbSet<CustomField> CustomFields {get; set;}
+
+        /// <summary>
+        /// Gets or sets the CustomFieldListItems.
+        /// </summary>
+        DbSet<CustomFieldListItem> CustomFieldListItems {get; set;}
+
+        /// <summary>
+        /// Gets or sets the CustomValues.
+        /// </summary>
+        DbSet<CustomValue> CustomValues {get; set;}
+
+        /// <summary>
+        /// Gets or sets the ExpertiseRatings.
+        /// </summary>
+        DbSet<ExpertiseRating> ExpertiseRatings {get; set;}
+
+        /// <summary>
+        /// Gets or sets the LocalizationOrganizations.
+        /// </summary>
+        DbSet<LocalizationOrganization> LocalizationOrganizations {get; set;}
 
         /// <summary>
         /// Gets or sets the Locations.
@@ -70,6 +110,16 @@ namespace VMS.Requisitions.Querying
         DbSet<OrganizationDetail> OrganizationDetails {get; set;}
 
         /// <summary>
+        /// Gets or sets the OrganizationMessages.
+        /// </summary>
+        DbSet<OrganizationMessage> OrganizationMessages {get; set;}
+
+        /// <summary>
+        /// Gets or sets the RateStructures.
+        /// </summary>
+        DbSet<RateStructure> RateStructures {get; set;}
+
+        /// <summary>
         /// Gets or sets the ReportsToContacts.
         /// </summary>
         DbSet<ReportsToContact> ReportsToContacts {get; set;}
@@ -85,9 +135,19 @@ namespace VMS.Requisitions.Querying
         DbSet<RequisitionAttachment> RequisitionAttachments {get; set;}
 
         /// <summary>
+        /// Gets or sets the RequisitionBudgetDetails.
+        /// </summary>
+        DbSet<RequisitionBudgetDetail> RequisitionBudgetDetails {get; set;}
+
+        /// <summary>
         /// Gets or sets the RequisitionClasses.
         /// </summary>
         DbSet<RequisitionClass> RequisitionClasses {get; set;}
+
+        /// <summary>
+        /// Gets or sets the RequisitionComplianceInfos.
+        /// </summary>
+        DbSet<RequisitionComplianceInfo> RequisitionComplianceInfos {get; set;}
 
         /// <summary>
         /// Gets or sets the RequisitionContacts.
@@ -98,6 +158,11 @@ namespace VMS.Requisitions.Querying
         /// Gets or sets the RequisitionCostCenters.
         /// </summary>
         DbSet<RequisitionCostCenter> RequisitionCostCenters {get; set;}
+
+        /// <summary>
+        /// Gets or sets the RequisitionFinancialDetails.
+        /// </summary>
+        DbSet<RequisitionFinancialDetail> RequisitionFinancialDetails {get; set;}
 
         /// <summary>
         /// Gets or sets the RequisitionGeneralLedgers.
@@ -113,6 +178,16 @@ namespace VMS.Requisitions.Querying
         /// Gets or sets the RequisitionProjects.
         /// </summary>
         DbSet<RequisitionProject> RequisitionProjects {get; set;}
+
+        /// <summary>
+        /// Gets or sets the RequisitionQuestions.
+        /// </summary>
+        DbSet<RequisitionQuestion> RequisitionQuestions {get; set;}
+
+        /// <summary>
+        /// Gets or sets the RequisitionSkills.
+        /// </summary>
+        DbSet<RequisitionSkill> RequisitionSkills {get; set;}
 
         /// <summary>
         /// Gets or sets the StatusDescriptions.

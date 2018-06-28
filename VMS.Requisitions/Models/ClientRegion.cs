@@ -6,6 +6,7 @@ namespace VMS.Requisitions.Models
     /// <summary>
     /// The client region.
     /// </summary>
+    /// Data Mapping: Organization
     public class ClientRegion : IClientRegion
     {
         /// <summary>
@@ -21,6 +22,7 @@ namespace VMS.Requisitions.Models
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
+        /// Data Mapping: RegionDescription
         public string Description { get; set; }
 
     }

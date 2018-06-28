@@ -22,6 +22,9 @@ namespace VMS.Requisitions.Querying.Entities
 
         public Organization()
         {
+            this.CUSTOMFLDs = new List<CustomField>();
+            this.LOCALORGs = new List<LocalizationOrganization>();
+            this.ORGMSGs = new List<OrganizationMessage>();
             OnCreated();
         }
 
@@ -43,7 +46,31 @@ namespace VMS.Requisitions.Querying.Entities
             set;
         }
 
+        public virtual string RegionDescription
+        {
+            get;
+            set;
+        }
+
         public virtual string ShortName
+        {
+            get;
+            set;
+        }
+
+        public virtual IList<CustomField> CUSTOMFLDs
+        {
+            get;
+            set;
+        }
+
+        public virtual IList<LocalizationOrganization> LOCALORGs
+        {
+            get;
+            set;
+        }
+
+        public virtual IList<OrganizationMessage> ORGMSGs
         {
             get;
             set;

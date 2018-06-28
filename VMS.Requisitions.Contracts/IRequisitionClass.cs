@@ -12,9 +12,9 @@ namespace VMS.Requisitions.Contracts
         int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the req class description.
+        /// Gets or sets the requisition class description.
         /// </summary>
-        string ReqClassDescription { get; set; }
+        string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the requisition class full name. - heavy to get
@@ -24,7 +24,7 @@ namespace VMS.Requisitions.Contracts
         /// <summary>
         /// Gets or sets the maximum duration.
         /// </summary>
-        string MaximumDuration { get; set; }
+        IDuration MaximumDuration { get; set; }
 
         /// <summary>
         /// Gets or sets the hourly low rate.

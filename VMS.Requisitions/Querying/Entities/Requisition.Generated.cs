@@ -24,15 +24,45 @@ namespace VMS.Requisitions.Querying.Entities
         {
             this.IsSalariedContractor = false;
             this.IsSowRequisition = false;
+            this.NotToExceedRatePeriodId = 1;
+            this.UseNotToExceed = false;
             this.Candidates = new List<Candidate>();
             this.CostCenters = new List<RequisitionCostCenter>();
             this.GeneralLedgers = new List<RequisitionGeneralLedger>();
             this.Projects = new List<RequisitionProject>();
+            this.ReqBudgetDetails = new List<RequisitionBudgetDetail>();
+            this.REQQSTNs = new List<RequisitionQuestion>();
+            this.REQSKLSTs = new List<RequisitionSkill>();
+            this.RequisitionComplianceInfos = new List<RequisitionComplianceInfo>();
             this.RequisitionContacts = new List<RequisitionContact>();
             OnCreated();
         }
 
         public virtual string AccountInfo
+        {
+            get;
+            set;
+        }
+
+        public virtual string AlternateEmail
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<decimal> BillFromRate
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<decimal> BillToRate
+        {
+            get;
+            set;
+        }
+
+        public virtual string Characteristics
         {
             get;
             set;
@@ -50,13 +80,49 @@ namespace VMS.Requisitions.Querying.Entities
             set;
         }
 
+        public virtual System.Nullable<int> DaysPerWeek
+        {
+            get;
+            set;
+        }
+
         public virtual string DepartmentName
         {
             get;
             set;
         }
 
+        public virtual string Description
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<int> DurationTypeId
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<decimal> DurationValue
+        {
+            get;
+            set;
+        }
+
         public virtual System.Nullable<System.DateTime> EndDate
+        {
+            get;
+            set;
+        }
+
+        public virtual int FormatTypeId
+        {
+            get;
+            set;
+        }
+
+        public virtual string HoursPerDay
         {
             get;
             set;
@@ -104,6 +170,36 @@ namespace VMS.Requisitions.Querying.Entities
             set;
         }
 
+        public virtual System.Nullable<decimal> MaxPayRate
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<int> MaxPayRatePeriodTypeId
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<decimal> MaxRate
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<decimal> NotToExceedRate
+        {
+            get;
+            set;
+        }
+
+        public virtual int NotToExceedRatePeriodId
+        {
+            get;
+            set;
+        }
+
         public virtual int NumberOfFilled
         {
             get;
@@ -134,13 +230,37 @@ namespace VMS.Requisitions.Querying.Entities
             set;
         }
 
+        public virtual string RateInformationText
+        {
+            get;
+            set;
+        }
+
+        public virtual System.Nullable<int> RequisitionCitizenStatusId
+        {
+            get;
+            set;
+        }
+
         public virtual System.Nullable<int> RequisitionClassId
         {
             get;
             set;
         }
 
+        public virtual System.Nullable<int> RequisitionPriorityId
+        {
+            get;
+            set;
+        }
+
         public virtual System.Nullable<int> RequisitionStatusId
+        {
+            get;
+            set;
+        }
+
+        public virtual string ShortDescription
         {
             get;
             set;
@@ -153,6 +273,12 @@ namespace VMS.Requisitions.Querying.Entities
         }
 
         public virtual string Title
+        {
+            get;
+            set;
+        }
+
+        public virtual bool UseNotToExceed
         {
             get;
             set;
@@ -224,7 +350,37 @@ namespace VMS.Requisitions.Querying.Entities
             set;
         }
 
+        public virtual IList<RequisitionBudgetDetail> ReqBudgetDetails
+        {
+            get;
+            set;
+        }
+
+        public virtual RequisitionFinancialDetail ReqFinancialDetail
+        {
+            get;
+            set;
+        }
+
+        public virtual IList<RequisitionQuestion> REQQSTNs
+        {
+            get;
+            set;
+        }
+
+        public virtual IList<RequisitionSkill> REQSKLSTs
+        {
+            get;
+            set;
+        }
+
         public virtual RequisitionClass RequisitionClass
+        {
+            get;
+            set;
+        }
+
+        public virtual IList<RequisitionComplianceInfo> RequisitionComplianceInfos
         {
             get;
             set;

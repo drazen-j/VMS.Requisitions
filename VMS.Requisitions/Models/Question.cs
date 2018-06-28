@@ -6,6 +6,7 @@ namespace VMS.Requisitions.Models
     /// <summary>
     /// The question.
     /// </summary>
+    /// Data Mapping: RequisitionQuestion
     public class Question : IQuestion
     {
         /// <summary>

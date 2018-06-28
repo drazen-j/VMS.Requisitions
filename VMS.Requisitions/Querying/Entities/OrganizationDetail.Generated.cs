@@ -23,7 +23,18 @@ namespace VMS.Requisitions.Querying.Entities
         public OrganizationDetail()
         {
             this.IsApprovalRequiredBeforeRequisitionDistribution = true;
+            this.IsEngagementTypeContractSupported = true;
+            this.IsEngagementTypeContractToPermanentSupported = true;
+            this.RateSalaryDescriptionFormatId = 1;
+            this.UseDefaultNotToExceedRate = false;
+            this.UsePayRateOnRequisition = false;
             OnCreated();
+        }
+
+        public virtual bool EnforceBudgetConstraint
+        {
+            get;
+            set;
         }
 
         public virtual int Id
@@ -38,7 +49,37 @@ namespace VMS.Requisitions.Querying.Entities
             set;
         }
 
+        public virtual bool IsEngagementTypeContractSupported
+        {
+            get;
+            set;
+        }
+
+        public virtual bool IsEngagementTypeContractToPermanentSupported
+        {
+            get;
+            set;
+        }
+
         public virtual int OrganizationId
+        {
+            get;
+            set;
+        }
+
+        public virtual int RateSalaryDescriptionFormatId
+        {
+            get;
+            set;
+        }
+
+        public virtual bool UseDefaultNotToExceedRate
+        {
+            get;
+            set;
+        }
+
+        public virtual bool UsePayRateOnRequisition
         {
             get;
             set;

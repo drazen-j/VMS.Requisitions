@@ -6,16 +6,21 @@ Response Example:
   "result": [
     {
       "id": 563870,
+      "formatType": 1,
+      "clientRegion": {
+        "id": 739,
+        "name": "VGVwcl - PWG",
+        "description": null
+      },
       "istemplate": false,
       "title": "Qtle Crebyle Qy",
-      "ext": null,
       "numberOfOpenings": 1,
       "numberOfFilled": 0,
       "startDate": "2018-06-11T00:00:00",
       "endDate": null,
       "requisitionClass": {
         "id": 225442,
-        "reqClassDescription": "Test Analyst Sr",
+        "description": "Test Analyst Sr",
         "hourlyLowRate": {
           "amount": 30,
           "currency": 1
@@ -117,17 +122,25 @@ Response Example:
         "code": "TOS",
         "name": "U.S. Bank TOS Rate Structure"
       },
-      "billRangeFromRate": {
-        "amount": 28,
-        "currency": 1
+      "rateRange": {
+        "rateFrom": 28,
+        "rateTo": 29,
+        "currency": 1,
+        "ratePeriod": 1
       },
-      "billRangeToRate": {
-        "amount": 28,
-        "currency": 1
+      "useNotToExceed": true,
+      "notToExceedRate": {
+        "amount": 30,
+        "currency": 1,
+        "ratePeriod": 1 
       },
-      "doNotAllowSubmissionAboveMaxBillRate": true,
       "maxPayRate": {
         "amount": 28,
+        "currency": 1,
+        "ratePeriod": 1
+      },
+      "maxRate": {
+        "amount": 29,
         "currency": 1
       },
       "hoursPerDay": 8,

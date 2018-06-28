@@ -15,6 +15,11 @@ namespace VMS.Requisitions.Contracts
         int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the client region.
+        /// </summary>
+        IClientRegion ClientRegion { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether is template.
         /// </summary>
         bool IsTemplate { get; set; }
@@ -27,7 +32,7 @@ namespace VMS.Requisitions.Contracts
         /// <summary>
         /// Gets or sets the ext.
         /// </summary>
-        string Ext { get; set; }
+        //string Ext { get; set; }
 
         /// <summary>
         /// Gets or sets the number of openings.
@@ -78,6 +83,11 @@ namespace VMS.Requisitions.Contracts
         /// Gets or sets a value indicating whether is for salaried contractors.
         /// </summary>
         bool IsForSalariedContractors { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether is req fill bill.
+        /// </summary>
+        bool IsReqFillBill { get; set; }
 
         /// <summary>
         /// Gets or sets the client internal number.
@@ -165,24 +175,29 @@ namespace VMS.Requisitions.Contracts
         IRateStructure RateStructure { get; set; }
 
         /// <summary>
-        /// Gets or sets the bill range from rate.
+        /// Gets or sets the rate range.
         /// </summary>
-        IMoney BillRangeFromRate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the bill range to rate.
-        /// </summary>
-        IMoney BillRangeToRate { get; set; }
+        IRateRange RateRange { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether do not allow submission above max bill rate.
         /// </summary>
-        bool DoNotAllowSubmissionAboveMaxBillRate { get; set; }
+        bool UseNotToExceed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the not to exceed rate.
+        /// </summary>
+        IRate NotToExceedRate { get; set; }
 
         /// <summary>
         /// Gets or sets the max pay rate.
         /// </summary>
-        IMoney MaxPayRate { get; set; }
+        IMaxPayRate MaxPayRate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the max rate.
+        /// </summary>
+        IMoney MaxRate { get; set; }
 
         /// <summary>
         /// Gets or sets the hours per day.
@@ -203,6 +218,11 @@ namespace VMS.Requisitions.Contracts
         /// Gets or sets the current budget.
         /// </summary>
         IBudget CurrentBudget { get; set; }
+
+        /// <summary>
+        /// Gets or sets the requisition organization messages.
+        /// </summary>
+        IList<IOrganizationMessage> RequisitionOrganizationMessages { get; set; }
 
         /// <summary>
         /// Gets or sets the skills.

@@ -7,6 +7,7 @@ namespace VMS.Requisitions.Models
     /// <summary>
     /// The rate structure.
     /// </summary>
+    /// Data Mapping: RateStructure
     public class RateStructure : IRateStructure
     {
         /// <summary>

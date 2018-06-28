@@ -47,8 +47,39 @@
         <File Name="AttachmentsCount.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
         <File Name="StatusDescription.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
         <File Name="StatusDescription.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="LocalizationOrganization.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="LocalizationOrganization.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="CustomField.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="CustomField.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="CustomValue.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="CustomValue.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="CustomFieldListItem.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="CustomFieldListItem.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionFinancialDetail.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionFinancialDetail.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RateStructure.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RateStructure.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="CompliainceGroup.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="CompliainceGroup.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="ComplianceItem.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="ComplianceItem.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionComplianceInfo.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionComplianceInfo.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionQuestion.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionQuestion.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionSkill.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionSkill.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="ExpertiseRating.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="ExpertiseRating.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="RequisitionBudgetDetail.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="RequisitionBudgetDetail.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="BillingRuleDetail.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="BillingRuleDetail.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="OrganizationMessage.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" OverwriteMode="None" />
+        <File Name="OrganizationMessage.Generated.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
         <File Name="RequisitionStatus.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
         <File Name="RequisitionContactRole.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
+        <File Name="SkillSetType.cs" Project="VMS.Requisitions" ProjectFolder="Querying\Entities" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>
