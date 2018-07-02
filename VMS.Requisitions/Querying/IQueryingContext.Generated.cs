@@ -9,10 +9,7 @@
 //------------------------------------------------------------------------------
 namespace VMS.Requisitions.Querying
 {
-  using System.Collections.Generic;
-
   using Microsoft.EntityFrameworkCore;      
-  using Microsoft.EntityFrameworkCore.ChangeTracking;
   using Microsoft.EntityFrameworkCore.Infrastructure;
   using System.Threading;
   using System.Threading.Tasks;
@@ -204,96 +201,5 @@ namespace VMS.Requisitions.Querying
         /// </summary>
         DatabaseFacade Database { get; }
 
-        /// <summary>
-        /// Gets the change tracker.
-        /// </summary>
-        ChangeTracker ChangeTracker { get; }
-        
-        /// <summary>
-        /// The save changes.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        int SaveChanges();
-
-        /// <summary>
-        /// The save changes.
-        /// </summary>
-        /// <param name="acceptAllChangesOnSuccess">
-        /// The accept all changes on success.
-        /// </param>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        int SaveChanges(bool acceptAllChangesOnSuccess);
-
-        /// <summary>
-        /// Asynchronously saves all pending changes to the database.
-        /// </summary>
-        /// <param name="cancellationToken">
-        /// A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Task"/> that represents the asynchronous operation.
-        /// The task result contains the <see cref="int" /> number of database rows affected.
-        /// </returns>
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
-
-        /// <summary>
-        /// Asynchronously saves all pending changes to the database.
-        /// </summary>
-        /// <param name="acceptAllChangesOnSuccess">
-        /// The accept all changes on success.
-        /// </param>
-        /// <param name="cancellationToken">
-        /// A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Task"/> that represents the asynchronous operation.
-        /// The task result contains the <see cref="int" /> number of database rows affected.
-        /// </returns>
-        Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken));
-
-        /// <summary>
-        /// The update.
-        /// </summary>
-        /// <param name="entity">
-        /// The entity.
-        /// </param>
-        /// <typeparam name="TEntity">
-        /// Type of entity.
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="EntityEntry"/>.
-        /// </returns>
-        EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class;
-
-        /// <summary>
-        /// The update.
-        /// </summary>
-        /// <param name="entity">
-        /// The entity.
-        /// </param>
-        /// <returns>
-        /// The <see cref="EntityEntry"/>.
-        /// </returns>
-        EntityEntry Update(object entity);
-
-        /// <summary>
-        /// The update range.
-        /// </summary>
-        /// <param name="entities">
-        /// The entities.
-        /// </param>
-        void UpdateRange(params object[] entities);
-
-        /// <summary>
-        /// The update range.
-        /// </summary>
-        /// <param name="entities">
-        /// The entities.
-        /// </param>
-        void UpdateRange(IEnumerable<object> entities);
   }
 }

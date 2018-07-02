@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44620889-1A9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Requisitions", "VMS.Requisitions\VMS.Requisitions.csproj", "{EFB03D25-3C0D-4FBF-A72A-644243158F09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VMS.Requisitions.Contracts", "VMS.Requisitions.Contracts\VMS.Requisitions.Contracts.csproj", "{F01BF2E8-79E3-4BA2-AF84-75A4348B2BBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Requisitions.Contracts", "VMS.Requisitions.Contracts\VMS.Requisitions.Contracts.csproj", "{F01BF2E8-79E3-4BA2-AF84-75A4348B2BBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

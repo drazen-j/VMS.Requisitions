@@ -46,6 +46,12 @@ namespace VMS.Requisitions.Querying.Entities
             set;
         }
 
+        public virtual System.Nullable<int> ParentOrganizationId
+        {
+            get;
+            set;
+        }
+
         public virtual string RegionDescription
         {
             get;

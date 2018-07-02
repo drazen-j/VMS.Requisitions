@@ -354,7 +354,7 @@
     <property name="OrganizationTypeId" type="Int32" p1:ValidateRequired="true" p1:Guid="eaccd40a-1571-47a2-9274-eed0e4e91fd4" p1:DoNotGenerate="False">
       <column name="s_Org_Tp_Cd" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="x_PrntOrgId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="54a9ad95-35d5-49d8-8405-3b469465fd67">
+    <property name="ParentOrganizationId" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="54a9ad95-35d5-49d8-8405-3b469465fd67" p1:DoNotGenerate="False">
       <column name="Prnt_Org_Id" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
     </property>
     <property name="x_BrndOrgID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="369efd83-8472-4d80-9207-8d41e1dfef7a">
@@ -2156,250 +2156,250 @@
   </class>
   <associations>
     <association name="Requisition_RequisitionProject" cardinality="OneToMany" p1:Guid="2cd1ce43-7629-4865-86ab-b19f243576e3">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionProject" relation-class="Requisition" generate="False" constrained="True" p1:Guid="82947ccd-bb42-4da2-b7e7-49eda328427f">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionProject" relation-class="Requisition" generate="False" constrained="True" lazy="False" p1:Guid="82947ccd-bb42-4da2-b7e7-49eda328427f">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="Projects" class="Requisition" relation-class="RequisitionProject" p1:Guid="a18b04d2-7886-4671-a5ee-7bc669c10cf9">
+      <end2 multiplicity="Many" name="Projects" class="Requisition" relation-class="RequisitionProject" lazy="False" p1:Guid="a18b04d2-7886-4671-a5ee-7bc669c10cf9">
         <property name="RequisitionId" />
       </end2>
     </association>
     <association name="Requisition_RequisitionGeneralLedger" cardinality="OneToMany" p1:Guid="c3f21937-9626-4ad5-b1b0-e1bb9a54753e">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionGeneralLedger" relation-class="Requisition" generate="False" constrained="True" p1:Guid="55d4d8c1-4868-4fe5-8d47-982b3dec58a2">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionGeneralLedger" relation-class="Requisition" generate="False" constrained="True" lazy="False" p1:Guid="55d4d8c1-4868-4fe5-8d47-982b3dec58a2">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="GeneralLedgers" class="Requisition" relation-class="RequisitionGeneralLedger" p1:Guid="1ce6fc67-44b4-4a22-8268-4b320cbac91a">
+      <end2 multiplicity="Many" name="GeneralLedgers" class="Requisition" relation-class="RequisitionGeneralLedger" lazy="False" p1:Guid="1ce6fc67-44b4-4a22-8268-4b320cbac91a">
         <property name="RequisitionId" />
       </end2>
     </association>
     <association name="Requisition_RequisitionCostCenter" cardinality="OneToMany" p1:Guid="f84b950d-dad0-4ebb-8cc9-1539b6c57aed">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionCostCenter" relation-class="Requisition" generate="False" constrained="True" p1:Guid="ece5cd0a-9f6c-4759-9424-09b4d88ec146">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionCostCenter" relation-class="Requisition" generate="False" constrained="True" lazy="False" p1:Guid="ece5cd0a-9f6c-4759-9424-09b4d88ec146">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="CostCenters" class="Requisition" relation-class="RequisitionCostCenter" p1:Guid="0d4b92ec-e709-413f-8d2c-a70d9da2efd1">
+      <end2 multiplicity="Many" name="CostCenters" class="Requisition" relation-class="RequisitionCostCenter" lazy="False" p1:Guid="0d4b92ec-e709-413f-8d2c-a70d9da2efd1">
         <property name="RequisitionId" />
       </end2>
     </association>
     <association name="ClientTier_Requisition" cardinality="OneToMany" p1:Guid="1701a889-bfb2-4989-add6-7bd08d96bf0a">
-      <end1 multiplicity="ZeroOrOne" name="ContractTier" class="Requisition" relation-class="ClientTier" constrained="False" p1:Guid="d1d2b37c-8797-41d8-8bed-a7dd87415f09">
+      <end1 multiplicity="ZeroOrOne" name="ContractTier" class="Requisition" relation-class="ClientTier" constrained="False" lazy="False" p1:Guid="d1d2b37c-8797-41d8-8bed-a7dd87415f09">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="Requisitions" class="ClientTier" relation-class="Requisition" generate="False" p1:Guid="d150d74d-018c-4884-bd7d-918393a78983">
+      <end2 multiplicity="Many" name="Requisitions" class="ClientTier" relation-class="Requisition" generate="False" lazy="False" p1:Guid="d150d74d-018c-4884-bd7d-918393a78983">
         <property name="ContractTierId" />
       </end2>
     </association>
     <association name="LOCATION_Requisition" cardinality="OneToMany" p1:Guid="bfd2d7f9-5778-47b0-98ed-4ca476ce1eb3">
-      <end1 multiplicity="ZeroOrOne" name="Location" class="Requisition" relation-class="Location" constrained="True" p1:Guid="33ed7aea-47a1-4c50-a233-f48ba18b233c">
+      <end1 multiplicity="ZeroOrOne" name="Location" class="Requisition" relation-class="Location" constrained="True" lazy="False" p1:Guid="33ed7aea-47a1-4c50-a233-f48ba18b233c">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="Requisitions" class="Location" relation-class="Requisition" generate="False" p1:Guid="cbf2e32e-dd3e-414d-81bc-2cd286c43658">
+      <end2 multiplicity="Many" name="Requisitions" class="Location" relation-class="Requisition" generate="False" lazy="False" p1:Guid="cbf2e32e-dd3e-414d-81bc-2cd286c43658">
         <property name="LocationId" />
       </end2>
     </association>
     <association name="ORG_Requisition" cardinality="OneToMany" p1:Guid="ce91130f-d90b-45ab-b55a-72acfba51570">
-      <end1 multiplicity="One" name="Organization" class="Requisition" relation-class="Organization" constrained="True" p1:Guid="7a68705a-fd49-45c0-a881-42dd90078e72">
+      <end1 multiplicity="One" name="Organization" class="Requisition" relation-class="Organization" constrained="True" lazy="False" p1:Guid="7a68705a-fd49-45c0-a881-42dd90078e72">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="Requisitions" class="Organization" relation-class="Requisition" generate="False" p1:Guid="657d249d-0dc1-44a2-a739-97c165f45964">
+      <end2 multiplicity="Many" name="Requisitions" class="Organization" relation-class="Requisition" generate="False" lazy="False" p1:Guid="657d249d-0dc1-44a2-a739-97c165f45964">
         <property name="OrganizationId" />
       </end2>
     </association>
     <association name="Requisition_CAND" cardinality="OneToMany" on-delete="Cascade" p1:Guid="ee3aa135-25dd-4fb7-b0c0-9108f993f24b">
-      <end1 multiplicity="ZeroOrOne" name="Requisition" class="Candidate" relation-class="Requisition" generate="False" constrained="True" p1:Guid="be63c553-91c6-4618-8419-67f346cbbd25">
+      <end1 multiplicity="ZeroOrOne" name="Requisition" class="Candidate" relation-class="Requisition" generate="False" constrained="True" lazy="False" p1:Guid="be63c553-91c6-4618-8419-67f346cbbd25">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="Candidates" class="Requisition" relation-class="Candidate" p1:Guid="a68e9a6c-80c7-42b9-b9e0-62122dfa4a47">
+      <end2 multiplicity="Many" name="Candidates" class="Requisition" relation-class="Candidate" lazy="False" p1:Guid="a68e9a6c-80c7-42b9-b9e0-62122dfa4a47">
         <property name="RequisitionId" />
       </end2>
     </association>
     <association name="OrganizationDetal_Requisition" cardinality="OneToMany" p1:Guid="366c95ad-1236-4d4d-9fe1-7db5b0d5ca74">
-      <end1 multiplicity="One" name="OrganizationDetail" class="Requisition" relation-class="OrganizationDetail" constrained="True" p1:Guid="9bb50036-0f7d-4524-bfaf-8fa175975226">
+      <end1 multiplicity="One" name="OrganizationDetail" class="Requisition" relation-class="OrganizationDetail" constrained="True" lazy="False" p1:Guid="9bb50036-0f7d-4524-bfaf-8fa175975226">
         <property name="OrganizationId" />
       </end1>
-      <end2 multiplicity="Many" name="Requisitions" class="OrganizationDetail" relation-class="Requisition" generate="False" p1:Guid="b63b4b3e-2789-431a-8f44-2b1a342e3658">
+      <end2 multiplicity="Many" name="Requisitions" class="OrganizationDetail" relation-class="Requisition" generate="False" lazy="False" p1:Guid="b63b4b3e-2789-431a-8f44-2b1a342e3658">
         <property name="OrganizationId" />
       </end2>
     </association>
     <association name="RequisitionClass_Requisition" cardinality="OneToMany" p1:Guid="72d3ed4e-c8a3-4759-adab-cbfd2217a5b1">
-      <end1 multiplicity="ZeroOrOne" name="RequisitionClass" class="Requisition" relation-class="RequisitionClass" constrained="True" p1:Guid="4cd47a8d-1fd2-46a7-94ec-ccb482cfdc27">
+      <end1 multiplicity="ZeroOrOne" name="RequisitionClass" class="Requisition" relation-class="RequisitionClass" constrained="True" lazy="False" p1:Guid="4cd47a8d-1fd2-46a7-94ec-ccb482cfdc27">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="Requisitions" class="RequisitionClass" relation-class="Requisition" generate="False" p1:Guid="656cf2df-dcbd-482e-9583-f861885c9cbd">
+      <end2 multiplicity="Many" name="Requisitions" class="RequisitionClass" relation-class="Requisition" generate="False" lazy="False" p1:Guid="656cf2df-dcbd-482e-9583-f861885c9cbd">
         <property name="RequisitionClassId" />
       </end2>
     </association>
     <association name="Requisition_RequisitionContact" cardinality="OneToMany" p1:Guid="cc1c239e-da34-4cdc-a26c-8a63dfd70790">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionContact" relation-class="Requisition" generate="False" constrained="True" p1:Guid="46dea91f-c307-425a-ad0a-8129e1294595">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionContact" relation-class="Requisition" generate="False" constrained="True" lazy="False" p1:Guid="46dea91f-c307-425a-ad0a-8129e1294595">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="RequisitionContacts" class="Requisition" relation-class="RequisitionContact" p1:Guid="b36b8bbf-6cf6-4888-aa81-ee40f6af3b3a">
+      <end2 multiplicity="Many" name="RequisitionContacts" class="Requisition" relation-class="RequisitionContact" lazy="False" p1:Guid="b36b8bbf-6cf6-4888-aa81-ee40f6af3b3a">
         <property name="RequisitionId" />
       </end2>
     </association>
     <association name="APVLPROCESS_APVL" cardinality="OneToMany" p1:Guid="49d99b9e-e414-4fcb-93ae-b5bff17772d2">
-      <end1 multiplicity="One" name="APVLPROCESS" class="Approval" relation-class="ApprovalProcess" generate="False" constrained="True" p1:Guid="603da142-b683-426c-9a81-6208fc20250f">
+      <end1 multiplicity="One" name="APVLPROCESS" class="Approval" relation-class="ApprovalProcess" generate="False" constrained="True" lazy="False" p1:Guid="603da142-b683-426c-9a81-6208fc20250f">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="Approvals" class="ApprovalProcess" relation-class="Approval" p1:Guid="13f61047-4d28-4fd9-84fb-319da5fd68d9">
+      <end2 multiplicity="Many" name="Approvals" class="ApprovalProcess" relation-class="Approval" lazy="False" p1:Guid="13f61047-4d28-4fd9-84fb-319da5fd68d9">
         <property name="ApprovalProcessId" />
       </end2>
     </association>
     <association name="UserApprovalData_Approval" cardinality="OneToOne" p1:Guid="c9752543-51a5-4f2d-b9f7-f66928c12c61">
-      <end1 multiplicity="One" name="UserApprovalData" class="Approval" relation-class="UserApprovalData" constrained="True" p1:Guid="f65dfe3c-8499-4411-8482-ccb8ff1ee494">
+      <end1 multiplicity="One" name="UserApprovalData" class="Approval" relation-class="UserApprovalData" constrained="True" lazy="False" p1:Guid="f65dfe3c-8499-4411-8482-ccb8ff1ee494">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="One" name="Approval" class="UserApprovalData" relation-class="Approval" generate="False" constrained="False" p1:Guid="2a9ce496-eb7e-494c-b250-a6ebf88ff1e9">
+      <end2 multiplicity="One" name="Approval" class="UserApprovalData" relation-class="Approval" generate="False" constrained="False" lazy="False" p1:Guid="2a9ce496-eb7e-494c-b250-a6ebf88ff1e9">
         <property name="UserId" />
       </end2>
     </association>
     <association name="ReportsToContact_Requisition" cardinality="OneToOne" p1:Guid="ae0dbd35-9a1b-42be-97d9-b2e42f5ffc5e">
-      <end1 multiplicity="One" name="ReportsToContact" class="Requisition" relation-class="ReportsToContact" constrained="False" p1:Guid="dee7a830-93a4-4ca2-90b5-d824d51641f4">
+      <end1 multiplicity="One" name="ReportsToContact" class="Requisition" relation-class="ReportsToContact" constrained="False" lazy="False" p1:Guid="dee7a830-93a4-4ca2-90b5-d824d51641f4">
         <property name="RequisitionId" />
       </end1>
-      <end2 multiplicity="One" name="Requisition" class="ReportsToContact" relation-class="Requisition" generate="False" constrained="False" p1:Guid="ac69ad91-2717-420c-b98c-b919cddb084f">
+      <end2 multiplicity="One" name="Requisition" class="ReportsToContact" relation-class="Requisition" generate="False" constrained="False" lazy="False" p1:Guid="ac69ad91-2717-420c-b98c-b919cddb084f">
         <property name="Id" />
       </end2>
     </association>
     <association name="ActiveCadidate_Requisition" cardinality="OneToOne" p1:Guid="fe05c4d8-b208-4f27-b989-9e093f3e2cdf">
-      <end1 multiplicity="One" name="ActiveCandidates" class="Requisition" relation-class="ActiveCandidatesCount" constrained="True" p1:Guid="6eb848bf-471a-4889-88b5-87857aebeddf">
+      <end1 multiplicity="One" name="ActiveCandidates" class="Requisition" relation-class="ActiveCandidatesCount" constrained="True" lazy="False" p1:Guid="6eb848bf-471a-4889-88b5-87857aebeddf">
         <property name="RequisitionId" />
       </end1>
-      <end2 multiplicity="One" name="Requisition" class="ActiveCandidatesCount" relation-class="Requisition" generate="False" constrained="False" p1:Guid="bc02f076-83e8-41ab-a540-165a0c46ee22">
+      <end2 multiplicity="One" name="Requisition" class="ActiveCandidatesCount" relation-class="Requisition" generate="False" constrained="False" lazy="False" p1:Guid="bc02f076-83e8-41ab-a540-165a0c46ee22">
         <property name="Id" />
       </end2>
     </association>
     <association name="AttachmentsCount_Requisition" cardinality="OneToOne" p1:Guid="7511bae9-bff8-442f-acd7-8a286d92d8bf">
-      <end1 multiplicity="One" name="Attachments" class="Requisition" relation-class="AttachmentsCount" constrained="True" p1:Guid="d57a176c-97c8-4052-a52e-47db26e0d709">
+      <end1 multiplicity="One" name="Attachments" class="Requisition" relation-class="AttachmentsCount" constrained="True" lazy="False" p1:Guid="d57a176c-97c8-4052-a52e-47db26e0d709">
         <property name="RequisitionId" />
       </end1>
-      <end2 multiplicity="One" name="Requisition" class="AttachmentsCount" relation-class="Requisition" generate="False" constrained="False" p1:Guid="87e3ec5a-354a-4c37-afc3-e91118dc5dfa">
+      <end2 multiplicity="One" name="Requisition" class="AttachmentsCount" relation-class="Requisition" generate="False" constrained="False" lazy="False" p1:Guid="87e3ec5a-354a-4c37-afc3-e91118dc5dfa">
         <property name="Id" />
       </end2>
     </association>
     <association name="StatusDescription_Requisition" cardinality="OneToOne" p1:Guid="2ac61d35-4308-44da-9c03-c8befac5595f">
-      <end1 multiplicity="ZeroOrOne" name="StatusDescription" class="Requisition" relation-class="StatusDescription" constrained="True" p1:Guid="9cb0f8a9-d318-4825-8b98-a29407ecfae7">
+      <end1 multiplicity="ZeroOrOne" name="StatusDescription" class="Requisition" relation-class="StatusDescription" constrained="True" lazy="False" p1:Guid="9cb0f8a9-d318-4825-8b98-a29407ecfae7">
         <property name="RequisitionStatusId" />
       </end1>
-      <end2 multiplicity="One" name="Requisition" class="StatusDescription" relation-class="Requisition" generate="False" constrained="False" p1:Guid="c348337c-b183-4511-97be-3fb558d5923c">
+      <end2 multiplicity="One" name="Requisition" class="StatusDescription" relation-class="Requisition" generate="False" constrained="False" lazy="False" p1:Guid="c348337c-b183-4511-97be-3fb558d5923c">
         <property name="RequisitionStatusId" />
       </end2>
     </association>
     <association name="Organization_LOCALORG" cardinality="OneToMany" on-delete="Cascade" p1:Guid="ebf08ae3-df49-4055-894e-3d8f0a299879">
-      <end1 multiplicity="One" name="Organization" class="LocalizationOrganization" relation-class="Organization" constrained="True" p1:Guid="5b3a4ae6-97e7-475f-b395-b5909ec768b1">
+      <end1 multiplicity="One" name="Organization" class="LocalizationOrganization" relation-class="Organization" constrained="True" lazy="False" p1:Guid="5b3a4ae6-97e7-475f-b395-b5909ec768b1">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="LOCALORGs" class="Organization" relation-class="LocalizationOrganization" p1:Guid="f0738665-a7b1-40d9-be1c-a371b6cbaefc">
+      <end2 multiplicity="Many" name="LOCALORGs" class="Organization" relation-class="LocalizationOrganization" lazy="False" p1:Guid="f0738665-a7b1-40d9-be1c-a371b6cbaefc">
         <property name="OrganizationId" />
       </end2>
     </association>
     <association name="CUSTOMFLD_CUSTOMFLD" cardinality="OneToMany" p1:Guid="b2becd35-5288-4966-8e85-20c02039fe69">
-      <end1 multiplicity="ZeroOrOne" name="CustomField_x_LinkedFldId" class="CustomField" relation-class="CustomField" constrained="True" p1:Guid="2af6ca38-abda-4007-908c-312892517959">
+      <end1 multiplicity="ZeroOrOne" name="CustomField_x_LinkedFldId" class="CustomField" relation-class="CustomField" constrained="True" lazy="False" p1:Guid="2af6ca38-abda-4007-908c-312892517959">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="CustomFields_x_LinkedFldId" class="CustomField" relation-class="CustomField" p1:Guid="a634bdfa-e85d-45a5-ab00-867e554a9872">
+      <end2 multiplicity="Many" name="CustomFields_x_LinkedFldId" class="CustomField" relation-class="CustomField" lazy="False" p1:Guid="a634bdfa-e85d-45a5-ab00-867e554a9872">
         <property name="x_LinkedFldId" />
       </end2>
     </association>
     <association name="Organization_CUSTOMFLD" cardinality="OneToMany" p1:Guid="8845aa0e-7c95-46e3-a0d1-09c997b76c04">
-      <end1 multiplicity="One" name="Organization" class="CustomField" relation-class="Organization" constrained="True" p1:Guid="61643c3d-7dbb-44f7-a6ef-7b6d02de1f9e">
+      <end1 multiplicity="One" name="Organization" class="CustomField" relation-class="Organization" constrained="True" lazy="False" p1:Guid="61643c3d-7dbb-44f7-a6ef-7b6d02de1f9e">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="CUSTOMFLDs" class="Organization" relation-class="CustomField" p1:Guid="60f550fa-0d1c-4759-86f1-a0b947085fa4">
+      <end2 multiplicity="Many" name="CUSTOMFLDs" class="Organization" relation-class="CustomField" lazy="False" p1:Guid="60f550fa-0d1c-4759-86f1-a0b947085fa4">
         <property name="OrganizationId" />
       </end2>
     </association>
     <association name="CUSTOMFLD_CUSTOMVAL" cardinality="OneToMany" p1:Guid="a1c89cbb-361d-4c01-9edd-c97f5f780adb">
-      <end1 multiplicity="One" name="CustomField" class="CustomValue" relation-class="CustomField" constrained="True" p1:Guid="7822adab-eedb-4586-9cc8-f830ee9e0c15">
+      <end1 multiplicity="One" name="CustomField" class="CustomValue" relation-class="CustomField" constrained="True" lazy="False" p1:Guid="7822adab-eedb-4586-9cc8-f830ee9e0c15">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="CustomValues" class="CustomField" relation-class="CustomValue" p1:Guid="3b1f03ef-924a-489e-81d5-1e314fbf2870">
+      <end2 multiplicity="Many" name="CustomValues" class="CustomField" relation-class="CustomValue" lazy="False" p1:Guid="3b1f03ef-924a-489e-81d5-1e314fbf2870">
         <property name="CustomFieldId" />
       </end2>
     </association>
     <association name="LISTITEM_CustomValue" cardinality="OneToMany" p1:Guid="964cdf84-4a94-48c7-ae6b-d8af3282d6b4">
-      <end1 multiplicity="ZeroOrOne" name="CustomFieldListItem" class="CustomValue" relation-class="CustomFieldListItem" constrained="True" p1:Guid="35507b04-8cc8-4848-b3df-50a99fac6f50">
+      <end1 multiplicity="ZeroOrOne" name="CustomFieldListItem" class="CustomValue" relation-class="CustomFieldListItem" constrained="True" lazy="False" p1:Guid="35507b04-8cc8-4848-b3df-50a99fac6f50">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="CustomValues" class="CustomFieldListItem" relation-class="CustomValue" p1:Guid="e0596ab9-138f-4d7f-be13-7389c194a208">
+      <end2 multiplicity="Many" name="CustomValues" class="CustomFieldListItem" relation-class="CustomValue" lazy="False" p1:Guid="e0596ab9-138f-4d7f-be13-7389c194a208">
         <property name="ListItemId" />
       </end2>
     </association>
     <association name="Requisition_ReqFinancialDetail" cardinality="OneToOne" p1:Guid="57aa46de-b892-43fc-a022-09e76a2afbba">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionFinancialDetail" relation-class="Requisition" constrained="True" p1:Guid="afdab639-a486-4435-9bb1-57b8aeee94f6">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionFinancialDetail" relation-class="Requisition" constrained="True" lazy="False" p1:Guid="afdab639-a486-4435-9bb1-57b8aeee94f6">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="One" name="ReqFinancialDetail" class="Requisition" relation-class="RequisitionFinancialDetail" constrained="False" p1:Guid="89b0e4c1-c8de-4b41-a5e6-f48270ac931c">
+      <end2 multiplicity="One" name="ReqFinancialDetail" class="Requisition" relation-class="RequisitionFinancialDetail" constrained="False" lazy="False" p1:Guid="89b0e4c1-c8de-4b41-a5e6-f48270ac931c">
         <property name="Id" />
       </end2>
     </association>
     <association name="Requisition_REQCOMPINFO" cardinality="OneToMany" p1:Guid="71bf62e3-56a7-4321-b2e9-7cbc2150dcad">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionComplianceInfo" relation-class="Requisition" constrained="True" p1:Guid="f987bf8c-9113-4b85-bfb1-1ef2f114ad41">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionComplianceInfo" relation-class="Requisition" constrained="True" lazy="False" p1:Guid="f987bf8c-9113-4b85-bfb1-1ef2f114ad41">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="RequisitionComplianceInfos" class="Requisition" relation-class="RequisitionComplianceInfo" p1:Guid="a9eafb83-d895-4124-8857-e0dee3ab402c">
+      <end2 multiplicity="Many" name="RequisitionComplianceInfos" class="Requisition" relation-class="RequisitionComplianceInfo" lazy="False" p1:Guid="a9eafb83-d895-4124-8857-e0dee3ab402c">
         <property name="x_ReqId" />
       </end2>
     </association>
     <association name="COMPLIANCEGROUP_REQCOMPINFO" cardinality="OneToMany" p1:Guid="7ab24265-8222-46a4-a8e5-bcbbc8436ded">
-      <end1 multiplicity="One" name="ComplianceGroup" class="RequisitionComplianceInfo" relation-class="CompliainceGroup" constrained="True" p1:Guid="fbd30426-410f-4f59-be5e-3696bdc58cb6">
+      <end1 multiplicity="One" name="ComplianceGroup" class="RequisitionComplianceInfo" relation-class="CompliainceGroup" constrained="True" lazy="False" p1:Guid="fbd30426-410f-4f59-be5e-3696bdc58cb6">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="RequisitonComplianceInfos" class="CompliainceGroup" relation-class="RequisitionComplianceInfo" p1:Guid="a03fa3a2-138c-4ccb-8579-9807b3598d33">
+      <end2 multiplicity="Many" name="RequisitonComplianceInfos" class="CompliainceGroup" relation-class="RequisitionComplianceInfo" lazy="False" p1:Guid="a03fa3a2-138c-4ccb-8579-9807b3598d33">
         <property name="x_ComplianceGroupId" />
       </end2>
     </association>
     <association name="COMPLIANCEITEM_REQCOMPINFO" cardinality="OneToMany" p1:Guid="f4450be0-64f3-4195-9c0d-c170256acd79">
-      <end1 multiplicity="One" name="ComplianceItem" class="RequisitionComplianceInfo" relation-class="ComplianceItem" constrained="True" p1:Guid="d7355f2d-120d-4647-9189-bd331dc82078">
+      <end1 multiplicity="One" name="ComplianceItem" class="RequisitionComplianceInfo" relation-class="ComplianceItem" constrained="True" lazy="False" p1:Guid="d7355f2d-120d-4647-9189-bd331dc82078">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="RequisitionComplianceInfos" class="ComplianceItem" relation-class="RequisitionComplianceInfo" p1:Guid="394a1809-0604-4903-bc25-a870895c7512">
+      <end2 multiplicity="Many" name="RequisitionComplianceInfos" class="ComplianceItem" relation-class="RequisitionComplianceInfo" lazy="False" p1:Guid="394a1809-0604-4903-bc25-a870895c7512">
         <property name="x_ComplianceItemId" />
       </end2>
     </association>
     <association name="Requisition_REQQSTN" cardinality="OneToMany" p1:Guid="4cd78223-818e-44ff-9ee7-a544d0e5a44f">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionQuestion" relation-class="Requisition" constrained="True" p1:Guid="98c90ca8-418c-4741-8f70-7c340f9cbc0b">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionQuestion" relation-class="Requisition" constrained="True" lazy="False" p1:Guid="98c90ca8-418c-4741-8f70-7c340f9cbc0b">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="REQQSTNs" class="Requisition" relation-class="RequisitionQuestion" p1:Guid="f183cdac-d5f9-400e-aad4-ffe506681af6">
+      <end2 multiplicity="Many" name="REQQSTNs" class="Requisition" relation-class="RequisitionQuestion" lazy="False" p1:Guid="f183cdac-d5f9-400e-aad4-ffe506681af6">
         <property name="RequisitionId" />
       </end2>
     </association>
     <association name="Requisition_REQSKLST" cardinality="OneToMany" on-delete="Cascade" p1:Guid="ced68463-e4ea-43a4-ae85-a7dde45de524">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionSkill" relation-class="Requisition" constrained="True" p1:Guid="a2f1e8b6-4498-4a22-9f9c-dd6c624dfac8">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionSkill" relation-class="Requisition" constrained="True" lazy="False" p1:Guid="a2f1e8b6-4498-4a22-9f9c-dd6c624dfac8">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="REQSKLSTs" class="Requisition" relation-class="RequisitionSkill" p1:Guid="34cba5dc-761a-4228-ad5d-ce1d9853d92d">
+      <end2 multiplicity="Many" name="REQSKLSTs" class="Requisition" relation-class="RequisitionSkill" lazy="False" p1:Guid="34cba5dc-761a-4228-ad5d-ce1d9853d92d">
         <property name="x_ReqId" />
       </end2>
     </association>
     <association name="EXPTRTG_RequisitionSkill" cardinality="OneToMany" p1:Guid="f18fd87e-f065-43da-93b1-5a27af195394">
-      <end1 multiplicity="ZeroOrOne" name="ExpertiseRating" class="RequisitionSkill" relation-class="ExpertiseRating" constrained="True" p1:Guid="cc8e8107-ee8d-476f-bc5b-c4b256223996">
+      <end1 multiplicity="ZeroOrOne" name="ExpertiseRating" class="RequisitionSkill" relation-class="ExpertiseRating" constrained="True" lazy="False" p1:Guid="cc8e8107-ee8d-476f-bc5b-c4b256223996">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="RequisitionSkills" class="ExpertiseRating" relation-class="RequisitionSkill" p1:Guid="7e9052aa-5d1c-4c22-aca6-81c3507f37ca">
+      <end2 multiplicity="Many" name="RequisitionSkills" class="ExpertiseRating" relation-class="RequisitionSkill" lazy="False" p1:Guid="7e9052aa-5d1c-4c22-aca6-81c3507f37ca">
         <property name="ExpertiseRatingId" />
       </end2>
     </association>
     <association name="Requisition_ReqBudgetDetail" cardinality="OneToMany" p1:Guid="efeefbb6-3c9c-4df8-86c6-c238521a8de4">
-      <end1 multiplicity="One" name="Requisition" class="RequisitionBudgetDetail" relation-class="Requisition" constrained="True" p1:Guid="19158fe4-8c9c-4d1b-bdf0-88b5e6d5568f">
+      <end1 multiplicity="One" name="Requisition" class="RequisitionBudgetDetail" relation-class="Requisition" constrained="True" lazy="False" p1:Guid="19158fe4-8c9c-4d1b-bdf0-88b5e6d5568f">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="ReqBudgetDetails" class="Requisition" relation-class="RequisitionBudgetDetail" p1:Guid="774d63be-bcf4-4b5a-bf57-bf974bbf6059">
+      <end2 multiplicity="Many" name="ReqBudgetDetails" class="Requisition" relation-class="RequisitionBudgetDetail" lazy="False" p1:Guid="774d63be-bcf4-4b5a-bf57-bf974bbf6059">
         <property name="RequisitionId" />
       </end2>
     </association>
     <association name="BILLRULEDTL_RequisitionBudgetDetail" cardinality="OneToMany" p1:Guid="300a0d96-c83d-4b72-b3dd-c080483b5ae1">
-      <end1 multiplicity="ZeroOrOne" name="BILLRULEDTL" class="RequisitionBudgetDetail" relation-class="BillingRuleDetail" constrained="True" p1:Guid="85b5159b-a85c-47bd-8d51-1a521318867f">
+      <end1 multiplicity="ZeroOrOne" name="BILLRULEDTL" class="RequisitionBudgetDetail" relation-class="BillingRuleDetail" constrained="True" lazy="False" p1:Guid="85b5159b-a85c-47bd-8d51-1a521318867f">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="RequisitionBudgetDetails" class="BillingRuleDetail" relation-class="RequisitionBudgetDetail" p1:Guid="441c8287-39a4-4c91-8797-976419cc4867">
+      <end2 multiplicity="Many" name="RequisitionBudgetDetails" class="BillingRuleDetail" relation-class="RequisitionBudgetDetail" lazy="False" p1:Guid="441c8287-39a4-4c91-8797-976419cc4867">
         <property name="BillingRuleDetailId" />
       </end2>
     </association>
     <association name="Organization_ORGMSG" cardinality="OneToMany" on-delete="Cascade" p1:Guid="59759135-c0ba-4064-81c9-19c23c006d21">
-      <end1 multiplicity="One" name="Organization" class="OrganizationMessage" relation-class="Organization" constrained="True" p1:Guid="76da0940-9be1-4568-b3cd-ef0bc972e43c">
+      <end1 multiplicity="One" name="Organization" class="OrganizationMessage" relation-class="Organization" constrained="True" lazy="False" p1:Guid="76da0940-9be1-4568-b3cd-ef0bc972e43c">
         <property name="Id" />
       </end1>
-      <end2 multiplicity="Many" name="ORGMSGs" class="Organization" relation-class="OrganizationMessage" p1:Guid="c9a12b9c-73f7-44f1-8e2c-db361bb2d28b">
+      <end2 multiplicity="Many" name="ORGMSGs" class="Organization" relation-class="OrganizationMessage" lazy="False" p1:Guid="c9a12b9c-73f7-44f1-8e2c-db361bb2d28b">
         <property name="OrganizationId" />
       </end2>
     </association>

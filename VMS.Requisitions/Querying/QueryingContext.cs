@@ -20,6 +20,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Threading.Tasks;
+using System.Threading;
 using VMS.Requisitions.Querying.Entities;
 
 
@@ -30,21 +32,27 @@ namespace VMS.Requisitions.Querying
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public partial class QueryingContext : DbContext, IQueryingContext
     {
+        private bool inMemoryDb;
 
         public QueryingContext() :
             base()
         {
+            this.ChangeTracker.AutoDetectChangesEnabled = false;
+            this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             OnCreated();
         }
 
         public QueryingContext(DbContextOptions<QueryingContext> options) :
             base(options)
         {
+            this.ChangeTracker.AutoDetectChangesEnabled = false;
+            this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             OnCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            this.inMemoryDb = optionsBuilder.Options.Extensions.Any(e=>e.GetType().FullName == "Microsoft.EntityFrameworkCore.Infrastructure.Internal.InMemoryOptionsExtension");
             CustomizeConfiguration(ref optionsBuilder);
             base.OnConfiguring(optionsBuilder);
         }
@@ -505,6 +513,7 @@ namespace VMS.Requisitions.Querying
             modelBuilder.Entity<Organization>().ToTable(@"ORG", @"dbo");
             modelBuilder.Entity<Organization>().Property<int>(x => x.Id).HasColumnName(@"Org_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Organization>().Property<int>(x => x.OrganizationTypeId).HasColumnName(@"s_Org_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<Organization>().Property<System.Nullable<int>>(x => x.ParentOrganizationId).HasColumnName(@"Prnt_Org_Id").HasColumnType(@"int").ValueGeneratedNever();
             modelBuilder.Entity<Organization>().Property<string>(x => x.Name).HasColumnName(@"Org_Nm").HasColumnType(@"nvarchar(120)").IsRequired().ValueGeneratedNever().HasMaxLength(120);
             modelBuilder.Entity<Organization>().Property<string>(x => x.ShortName).HasColumnName(@"Org_Sh_Nm").HasColumnType(@"nvarchar(50)").IsRequired().ValueGeneratedNever().HasMaxLength(50);
             modelBuilder.Entity<Organization>().Property<string>(x => x.RegionDescription).HasColumnName(@"Rgn_Dc").HasColumnType(@"nvarchar(255)").ValueGeneratedNever().HasMaxLength(255);
@@ -1191,5 +1200,101 @@ namespace VMS.Requisitions.Querying
         }
 
         partial void OnCreated();
+
+        /************************************************************************************/
+        /* Overriding save methods for readonly db context*/
+
+        /// <summary>
+        /// The save changes.
+        /// Call to this method will throw exception because this context is read only.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        /// <exception cref="DbUpdateException">
+        /// Call to this method will throw exception because this context is read only.
+        /// </exception>
+        public override int SaveChanges()
+        {
+            if (this.inMemoryDb)
+            {
+                return base.SaveChanges();
+            }
+            throw new InvalidOperationException("This context is readonly. Saving is not allowed", null as Exception);
+        }
+
+        /// <summary>
+        /// The save changes.
+        /// Call to this method will throw exception because this context is read only.
+        /// </summary>
+        /// <param name="acceptAllChangesOnSuccess">
+        /// The accept all changes on success.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        /// <exception cref="DbUpdateException">
+        /// Call to this method will throw exception because this context is read only.
+        /// </exception>
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            if (this.inMemoryDb)
+            {
+                return base.SaveChanges(acceptAllChangesOnSuccess);
+            }
+            throw new InvalidOperationException("This context is readonly. Saving is not allowed", null as Exception);
+        }
+
+        /// <summary>
+        /// The save changes async.
+        /// Call to this method will throw exception because this context is read only.
+        /// </summary>
+        /// <param name="cancellationToken">
+        /// The cancellation token.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        /// <exception cref="DbUpdateException">
+        /// Call to this method will throw exception because this context is read only.
+        /// </exception>
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            if (this.inMemoryDb)
+            {
+                return base.SaveChangesAsync(cancellationToken);
+            }
+            throw new InvalidOperationException("This context is readonly. Saving is not allowed", null as Exception);
+        }
+
+        /// <summary>
+        /// The save changes async.
+        /// Call to this method will throw exception because this context is read only.
+        /// </summary>
+        /// <param name="acceptAllChangesOnSuccess">
+        /// The accept all changes on success.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The cancellation token.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        /// <exception cref="DbUpdateException">
+        /// Call to this method will throw exception because this context is read only.
+        /// </exception>
+        public override Task<int> SaveChangesAsync(
+            bool acceptAllChangesOnSuccess,
+            CancellationToken cancellationToken = new CancellationToken())
+        {
+            if (this.inMemoryDb)
+            {
+                return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            }
+            throw new InvalidOperationException("This context is readonly. Saving is not allowed", null as Exception);
+        }
+        
+        /* Overriding save methods for readonly db context*/
+        /************************************************************************************/
     }
 }

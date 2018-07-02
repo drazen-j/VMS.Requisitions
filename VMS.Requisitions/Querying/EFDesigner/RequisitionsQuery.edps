@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<EntityDeveloper Version="6.2.505.0">
+<EntityDeveloper Version="6.3.525.0">
   <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" ConnectionStringInAppConfig="False" TargetFramework="NetCore" DetectManyToManyAssociations="False" DetectTPTInheritance="False" DetectFunctionBasedColumnDefault="True">
     <Connection ConnectionString="Data Source=rdcvc2sql01\oltp;Initial Catalog=VMS1;Integrated Security=True;Persist Security Info=True" Provider="System.Data.SqlClient" />
     <Generation>
@@ -99,20 +99,20 @@
     </Diagrams>
     <Templates>
       <Template Name="Customized.EF Core" Enabled="True" File="Customized.EF Core.tmpl">
-        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.2.505.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.3.525.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ValidationFramework>None</ValidationFramework>
         </ed:Property>
-        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.2.505.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.3.525.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ValidationErrorMessages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
         </ed:Property>
-        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.2.505.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.3.525.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project>VMS.Requisitions</Project>
             <ProjectFolder>Querying\Entities</ProjectFolder>
             <DestinationFolder />
           </OutputInfo>
         </ed:Property>
-        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.2.505.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.3.525.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project>VMS.Requisitions</Project>
             <ProjectFolder>Querying</ProjectFolder>
@@ -141,7 +141,7 @@
           <boolean>false</boolean>
         </ed:Property>
         <ed:Property Name="ReadOnly" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
+          <boolean>true</boolean>
         </ed:Property>
         <ed:Property Name="GeneratePartialClass" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>true</boolean>
