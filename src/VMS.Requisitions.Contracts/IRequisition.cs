@@ -15,6 +15,11 @@ namespace VMS.Requisitions.Contracts
         int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the format type.
+        /// </summary>
+        FormatType FormatType { get; set; }
+
+        /// <summary>
         /// Gets or sets the client region.
         /// </summary>
         IClientRegion ClientRegion { get; set; }

@@ -18,32 +18,44 @@ using System.Collections.Generic;
 namespace VMS.Requisitions.Querying.Entities
 {
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    public partial class OrganizationMessage {
+    public partial class RequisitionComplianceInfo {
 
-        public OrganizationMessage()
+        public RequisitionComplianceInfo()
         {
             OnCreated();
         }
 
-        public virtual int OrganizationId
+        public virtual int ComplianceItemId
         {
             get;
             set;
         }
 
-        public virtual int OrganizationMessageTypeId
+        public virtual int Id
         {
             get;
             set;
         }
 
-        public virtual string Text
+        public virtual int RequisitionId
         {
             get;
             set;
         }
 
-        public virtual Organization Organization
+        public virtual CompliainceGroup ComplianceGroup
+        {
+            get;
+            set;
+        }
+
+        public virtual ComplianceItem ComplianceItem
+        {
+            get;
+            set;
+        }
+
+        public virtual Requisition Requisition
         {
             get;
             set;

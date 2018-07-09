@@ -873,7 +873,10 @@ namespace VMS.Requisitions.Querying
         private void RequisitionComplianceInfoMapping(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<RequisitionComplianceInfo>().ToTable(@"REQ_COMP_INFO", @"dbo");
-            modelBuilder.Entity<RequisitionComplianceInfo>().HasKey(@"x_ReqCompInfoId");
+            modelBuilder.Entity<RequisitionComplianceInfo>().Property<int>(x => x.Id).HasColumnName(@"Req_Comp_Info_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<RequisitionComplianceInfo>().Property<int>(x => x.RequisitionId).HasColumnName(@"Req_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionComplianceInfo>().Property<int>(x => x.ComplianceItemId).HasColumnName(@"Compliance_Item_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<RequisitionComplianceInfo>().HasKey(@"Id");
         }
 	
         partial void CustomizeRequisitionComplianceInfoMapping(ModelBuilder modelBuilder);
@@ -972,6 +975,7 @@ namespace VMS.Requisitions.Querying
         private void OrganizationMessageMapping(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrganizationMessage>().ToTable(@"ORG_MSG", @"dbo");
+            modelBuilder.Entity<OrganizationMessage>().Property<int>(x => x.Id).HasColumnName(@"Org_Msg_Id").HasColumnType(@"int").IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<OrganizationMessage>().Property<int>(x => x.OrganizationId).HasColumnName(@"Org_Id").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
             modelBuilder.Entity<OrganizationMessage>().Property<int>(x => x.OrganizationMessageTypeId).HasColumnName(@"Org_Msg_Tp_Cd").HasColumnType(@"int").IsRequired().ValueGeneratedNever();
             modelBuilder.Entity<OrganizationMessage>().Property<string>(x => x.Text).HasColumnName(@"Msg_Tx").HasColumnType(@"nvarchar(800)").ValueGeneratedNever().HasMaxLength(800);
@@ -1002,7 +1006,7 @@ namespace VMS.Requisitions.Querying
             modelBuilder.Entity<Requisition>().HasOne(x => x.Attachments).WithOne().IsRequired(true).HasForeignKey(typeof(Requisition), @"Id");
             modelBuilder.Entity<Requisition>().HasOne(x => x.StatusDescription).WithOne().HasForeignKey(typeof(Requisition), @"RequisitionStatusId");
             modelBuilder.Entity<Requisition>().HasOne(x => x.ReqFinancialDetail).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(typeof(RequisitionFinancialDetail), @"Id");
-            modelBuilder.Entity<Requisition>().HasMany(x => x.RequisitionComplianceInfos).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(@"x_ReqId");
+            modelBuilder.Entity<Requisition>().HasMany(x => x.RequisitionComplianceInfos).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(@"RequisitionId");
             modelBuilder.Entity<Requisition>().HasMany(x => x.REQQSTNs).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(@"RequisitionId");
             modelBuilder.Entity<Requisition>().HasMany(x => x.REQSKLSTs).WithOne(op => op.Requisition).OnDelete(DeleteBehavior.Cascade).IsRequired(true).HasForeignKey(@"x_ReqId");
             modelBuilder.Entity<Requisition>().HasMany(x => x.ReqBudgetDetails).WithOne(op => op.Requisition).IsRequired(true).HasForeignKey(@"RequisitionId");
@@ -1141,15 +1145,15 @@ namespace VMS.Requisitions.Querying
 
         #region ComplianceItem Navigation properties
 
-            modelBuilder.Entity<ComplianceItem>().HasMany(x => x.RequisitionComplianceInfos).WithOne(op => op.ComplianceItem).IsRequired(true).HasForeignKey(@"x_ComplianceItemId");
+            modelBuilder.Entity<ComplianceItem>().HasMany(x => x.RequisitionComplianceInfos).WithOne(op => op.ComplianceItem).IsRequired(true).HasForeignKey(@"ComplianceItemId");
 
         #endregion
 
         #region RequisitionComplianceInfo Navigation properties
 
-            modelBuilder.Entity<RequisitionComplianceInfo>().HasOne(x => x.Requisition).WithMany(op => op.RequisitionComplianceInfos).IsRequired(true).HasForeignKey(@"x_ReqId");
+            modelBuilder.Entity<RequisitionComplianceInfo>().HasOne(x => x.Requisition).WithMany(op => op.RequisitionComplianceInfos).IsRequired(true).HasForeignKey(@"RequisitionId");
             modelBuilder.Entity<RequisitionComplianceInfo>().HasOne(x => x.ComplianceGroup).WithMany(op => op.RequisitonComplianceInfos).IsRequired(true).HasForeignKey(@"x_ComplianceGroupId");
-            modelBuilder.Entity<RequisitionComplianceInfo>().HasOne(x => x.ComplianceItem).WithMany(op => op.RequisitionComplianceInfos).IsRequired(true).HasForeignKey(@"x_ComplianceItemId");
+            modelBuilder.Entity<RequisitionComplianceInfo>().HasOne(x => x.ComplianceItem).WithMany(op => op.RequisitionComplianceInfos).IsRequired(true).HasForeignKey(@"ComplianceItemId");
 
         #endregion
 

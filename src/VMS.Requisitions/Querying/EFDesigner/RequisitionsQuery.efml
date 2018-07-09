@@ -1884,16 +1884,16 @@
     </property>
   </class>
   <class name="RequisitionComplianceInfo" entity-set="RequisitionComplianceInfos" table="REQ_COMP_INFO" schema="dbo" p1:Guid="cf63a199-7246-43a6-ad7f-7bcb1f67b0b0">
-    <id name="x_ReqCompInfoId" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="1aeb3f3e-f602-4db2-990c-fbf76a143050">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="1aeb3f3e-f602-4db2-990c-fbf76a143050" p1:DoNotGenerate="False">
       <column name="Req_Comp_Info_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
     </id>
-    <property name="x_ReqId" type="Int32" p1:ValidateRequired="true" p1:Guid="14dbade3-231c-4a32-8a8c-212eba391e85">
+    <property name="RequisitionId" type="Int32" p1:ValidateRequired="true" p1:Guid="14dbade3-231c-4a32-8a8c-212eba391e85" p1:DoNotGenerate="False">
       <column name="Req_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
     </property>
     <property name="x_ComplianceGroupId" type="Int32" p1:ValidateRequired="true" p1:Guid="653c9d49-c5ed-4518-9ca7-9bfff885ded1">
       <column name="Compliance_Group_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="x_ComplianceItemId" type="Int32" p1:ValidateRequired="true" p1:Guid="8f6e9a5c-19a1-4e2e-afc3-bfcd947ec6e9">
+    <property name="ComplianceItemId" type="Int32" p1:ValidateRequired="true" p1:Guid="8f6e9a5c-19a1-4e2e-afc3-bfcd947ec6e9" p1:DoNotGenerate="False">
       <column name="Compliance_Item_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
     </property>
     <property name="x_AppWorkflowCd" type="Int32" p1:ValidateRequired="true" p1:Guid="933b3273-9f06-4271-a461-b57c481c7e6c">
@@ -2135,7 +2135,7 @@
     </property>
   </class>
   <class name="OrganizationMessage" entity-set="OrganizationMessages" table="ORG_MSG" schema="dbo" p1:Guid="2f0cad88-a831-46d3-9e7e-cfd1034822b8">
-    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="e919f053-0902-45a7-9b1d-8b251f43c564">
+    <id name="Id" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="e919f053-0902-45a7-9b1d-8b251f43c564" p1:DoNotGenerate="False">
       <column name="Org_Msg_Id" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
     </id>
     <property name="OrganizationId" type="Int32" p1:ValidateRequired="true" p1:Guid="92fd10e1-9704-41fa-a859-c955de5e743a" p1:DoNotGenerate="False">
@@ -2336,7 +2336,7 @@
         <property name="Id" />
       </end1>
       <end2 multiplicity="Many" name="RequisitionComplianceInfos" class="Requisition" relation-class="RequisitionComplianceInfo" lazy="False" p1:Guid="a9eafb83-d895-4124-8857-e0dee3ab402c">
-        <property name="x_ReqId" />
+        <property name="RequisitionId" />
       </end2>
     </association>
     <association name="COMPLIANCEGROUP_REQCOMPINFO" cardinality="OneToMany" p1:Guid="7ab24265-8222-46a4-a8e5-bcbbc8436ded">
@@ -2352,7 +2352,7 @@
         <property name="Id" />
       </end1>
       <end2 multiplicity="Many" name="RequisitionComplianceInfos" class="ComplianceItem" relation-class="RequisitionComplianceInfo" lazy="False" p1:Guid="394a1809-0604-4903-bc25-a870895c7512">
-        <property name="x_ComplianceItemId" />
+        <property name="ComplianceItemId" />
       </end2>
     </association>
     <association name="Requisition_REQQSTN" cardinality="OneToMany" p1:Guid="4cd78223-818e-44ff-9ee7-a544d0e5a44f">

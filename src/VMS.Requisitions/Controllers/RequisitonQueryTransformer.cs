@@ -3,6 +3,8 @@ namespace VMS.Requisitions.Controllers
 {
     using EFCoreDynamicQuerying;
 
+    using VMS.Requisitions.Contracts;
+
     using Requisition = Querying.Entities.Requisition;
 
     /// <summary>
@@ -24,7 +26,12 @@ namespace VMS.Requisitions.Controllers
             return new Models.Requisition
                        {
                            Id = entity.Id,
-                           Description = entity.Description
+                           Description = entity.Description,
+                           FormatType = (FormatType)entity.FormatTypeId,
+                           IsTemplate = entity.IsTemplate.GetValueOrDefault(),
+                           NumberOfOpenings = entity.NumberOfOpenings,
+                           Title = entity.Title,
+                           RequisitionStatus = (RequisitionStatus)entity.RequisitionStatusId.GetValueOrDefault()
                        };
         }
     }

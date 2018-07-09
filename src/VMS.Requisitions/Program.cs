@@ -2,8 +2,11 @@
 
 namespace VMS.Requisitions
 {
+    using System.IO;
+
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
 
     using Serilog;
 
@@ -45,6 +48,24 @@ namespace VMS.Requisitions
         /// </returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureAppConfiguration(
+                    (hostingContext, config) =>
+                        {
+                            var env = hostingContext.HostingEnvironment;
+
+                            config
+                                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                                .AddEnvironmentVariables();
+
+                            var loggerConfig = new LoggerConfiguration()
+                                .ReadFrom.Configuration(config.Build())
+                                .Enrich.FromLogContext();
+
+                            Log.Logger = loggerConfig.CreateLogger();
+                        })
                 .UseSerilog()
                 .UseStartup<Startup>();
     }

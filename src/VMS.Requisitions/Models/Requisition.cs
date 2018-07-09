@@ -20,6 +20,11 @@ namespace VMS.Requisitions.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the format type.
+        /// </summary>
+        public FormatType FormatType { get; set; }
+
+        /// <summary>
         /// Gets or sets the client region.
         /// </summary>
         public IClientRegion ClientRegion { get; set; }
