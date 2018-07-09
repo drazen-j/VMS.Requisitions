@@ -1,0 +1,64 @@
+build:
+  compile:
+    image: microsoft/dotnet:2.1.0-sdk
+    pull: true
+    commands:
+      - dotnet restore
+      - dotnet build ./src/VMS.Requisitions/VMS.Requisitions.csproj --configuration Release
+      - dotnet test ./test/VMS.Requisitions.Test/VMS.Requisitions.Test.csproj
+      - dotnet publish ./src/VMS.Requisitions/VMS.Requisitions.csproj --configuration Release
+
+  package:
+    image: microsoft/dotnet:2.1.0-runtime
+    commands:
+      - tar cvzf VMS.Requisitions-$$COMMIT.tar.gz -C ./src/VMS.Requisitions/bin/Release/netcoreapp2.1/publish .
+    when:
+      event: push
+      branch: master
+
+publish:
+  docker:
+    registry: registry.cd.pf-labs.net
+    repo: vms/requisitions
+    file: Dockerfile
+    email: "dev@peoplefluent.com"
+    force_tag: true
+    tag:
+      - latest
+      - "1.0.0.$$BUILD_NUMBER"
+      - "$${COMMIT:0:9}"
+    build_args:
+      - TARBALL=VMS.Requisitions-$$COMMIT.tar.gz
+    when:
+      repo: PeopleFluent/VMS.Requisitions
+      branch: master
+      event: push
+
+  ssh:
+    host: $$SHARED_DEV
+    user: ubuntu # username to ssh into the machine
+    port: 22
+    commands:
+      - docker service rm vms-requisitions-vc1vms1
+     #- docker service create --name=vms-requisitions-vc1vms1 --replicas=2 --constraint "node.role==worker" --network=proxy -e "ConnectionStrings:VMS=Data Source=RDCVC1SQL01.rdc.l\OLTP;Initial Catalog=VMS1;UID=Appuser;PWD=1gumball%rally+;Connection Timeout=600;Application Name=VMS.Requisitions" -e "ConnectionStrings:VMS.Requisitions=Server=vms-nonprod-pg.crmxjibn3vgh.us-east-1.rds.amazonaws.com;Port=5432;User Id=vms_nonprod_pg;Password=1_hat3_G3n3rat3DPwRds;Database=vms-requisitions-vc1vms1;" -e "IdentityServer:Authority=https://api.shared-dev.pf-labs.net/vms/vc1/1/idp" -e "IdentityServer:ApiName=peoplefluent.vms.security.resources.api.requisitions" -e "IdentityServer:ApiSecret=[REQ_API_SECRET]" -e "IdentityServer:RequireHttpsMetadata=true" -e "JustSaying:AwsAccessKeyId=AKIAJFNQ5RZU25HYMJLA" -e "JustSaying:AwsAccessKeySecret=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" -e "JustSaying:AwsRegion=us-east-1" -e "JustSaying:ServiceName=reqservice" -e "JustSaying:EnvironmentName=shared-dev_vmsvc1_1" -e "HealthStatus:Enabled=true" -e "HealthStatus:DisplayConnectionStringInfo=true" -e "Swagger:EndpointUrl=/vms/vc1/1/requisitions/swagger/v1/swagger.json" -e "Swagger:BasePath=/vms/vc1/1/requisitions" -e "Swagger:ShowTryMeOption=true" -e "Swagger:ShowJsonEditor=true" -e "Swagger:ShowRequestHeaders=true" -e "Swagger:SecurityDefinitions:oauth2_password:Type=oauth2" -e "Swagger:SecurityDefinitions:oauth2_password:Flow=password" -e "Swagger:SecurityDefinitions:oauth2_password:Scopes:peoplefluent.vms.security.scopes.api.requisitions.full_access=requisitions full access" -e "Swagger:SecurityDefinitions:oauth2_password:TokenUrl=https://api.shared-dev.pf-labs.net/vms/vc1/1/idp/connect/token" -e "Serilog:MinimumLevel=Debug" -e "API_ROOT_URL=https://api.shared-dev.pf-labs.net/vms/vc1/1/requisitions" -e "BUILD_NUMBER=1.0.0.$$BUILD_NUMBER" --label "com.df.notify=true" --label "com.df.distribute=true" --label "com.df.serviceDomain=api.shared-dev.pf-labs.net" --label "com.df.servicePath=/vms/vc1/1/requisitions" --label "com.df.port=5000" --label "com.df.reqPathSearch=/vms/vc1/1/requisitions/?" --label "com.df.reqPathReplace=/" registry.cd.pf-labs.net/vms/requisitions:latest
+      - docker service create --name=vms-requisitions-vc1vms1 --replicas=2 --constraint "node.role==worker" --network=proxy -e "ConnectionStrings:VMS=Data Source=RDCVC1SQL01.rdc.l\OLTP;Initial Catalog=VMS1;UID=Appuser;PWD=1gumball%rally+;Connection Timeout=600;Application Name=VMS.Requisitions" -e "ConnectionStrings:VMS.Requisitions=Server=vms-nonprod-pg.crmxjibn3vgh.us-east-1.rds.amazonaws.com;Port=5432;User Id=vms_nonprod_pg;Password=1_hat3_G3n3rat3DPwRds;Database=vms-requisitions-vc1vms1;" -e "HealthStatus:Enabled=true" -e "HealthStatus:DisplayConnectionStringInfo=true" -e "Serilog:MinimumLevel=Debug" -e "API_ROOT_URL=https://api.shared-dev.pf-labs.net/vms/vc1/1/requisitions" -e "BUILD_NUMBER=1.0.0.$$BUILD_NUMBER" --label "com.df.notify=true" --label "com.df.distribute=true" --label "com.df.serviceDomain=api.shared-dev.pf-labs.net" --label "com.df.servicePath=/vms/vc1/1/requisitions" --label "com.df.port=5000" --label "com.df.reqPathSearch=/vms/vc1/1/requisitions/?" --label "com.df.reqPathReplace=/" registry.cd.pf-labs.net/vms/requisitions:latest
+    when:
+      repo: PeopleFluent/VMS.Requisitions
+      branch: master
+      event: push  
+
+notify:
+  email:
+    from: drone@pf-labs.net
+    host: $$SMTP_SERVER
+    username: $$SMTP_USER
+    password: $$SMTP_PWD
+    recipients:
+      - drazen.jovanovic@peoplefluent.com
+      - milan.cihoric@peoplefluent.com
+      - brian.rhoades@peoplefluent.com
+      - ben.grisafi@peoplefluent.com
+      - palak.desai@peoplefluent.com
+    when:
+      repo: PeopleFluent/VMS.Requisitions
+      branch: master
